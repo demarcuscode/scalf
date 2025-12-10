@@ -1,0 +1,130 @@
+🏗️ Hostel Listing & Management System — Development Plan
+1️⃣ Core Features
+
+Hostel listing and discovery
+
+Room availability with realtime updates
+
+Booking and reservation system
+
+Payment integration with Paystack
+
+Chat system (Supabase Realtime)
+
+Push notifications
+
+Admin and hostel manager dashboard
+
+User roles (student, admin, hostel owner)
+
+2️⃣ Technology Stack
+Category	Technology
+Frontend	Next.js 15, React, ShadCN UI
+Backend	Supabase (DB, Auth, Realtime, Edge Functions)
+Payments	Paystack
+Notifications	Web Push API + Supabase Events
+Deployment	Vercel + Supabase Cloud
+Optional	Clerk/Auth.js alternative
+3️⃣ Required UI Components (ShadCN)
+General UI
+
+Navbar
+
+Footer
+
+Sidebar
+
+Search bar
+
+Filter popover / drawer
+
+Toast notifications
+
+Progress indicator / loaders
+
+Authentication
+
+Login form
+
+Register form
+
+Forgot password modal
+
+Listing System
+
+Hostel card UI (with live availability)
+
+Image carousel
+
+Price tag badge
+
+Tags UI (Wi-Fi, Water, Electricity, etc.)
+
+Booking System
+
+Booking modal
+
+Date selector or term selector (Per semester?)
+
+Payment component (Paystack client)
+
+Status indicator (Available / Full / Pending)
+
+Chat & Notifications
+
+Chat window (messages + input)
+
+Chat sidebar list
+
+Notification bell with real-time updates
+
+Admin Panel
+
+Dashboard cards
+
+Table (users, bookings, hostels)
+
+Forms for adding/editing hostels/rooms
+
+Role assignment UI
+
+Analytics chart
+
+4️⃣ Supabase Database Structure
+Table	Purpose
+users	Store user profile info
+hostels	Basic hostel info
+rooms	Individual rooms with capacity
+bookings	Booking and reservation records
+messages	Chat messages
+transactions	Payment logs from Paystack
+notifications	Push notification tracking
+Basic Relationships
+
+hostels.owner_id → users.id
+
+rooms.hostel_id → hostels.id
+
+bookings.room_id → rooms.id
+
+5️⃣ Payment Flow (Paystack)
+
+User selects room and booking options
+
+A pending booking record is created
+
+User pays using Paystack popup
+
+Backend verifies via server route
+
+On success:
+
+Update transaction record
+
+Confirm booking
+
+Mark room availability
+
+Trigger realtime update
+
+Send notification +
