@@ -12,7 +12,7 @@ import Image from "next/image";
 
 export default function Home() {
   return (
-    <section className=" w-full h-full p-8">
+    <section className=" w-full h-full p-4">
       <div className="relative">
         <Hero />
         <SearchBtn />
