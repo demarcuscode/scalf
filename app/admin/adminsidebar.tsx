@@ -14,7 +14,7 @@ interface sideprops {
   links: { name: string; href: string; icon: any }[];
 }
 
-export default function Sidebar(props: sideprops) {
+export default function AdminSidebar(props: sideprops) {
   return (
     <div className="flex fixed left-0 top-0 p-4 ">
       <aside className="h-screen border-r   flex flex-col p-4 bg-blue-400 h-full rounded-lg items-center">
@@ -34,7 +34,7 @@ export default function Sidebar(props: sideprops) {
           {props.links.map(({ name, href, icon: Icon }) => (
             <Link
               key={name}
-              href={href !== "/" ? `/dashboard/${href}` : href}
+              href={href !== "/" ? `/admin/${href}` : href}
               replace
               className="flex items-center gap-3 text-gray-700 hover:text-white "
             >
