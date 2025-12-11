@@ -1,3 +1,12 @@
+import {
+  BarChart2,
+  Bell,
+  CreditCard,
+  FileText,
+  Home,
+  MessageSquare,
+} from "lucide-react";
+
 export const ratedhostels = [
   {
     id: "1",
@@ -44,4 +53,21 @@ export const ratedhostels = [
     city: "kumasi",
     rating: "5.5",
   },
+];
+
+export const dashboardlinks = [
+  { name: "Dashboard", href: "/", icon: Home },
+  { name: "Charts", href: "/charts", icon: BarChart2 },
+  { name: "Chat", href: "/chat", icon: MessageSquare },
+  { name: "Payments", href: "/payments", icon: CreditCard },
+  { name: "Notifications", href: "/notifications", icon: Bell },
+  { name: "Content", href: "/content", icon: FileText },
+];
+export const adminlinks = [
+  { name: "Dashboard", href: "/", icon: Home },
+  { name: "Charts", href: "/charts", icon: BarChart2 },
+  { name: "Chat", href: "/chat", icon: MessageSquare },
+  { name: "Payments", href: "/payments", icon: CreditCard },
+  { name: "Notifications", href: "/notifications", icon: Bell },
+  { name: "Content", href: "/content", icon: FileText },
 ];

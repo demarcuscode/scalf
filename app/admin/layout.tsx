@@ -1,7 +1,8 @@
-import { dashboardlinks } from "@/lib/constant";
 import Sidebar from "@/components/dashboard/sidebar";
+import { adminlinks } from "@/lib/constant";
+import AdminSidebar from "./adminsidebar";
 
-export default function DashboardLayout({
+export default function AdminLayout({
   children,
 }: {
   children: React.ReactNode;
@@ -9,7 +10,7 @@ export default function DashboardLayout({
   return (
     <>
       <div className="flex w-full min-h-screen">
-        <Sidebar links={dashboardlinks} />
+        <AdminSidebar links={adminlinks} />
         <div className="flex-grow w-full ml-16 md:ml-50">{children}</div>
       </div>
     </>
