@@ -11,7 +11,7 @@ export function HighlightText(props: highprops) {
       className={cn(
         `
         px-3 py-1 rounded-full 
-        bg-blue-300  text-yellow-900 
+        bg-miaccent  text-card  
         font-semibold  
       `,
         props.className

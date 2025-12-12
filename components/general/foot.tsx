@@ -4,14 +4,12 @@ import Link from "next/link";
 
 export default function SiteFooter() {
   return (
-    <footer className="w-full bg-gray-100 border-t mt-10 bg-miprimary">
-      <div className="max-w-6xl mx-auto p-8 grid grid-cols-1 md:grid-cols-3 gap-12">
+    <footer className="w-full bg-gray-100 border-t mt-10 bg-miprimary ">
+      <div className="max-w-xl mx-auto p-8 grid grid-cols-2 md:grid-cols-3 gap-12 max-w-[80%] mx-auto">
         {/* Column 1 */}
         <div className="text-white ">
-          <h3 className="text-xl font-semibold text-white mb-4 text-center">
-            Navigation
-          </h3>
-          <ul className="space-y-2 text-gray-700 text-center flex  flex-col gap-4">
+          <h3 className="text-xl font-semibold text-white mb-4 ">Navigation</h3>
+          <ul className="space-y-2 text-gray-700  flex  flex-col gap-4">
             <li>
               <Link href="/" className="hover:text-misecondary text-white">
                 Home
@@ -62,10 +60,8 @@ export default function SiteFooter() {
 
         {/* Column 2 */}
         <div>
-          <h3 className="text-xl font-semibold mb-4 text-center text-white">
-            Discover
-          </h3>
-          <ul className="space-y-2 text-gray-700 text-center flex flex-col gap-4">
+          <h3 className="text-xl font-semibold mb-4  text-white">Discover</h3>
+          <ul className="space-y-2 text-gray-700  flex flex-col gap-4">
             <li>
               <Link
                 href="/top-rated"
@@ -119,10 +115,8 @@ export default function SiteFooter() {
 
         {/* Column 3 */}
         <div>
-          <h3 className="text-xl font-semibold mb-4 text-center text-white">
-            Support
-          </h3>
-          <ul className="space-y-2 text-gray-700 text-center flex flex-col gap-4">
+          <h3 className="text-xl font-semibold mb-4  text-white">Support</h3>
+          <ul className="space-y-2 text-gray-700  flex flex-col gap-4">
             <li>
               <Link
                 href="/chat-manager"
