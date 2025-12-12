@@ -12,27 +12,27 @@ export default function Hero(props: heroprops) {
   return (
     <section
       className={cn(
-        "  md:flex md:items-center   md:max-w-[80%] gap-8 p-4 w-full md:justify-center md:items-center  text-white rounded-lg bg-blue-400 md:mx-auto ",
+        "md:flex md:items-center md:max-w-[90%] md:mx-auto md:jusity-center w-full md:gap-12 md:p-12 ",
         props.className
       )}
     >
-      <div className="md:max-w-lg p-4 flex gap-4 flex-col  ">
+      <div className="flex  flex-col gap-4 p-4 md:max-w-lg  ">
         <Heading2
-          text="Get access to 500 plus hostels across KNUST"
-          className=" uppercase "
+          text="Get access to 500 plus hostels across ghana"
+          className=" capitalize  text-left text-4xl  md:text-5xl  tracking-wide leading-0.7 font-bold "
         />
         <Text
-          className="text-white capitalize "
+          className="text-text text-base  text-left"
           text="We provide clean hygienic students hostels  in affordable prices with safe and secure environments. "
         />
       </div>
-      <div className="max-w-full h-[50vh] object-contain bg-blue-400">
+      <div className="max-w-full h-[60vh] object-cover ">
         <Image
           src="/hero.png"
           alt="logo"
           width={500}
           height={500}
-          className="object-contain h-[50vh] bg-blue-400"
+          className="  bg-blue-400 object-cover"
           priority={true}
         />
       </div>

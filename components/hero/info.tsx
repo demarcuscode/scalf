@@ -42,25 +42,25 @@ export const amenities: Amenity[] = [
 
 export default function HeroInfo() {
   return (
-    <section className=" md:flex md:justify-center md:max-w-[95%] mx-auto my-10">
-      <div className="w-full md:max-w-4xl p-8 bg-gray-300">
+    <section className="mt-20 md:flex  md:flex-row-reverse ">
+      <div className="w-full md:max-w-4xl p-8 bg-miprimary md:h-[screen] p-6">
         <Heading2
-          className=" uppercase"
+          className=" capitalize text-4xl md:text-pretty text-white  md:text-5xl leading-0.7 tracking-wide"
           text="Eco-friendly student's housing with all essentials included"
         />
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4  items-center justify-center p-8">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-8 mt-10 items-center justify-center ">
           {amenities.map((item, index) => {
             return <InfolistItem key={index} {...item} />;
           })}
         </div>
       </div>
-      <div className=" max-w-full  h-[50vh] object-cover">
+      <div className=" max-w-full  md:h-screen w-full  object-cover">
         <Image
           src="/info.jpg"
           alt="info"
-          width={500}
+          width={800}
           height={500}
-          className="w-full  h-[50vh] object-cover"
+          className="w-full  md:h-screen object-cover"
         />
       </div>
     </section>
@@ -73,12 +73,12 @@ interface infoprops {
 }
 const InfolistItem = (props: infoprops) => {
   return (
-    <div className="p-4 flex flex-col items-center ">
+    <div className="">
       <div className="flex items-center flex-col gap-4">
-        <div className="rounded-full text-white  bg-blue-400 p-4 w-18">
+        <div className="rounded-full text-white  bg-misecondary p-4 w-18">
           {props.icon}
         </div>
-        <p className="capitalize text-base text-wrap text-center">
+        <p className="capitalize text-base text-miaccent text-wrap text-center">
           {props.label}
         </p>
       </div>

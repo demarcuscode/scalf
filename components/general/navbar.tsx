@@ -7,29 +7,22 @@ import Link from "next/link";
 import SignInBtn from "./signinbtn";
 import Navlist from "./navlist";
 import MobileNav from "./menubar";
+import { colortheme } from "@/lib/constant";
 
 export default function NavBar() {
   return (
-    <section className="fixed top-0 left-0 bg-gray-300 transparent z-50 md:px-16 px-4 w-full flex justify-between items-center p-4 ">
-      {/* logo , list your hostel ,  sign in  menubar */}
-      <div className="">
+    <section className="text-miaccent w-full max-w-full fixed top-0 left-0    z-50 flex items-center md:items-center gap-4 justify-between p-4 bg-miprimary ">
+      <div className="h-10 md:w-50 object-contain">
         <Image
           src="/logo-1-primary.png"
           alt="logo"
           width={80}
           height={80}
-          className=""
+          className="w-40 md:w-50 h-10 object-cover"
         />
       </div>
-
-      <div className="flex items-center gap-4">
-        <div className="flex  gap-1 items-end font-bold">
-          <HousePlus size={20} className="text-blue-400" />
-          <Link href="/" className="text-base text-pretty">
-            list your hostel
-          </Link>
-        </div>
-        {<MobileNav />}
+      <div className="object-contain">
+        <MobileNav />
       </div>
     </section>
   );

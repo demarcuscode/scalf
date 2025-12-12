@@ -16,12 +16,22 @@ import {
   PopoverContent,
 } from "@/components/ui/popover";
 import { Calendar } from "@/components/ui/calendar";
+import { cn } from "@/lib/utils";
 
-export default function SearchBtn() {
+interface searchprops {
+  className?: string;
+}
+
+export default function SearchBtn(props: searchprops) {
   const [date, setDate] = React.useState<Date>();
 
   return (
-    <div className="w-full max-w-3xl md:max-w-[80%] relative z-20 -top-10   mx-auto p-5 bg-white rounded-2xl shadow-md grid grid-cols-1 md:grid-cols-4 gap-4">
+    <div
+      className={cn(
+        "bg-micard  rounded-lg z-40 relative -top-20 max-w-[80%] mx-auto shadow-lg shadow-misecondary border p-4",
+        props.className
+      )}
+    >
       {/* -------- City Select -------- */}
       <div>
         <label className="text-sm font-medium mb-1 block">City</label>
@@ -43,7 +53,7 @@ export default function SearchBtn() {
       </div>
 
       {/* -------- Date Picker -------- */}
-      <div>
+      <div className="flex flex-col  gap-4">
         <label className="text-sm font-medium mb-1 block">Date</label>
         <Popover>
           <PopoverTrigger asChild>
@@ -62,7 +72,7 @@ export default function SearchBtn() {
       </div>
 
       {/* -------- Room Type Select -------- */}
-      <div>
+      <div className="py-4">
         <label className="text-sm font-medium mb-1 block">Room Type</label>
         <Select>
           <SelectTrigger className="w-full">
@@ -80,7 +90,7 @@ export default function SearchBtn() {
 
       {/* -------- Search Button -------- */}
       <div className="flex items-end">
-        <Button className="w-full h-11 text-white bg-blue-400 font-semibold text-md">
+        <Button className="w-full h-11 text-white bg-miaccent font-semibold text-md">
           Book a Room
         </Button>
       </div>

@@ -8,12 +8,11 @@ import JoinNewsletter from "@/components/hero/joinnewsletter";
 import Map from "@/components/hero/map";
 import Rated from "@/components/hero/rated";
 import TestimonialsSection from "@/components/hero/testdiv";
-import Image from "next/image";
 
 export default function Home() {
   return (
-    <section className=" w-full h-full p-4">
-      <div className="relative">
+    <section className=" w-full h-full mt-15 ">
+      <div className="  p-4">
         <Hero />
         <SearchBtn />
       </div>
@@ -22,8 +21,8 @@ export default function Home() {
       <FAQ />
       <TestimonialsSection />
       <Map />
-      <JoinNewsletter />
       <LastImage />
+      <JoinNewsletter />
       <SiteFooter />
     </section>
   );

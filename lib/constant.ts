@@ -71,3 +71,12 @@ export const adminlinks = [
   { name: "Notifications", href: "/notifications", icon: Bell },
   { name: "Content", href: "/content", icon: FileText },
 ];
+
+export const colortheme = {
+  primary: "#6D28D9",
+  secondary: "#6B5CF6",
+  accent: "#FACC15",
+  background: "#FAF5FF",
+  card: "#FFFFFF",
+  text: "#1E1B4B",
+};
