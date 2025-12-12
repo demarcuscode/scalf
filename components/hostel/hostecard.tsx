@@ -18,7 +18,7 @@ interface hostelcardprops {
 
 export default function Hostelcard(props: hostelcardprops) {
   return (
-    <Card className=" overflow-hidden shadow-lg shadow-misecondary  rounded-lg relative hover:scale-[1.02] p-0 transition-all cursor-pointer">
+    <Card className=" overflow-hidden shadow-lg shadow-misecondary ease-out  rounded-lg relative hover:scale-[1.02] p-0 transition-all cursor-pointer">
       <div className="h-[70%] w-full overflow-hidden p-0 rounded-t-lg object-cover ">
         <Image
           src={props.imageurl}
@@ -57,7 +57,7 @@ export default function Hostelcard(props: hostelcardprops) {
           </CardDescription>
         </div>
 
-        <Button className=" w-full bg-miaccent text-white  capitalize text-lg font-extrabold ">
+        <Button className=" w-full bg-miaccent/90 text-white cursor-pointer hover:bg-miaccent  tracking-wide hover:-translate-y-0.5 duration-500 ease-out  capitalize text-lg font-extrabold ">
           view
         </Button>
       </CardContent>

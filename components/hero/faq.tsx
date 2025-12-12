@@ -1,5 +1,4 @@
 "use client";
-
 import React from "react";
 import {
   Accordion,
@@ -8,6 +7,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { PlusSquare } from "lucide-react";
+import Image from "next/image";
 
 // FAQ Data
 export const faqs = [
@@ -45,11 +45,32 @@ export const faqs = [
 
 export default function FAQ() {
   return (
-    <div className="max-w-[90%] mx-auto  mt-10 md:flex md:justify-between p-4 w-full">
-      <h2 className="text-4xl font-extrabold mb-4 text-center">
+    <div className="max-w-[90%] md:mx-auto  mt-10  p-4 h-full ">
+      <h2 className="text-4xl md:text-5xl font-extrabold mb-4 text-center">
         Frequently Asked Questions
       </h2>
-      <div className="rounded-lg">
+      <div className=" md:flex md:items-center ">
+        <div className=" w-full md:max-w-[40%] h-[50vh] object-cover ">
+          <video
+            loop
+            className=" w-full md:w-[40vw] h-[50vh]  object-cover"
+            autoPlay={true}
+            preload="none"
+          >
+            <source
+              src="https://bez5btbsbycwy9xv.public.blob.vercel-storage.com/mapvideo.mp4"
+              type="video/mp4"
+              className="w-full  object-cover"
+            />
+            <track
+              src="/path/to/captions.vtt"
+              kind="subtitles"
+              srcLang="en"
+              label="English"
+            />
+            Your browser does not support the video tag.
+          </video>
+        </div>
         <Accordion
           type="single"
           collapsible

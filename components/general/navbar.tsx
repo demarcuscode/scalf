@@ -11,17 +11,17 @@ import { colortheme } from "@/lib/constant";
 
 export default function NavBar() {
   return (
-    <section className="text-miaccent w-full max-w-full fixed top-0 left-0    z-50 flex items-center md:items-center gap-4 justify-between p-4 bg-miprimary ">
-      <div className="h-10 md:w-50 object-contain">
+    <section className="text-miaccent w-full  mx-auto h-10 fixed top-0 left-0 z-50 flex items-center  gap-4 justify-between p-4 bg-miprimary ">
+      <div className="h-10 md:w-50 object-contain ">
         <Image
           src="/logo-1-primary.png"
           alt="logo"
-          width={80}
-          height={80}
-          className="w-40 md:w-50 h-10 object-cover"
+          width={60}
+          height={60}
+          className="w-20 md:w-30 h-10 p-2 object-cover"
         />
       </div>
-      <div className="object-contain">
+      <div className="object-contain ">
         <MobileNav />
       </div>
     </section>

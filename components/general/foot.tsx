@@ -5,7 +5,7 @@ import Link from "next/link";
 export default function SiteFooter() {
   return (
     <footer className="w-full bg-gray-100 border-t mt-10 bg-miprimary ">
-      <div className="max-w-xl mx-auto p-8 grid grid-cols-2 md:grid-cols-3 gap-12 max-w-[80%] mx-auto">
+      <div className="max-w-[80%] mx-auto p-8 grid grid-cols-2 md:grid-cols-3 gap-12 max-w-[80%] mx-auto">
         {/* Column 1 */}
         <div className="text-white ">
           <h3 className="text-xl font-semibold text-white mb-4 ">Navigation</h3>
@@ -41,8 +41,8 @@ export default function SiteFooter() {
             </li>
             <li>
               <Link
-                href="/book-hostel"
                 className="hover:text-misecondary text-white"
+                href="/book-hostel"
               >
                 Book a Hostel
               </Link>
@@ -95,12 +95,8 @@ export default function SiteFooter() {
               </Link>
             </li>
             <li>
-              <Link
-                href="/hostels"
-                className="hover:text-misecondary text-white"
-              >
-                Hostels
-              </Link>
+              <Link href="/hostels" className=" text-white"></Link>
+              Hostels
             </li>
             <li>
               <Link

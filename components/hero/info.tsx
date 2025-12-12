@@ -43,9 +43,9 @@ export const amenities: Amenity[] = [
 export default function HeroInfo() {
   return (
     <section className="mt-20 md:flex  md:flex-row-reverse ">
-      <div className="w-full md:max-w-4xl p-8 bg-miprimary md:h-[screen] p-6">
+      <div className="w-full    bg-miprimary/75 bg-gradient-to-r flex items-center justify-center flex-col from-misecondary/80 md:h-[screen] md:py-20 md:p-8 p-4 ">
         <Heading2
-          className=" capitalize text-4xl md:text-pretty text-white  md:text-5xl leading-0.7 tracking-wide"
+          className=" capitalize text-4xl text-right text-white  md:text-5xl max-w-[80%]   leading-0.7 tracking-wide"
           text="Eco-friendly student's housing with all essentials included"
         />
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-8 mt-10 items-center justify-center ">
@@ -54,13 +54,13 @@ export default function HeroInfo() {
           })}
         </div>
       </div>
-      <div className=" max-w-full  md:h-screen w-full  object-cover">
+      <div className=" max-w-full  md:h-screen  w-full  object-cover">
         <Image
           src="/info.jpg"
           alt="info"
-          width={800}
+          width={750}
           height={500}
-          className="w-full  md:h-screen object-cover"
+          className="w-full  md:h-screen object-cover "
         />
       </div>
     </section>
@@ -75,10 +75,10 @@ const InfolistItem = (props: infoprops) => {
   return (
     <div className="">
       <div className="flex items-center flex-col gap-4">
-        <div className="rounded-full text-white  bg-misecondary p-4 w-18">
+        <div className="rounded-full text-white  bg-miprimary p-4 w-18">
           {props.icon}
         </div>
-        <p className="capitalize text-base text-miaccent text-wrap text-center">
+        <p className="capitalize text-base text-miaccent  text-wrap text-center">
           {props.label}
         </p>
       </div>

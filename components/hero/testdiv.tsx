@@ -12,15 +12,15 @@ const testimonials = [
     author: "Michael Amankwah",
   },
   {
-    message: "Excellent service! The UI is clean and beautiful. I love it.",
+    message: "I started using the app and am already, and it Wow!",
     author: "Ansah Debrina",
   },
   {
-    message: "Excellent service! The UI is clean and beautiful. I love it.",
+    message: "Saves alot of time and effort . like i can scroll all day.",
     author: "Osei Poku ",
   },
   {
-    message: "Excellent service! The UI is clean and beautiful. I love it.",
+    message: "I do not need a thirdman if there is a website i can trust .",
     author: "Benedicta Asuo",
   },
 ];
