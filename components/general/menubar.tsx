@@ -46,27 +46,27 @@ export default function MobileNav() {
             </Link>
 
             <Link href="/payments" className="hover:text-black">
-              Payments
+              hostels
             </Link>
 
             <Link href="/manage-hostel" className="hover:text-black">
-              Manage Hostel
+              dashboard
             </Link>
 
             <Link href="/list-hostel" className="hover:text-black">
-              List a Hostel
+              chat
             </Link>
 
             <Link href="/hostel" className="hover:text-black">
-              Book a Hostel
+              bookings
             </Link>
 
             <Link href="/payment" className="hover:text-black">
-              Make Payment
+              featured
             </Link>
 
             <Link href="#top-rated" className="hover:text-black">
-              Top Rated Hostels
+              your
             </Link>
 
             <Link href="/announcements" className="hover:text-black">

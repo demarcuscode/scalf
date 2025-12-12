@@ -2,6 +2,7 @@ import SiteFooter from "@/components/general/foot";
 import SearchBtn from "@/components/general/searchbtn";
 import LastImage from "@/components/hero/actionheroinfoimg";
 import FAQ from "@/components/hero/faq";
+import ArtisticCounter from "@/components/hero/figures";
 import Hero from "@/components/hero/hero";
 import HeroInfo from "@/components/hero/info";
 import JoinNewsletter from "@/components/hero/joinnewsletter";
@@ -15,6 +16,11 @@ export default function Home() {
       <div className="  p-4">
         <Hero />
         <SearchBtn />
+      </div>
+      <div className="md:flex items-center justify-center    max-w-[80%] mx-auto  my-20 gap-8">
+        <ArtisticCounter title="Hostels" number={500} />
+        <ArtisticCounter title="Users" number={5000} />
+        <ArtisticCounter title="Engagements" number={15000} />
       </div>
       <Rated />
       <HeroInfo />
