@@ -10,7 +10,7 @@ export function Text(props: textprops) {
     <p
       className={cn(
         `
-        text-xl md:text-2xl tracking-wide 
+        text-sm md:text-lg   tracking-wide 
       `,
         props.className
       )}

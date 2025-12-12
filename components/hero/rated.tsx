@@ -12,13 +12,13 @@ import {
 
 export default function Rated() {
   return (
-    <div className="w-full max-w-6xl mx-auto py-6">
+    <div className="max-w-[90%] mx-auto ">
       <Carousel className="w-full">
-        <CarouselContent className="-ml-2 md:-ml-4">
+        <CarouselContent className=" flex gap-4">
           {ratedhostels.map((item, index) => (
             <CarouselItem
               key={index}
-              className="pl-2 md:pl-4 basis-3/4 sm:basis-1/2 md:basis-1/3 lg:basis-1/4"
+              className=" basis-1/1 sm:basis-1/2 md:basis-1/3 lg:basis1/3"
             >
               <Hostelcard {...item} />
             </CarouselItem>
@@ -26,8 +26,8 @@ export default function Rated() {
         </CarouselContent>
 
         {/* Navigation Buttons */}
-        <CarouselPrevious />
-        <CarouselNext />
+        <CarouselPrevious className="hidden md:flex" />
+        <CarouselNext className="hidden md:flex " />
       </Carousel>
     </div>
   );

@@ -45,23 +45,27 @@ export const faqs = [
 
 export default function FAQ() {
   return (
-    <div className="w-full md:max-w-[65%] md:mx-auto p-4 mt-10 md:flex md:justify-between p-4 w-full">
+    <div className="max-w-[90%] mx-auto  mt-10 md:flex md:justify-between p-4 w-full">
       <h2 className="text-4xl font-extrabold mb-4 text-center">
         Frequently Asked Questions
       </h2>
-      <div>
-        <Accordion type="single" collapsible className="w-full ">
+      <div className="rounded-lg">
+        <Accordion
+          type="single"
+          collapsible
+          className="w-full flex flex-col rounded-lg gap-4"
+        >
           {faqs.map((item) => (
             <AccordionItem
               key={item.id}
               value={item.id}
-              className="bg-gray-300 m-2 w-full p-2"
+              className="bg-misecondary rounded-lg m-2 w-full p-3"
             >
-              <AccordionTrigger className="text-lg">
+              <AccordionTrigger className="text-lg text-card">
                 {item.question}
               </AccordionTrigger>
 
-              <AccordionContent className="bg-gray-200 p-4 text-lg">
+              <AccordionContent className="bg-miprimary text-card rounded-lg  p-4 text-lg">
                 {item.answer}
               </AccordionContent>
             </AccordionItem>

@@ -41,7 +41,7 @@ function AccordionTrigger({
         {...props}
       >
         {children}
-        <PlusSquare className="h-5 w-5 transition-transform duration-300 data-[state=open]:rotate-45" />
+        <PlusSquare className="h-5 w-5 transition-transform duration-300 data-[state=open]:rotate-45 text-miaccent" />
       </AccordionPrimitive.Trigger>
     </AccordionPrimitive.Header>
   );

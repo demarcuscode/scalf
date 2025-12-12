@@ -8,31 +8,39 @@ import {
   SheetTitle,
   SheetDescription,
 } from "@/components/ui/sheet";
+import { colortheme } from "@/lib/constant";
 import { Menu } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 
 export default function MobileNav() {
   return (
-    <div className="z-20">
+    <div className={"z-20"}>
       <Sheet>
         {/* Hamburger Button */}
-        <SheetTrigger className="md:hidden">
-          <Menu className="h-7 w-7 text-blue-500" />
+        <SheetTrigger className="">
+          <Menu className={`h-10 w-10 text-miaccent z-40 ]`} />
         </SheetTrigger>
 
         {/* Slide-Out Menu */}
-        <SheetContent side="left" className="w-72">
+        <SheetContent side="left" className=" w-72">
           <SheetHeader>
-            <SheetTitle className="text-left text-2xl font-bold">
-              HostelHub
-            </SheetTitle>
-            <SheetDescription className="text-left">
+            <div className="text-center flex justify-center uppercase  font-bold">
+              <Image
+                src="/logo-1-primary.png"
+                alt="logo"
+                width={100}
+                height={100}
+                className=""
+              />
+            </div>
+            <SheetDescription className=" text-center">
               Navigate your dashboard
             </SheetDescription>
           </SheetHeader>
 
           {/* NAV LINKS */}
-          <nav className="mt-2 flex flex-col space-y-4 gap-8 text-lg font-medium  p-8 text-center">
+          <nav className="mt-2 flex flex-col space-y-4 gap-4  text-base capitalize  text-blue-500 ease-out  hover:text-blue-600 font-medium   text-center">
             <Link href="/" className="hover:text-black">
               Home
             </Link>

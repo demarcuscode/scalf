@@ -8,18 +8,18 @@ interface testprops {
 }
 export function TestimonialCard(props: testprops) {
   return (
-    <Card className="relative rounded-xl shadow-md p-4 overflow-hidden bg-gray-300">
+    <Card className="relative rounded-lg  shadow-lg shadow-misecondary bg-card p-4 overflow-hidden ">
       {/* Faint Background Quote Icon */}
-      <Quote className="absolute top-4 left-4 h-12 w-12 text-gray-300 opacity-20" />
+      <Quote className="absolute top-4 right-0 h-12 w-12 text-miprimary opacity-20 p-2" />
 
       <CardHeader className="relative z-10 p-0">
-        <p className="text-xl text-gray-800 leading-relaxed">
+        <p className="text-xl text-gray-800 leading-relaxed max-w-[90%]">
           “{props.message}”
         </p>
       </CardHeader>
 
       <CardContent className="relative z-10 mt-4 p-0">
-        <p className="font-semibold text-lg text-gray-900 text-right">
+        <p className="font-semibold text-lg text-miprimary font-bold text-right">
           — {props.author}
         </p>
       </CardContent>

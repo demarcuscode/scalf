@@ -4,6 +4,12 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
+  --color-misecondary: var(--misecondary);
+  --color-miaccent: var(--miaccent);
+  --color-mibackground: var(--mibackgound);
+  --color-miprimary: var(--miprimary);
+  --color-micard: var(--micard);
+  --color-mitext: var(--mitext);
   --color-background: var(--background);
   --color-mycolor: oklch(69.8% 0.128 259);
   --color-foreground: var(--foreground);
@@ -45,6 +51,12 @@
 }
 
 :root {
+  --miprimary: #6d28d9;
+  --misecondary: #6b5cf6;
+  --miaccent: #facc15;
+  --mibackground: #faf5ff;
+  --micard: #ffffff;
+  --mitext: "#1E1B4B";
   --mycolor: oklch(69.8% 0.128 259);
   --radius: 0.625rem;
   --background: oklch(1 0 0);
@@ -81,7 +93,12 @@
 }
 
 .dark {
-  --font-poppins: var(--font-poppins);
+  --miprimary: #6d28d9;
+  --misecondary: #6b5cf6;
+  --miaccent: #facc15;
+  --mibackground: #faf5ff;
+  --micard: #ffffff;
+  --mitext: #1e1b4b;
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
   --card: oklch(0.205 0 0);
