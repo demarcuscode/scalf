@@ -90,7 +90,11 @@ export default function SearchBtn(props: searchprops) {
 
       {/* -------- Search Button -------- */}
       <div className="flex items-end">
-        <Button className="w-full h-11 text-white bg-miaccent font-semibold text-md">
+        <Button
+          className={
+            "w-full h-11 text-white bg-miaccent/80 cursor-pointer font-bold tracking-wide hover:-translate-y-0.5 duration-500 ease-out font-semibold text-md hover:bg-miaccent  "
+          }
+        >
           Book a Room
         </Button>
       </div>

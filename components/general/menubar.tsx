@@ -12,14 +12,23 @@ import { colortheme } from "@/lib/constant";
 import { Menu } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import { useCurrentUserImage } from "@/hooks/use-current-user-image";
 
 export default function MobileNav() {
+  const image: any = useCurrentUserImage();
   return (
     <div className={"z-20"}>
       <Sheet>
         {/* Hamburger Button */}
-        <SheetTrigger className="">
-          <Menu className={`h-10 w-10 text-miaccent z-40 ]`} />
+
+        <SheetTrigger asChild className="">
+          <div className="flex items-center gap-2 ">
+            <Avatar>
+              <AvatarImage src={image as string} alt="" />
+            </Avatar>
+            <Menu className={`h-10 w-10 text-miaccent z-40  p-2  `} />
+          </div>
         </SheetTrigger>
 
         {/* Slide-Out Menu */}

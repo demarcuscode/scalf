@@ -17,7 +17,7 @@ export default function Home() {
         <Hero />
         <SearchBtn />
       </div>
-      <div className="md:flex items-center justify-center    max-w-[80%] mx-auto  my-20 gap-8">
+      <div className="max-w-[90%] mx-auto">
         <ArtisticCounter title="Hostels" number={500} />
         <ArtisticCounter title="Users" number={5000} />
         <ArtisticCounter title="Engagements" number={15000} />
