@@ -24,10 +24,10 @@ export default function Map() {
             <li>Higher occupancy rates and turnover</li>
             <li>No prior hospitality required to start </li>
             <div className="flex w-full gap-4 text-xl">
-              <Button className="bg-miaccent/80 text-xl text-white px-8 py-4 cursor-pointer hover:bg-miaccent font-bold tracking-wide hover:-translate-y-0.5 duration-500 ease-out">
+              <Button className="bg-miaccent/80 text-xl text-white px-8 py-6 cursor-pointer hover:bg-miaccent font-bold tracking-wide hover:-translate-y-0.5 duration-500 ease-out">
                 list your hostel
               </Button>
-              <Button className="text-miaccent  text-xl font-bold bg-white cursor-pointer hover:bg-miaccent hover:text-misecondary md:px-8 font-bold tracking-wide hover:-translate-y-0.5 duration-500 ease-out ">
+              <Button className="text-miaccent  text-xl font-bold bg-white cursor-pointer hover:bg-miaccent hover:text-misecondary px-8 py-6  font-bold tracking-wide hover:-translate-y-0.5 duration-500 ease-out ">
                 learn more
               </Button>
             </div>
