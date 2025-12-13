@@ -49,12 +49,14 @@ export default function FAQ() {
       <h2 className="text-4xl md:text-5xl font-extrabold mb-4 text-center">
         Frequently Asked Questions
       </h2>
-      <div className=" md:flex md:items-center gap-4 p-4 md:p-0 ">
+      <div className=" md:flex md:items-center gap-4 p-4 md:p-0 md:mt-20 ">
         <video
           loop
+          muted
+          autoPlay
           className="w-full h-[50vh] md:h-[55vh] object-cover rounded-lg"
-          autoPlay={true}
-          preload="metadata"
+          playsInline
+          preload="auto"
         >
           <source
             src="https://bez5btbsbycwy9xv.public.blob.vercel-storage.com/mapvideo.mp4"
