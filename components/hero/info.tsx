@@ -45,10 +45,10 @@ export default function HeroInfo() {
     <section className="my-30 md:flex  md:flex-row-reverse ">
       <div className="w-full    bg-miprimary/75 bg-gradient-to-r flex items-center justify-center flex-col from-misecondary/80 md:h-[screen] md:py-20 md:p-8 p-4 ">
         <Heading2
-          className=" capitalize text-4xl text-right text-white  md:text-5xl max-w-[80%]   leading-0.7 tracking-wide"
+          className=" capitalize text-4xl text-right text-white  md:text-5xl max-w-[80%]   leading-0.7 tracking-wide p-4"
           text="Eco-friendly student's housing with all essentials included"
         />
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-8 my-30 items-center justify-center ">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-8 my-10 items-center justify-center ">
           {amenities.map((item, index) => {
             return <InfolistItem key={index} {...item} />;
           })}
