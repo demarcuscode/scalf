@@ -4,7 +4,7 @@ import { Button } from "../ui/button";
 
 export default function Map() {
   return (
-    <section className="  mt-20 w-full ">
+    <section className="  my-30 w-full ">
       <div className=" gap-8 w-full">
         <div className="max-w-full h-[60vh]  w-full object-contain md:object-cover ">
           <Image

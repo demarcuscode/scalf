@@ -12,7 +12,7 @@ import {
 
 export default function Rated() {
   return (
-    <div className="max-w-[90%] mx-auto ">
+    <div className="max-w-[90%] mx-auto  my-30">
       <Carousel className="w-full">
         <CarouselContent className=" flex gap-4">
           {ratedhostels.map((item, index) => (

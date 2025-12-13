@@ -4,12 +4,14 @@ import Link from "next/link";
 
 export default function SiteFooter() {
   return (
-    <footer className="w-full bg-gray-100 border-t mt-10 bg-miprimary ">
-      <div className="max-w-[80%] mx-auto p-8 grid grid-cols-2 md:grid-cols-3 gap-12 max-w-[80%] mx-auto">
+    <footer className="w-full  border-t  bg-miprimary ">
+      <div className="p-12 grid grid-cols-2 lg:grid-cols-3 max-w-[85%] gap-4 md:gap-8 md:mx-auto justify-center ">
         {/* Column 1 */}
-        <div className="text-white ">
-          <h3 className="text-xl font-semibold text-white mb-4 ">Navigation</h3>
-          <ul className="space-y-2 text-gray-700  flex  flex-col gap-4">
+        <div className=" md:p-8">
+          <h3 className="text-2xl font-extrabold  text-white p-4 ">
+            Navigation
+          </h3>
+          <ul className="space-y-2 text-white text-lg p-4  flex  flex-col gap-4">
             <li>
               <Link href="/" className="hover:text-misecondary text-white">
                 Home
@@ -59,9 +61,9 @@ export default function SiteFooter() {
         </div>
 
         {/* Column 2 */}
-        <div>
-          <h3 className="text-xl font-semibold mb-4  text-white">Discover</h3>
-          <ul className="space-y-2 text-gray-700  flex flex-col gap-4">
+        <div className=" md:p-8">
+          <h3 className="text-2xl font-extrabold  p-4  text-white">Discover</h3>
+          <ul className="space-y-2 text-white text-lg p-4  flex flex-col gap-4">
             <li>
               <Link
                 href="/top-rated"
@@ -95,8 +97,9 @@ export default function SiteFooter() {
               </Link>
             </li>
             <li>
-              <Link href="/hostels" className=" text-white"></Link>
-              Hostels
+              <Link href="/hostels" className=" text-white">
+                Hostels
+              </Link>
             </li>
             <li>
               <Link
@@ -110,9 +113,9 @@ export default function SiteFooter() {
         </div>
 
         {/* Column 3 */}
-        <div>
-          <h3 className="text-xl font-semibold mb-4  text-white">Support</h3>
-          <ul className="space-y-2 text-gray-700  flex flex-col gap-4">
+        <div className=" md:p-8">
+          <h3 className="text-2xl font-extrabold  p-4  text-white">Support</h3>
+          <ul className="space-y-2 text-white text-lg p-4  flex flex-col gap-4">
             <li>
               <Link
                 href="/chat-manager"
@@ -151,7 +154,7 @@ export default function SiteFooter() {
         </div>
       </div>
 
-      <div className="border-t py-4 text-center text-sm text-miaccent font-extrabold">
+      <div className="border-t py-4 text-center text-sm text-miaccent font-extrabold p-6">
         © {new Date().getFullYear()} HostelHub. All rights reserved.
       </div>
     </footer>
