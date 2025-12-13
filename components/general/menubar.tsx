@@ -34,15 +34,17 @@ export default function MobileNav() {
         {/* Slide-Out Menu */}
         <SheetContent side="left" className=" w-72">
           <SheetHeader>
-            <div className="text-center flex justify-center uppercase  font-bold">
-              <Image
-                src="/logo-1-primary.png"
-                alt="logo"
-                width={100}
-                height={100}
-                className=""
-              />
-            </div>
+            <SheetTitle>
+              <div className="text-center flex justify-center uppercase  font-bold">
+                <Image
+                  src="/logo-1-primary.png"
+                  alt="logo"
+                  width={100}
+                  height={100}
+                  className=""
+                />
+              </div>
+            </SheetTitle>
             <SheetDescription className=" text-center">
               Navigate your dashboard
             </SheetDescription>
