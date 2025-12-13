@@ -154,7 +154,7 @@ export default function SiteFooter() {
       </div>
 
       <div className="border-t py-4 text-center text-sm text-miaccent font-extrabold p-6">
-        © {new Date().getFullYear()} HostelHub. All rights reserved.
+        © {new Date().getFullYear()} Scalf.io. All rights reserved.
       </div>
     </footer>
   );

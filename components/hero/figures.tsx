@@ -33,7 +33,7 @@ const ArtisticCounter = ({ number, title }: artisticcouterprops) => {
   return (
     <div
       ref={ref}
-      className={`py-16 px-8 rounded-xl bg-gradient-to-r from-purple-600 to-blue-500 text-white text-center shadow-xl transform transition-opacity duration-300 ease-in-out m-2 ${
+      className={`py-16 px-8 rounded-xl bg-gradient-to-r from-purple-600 to-blue-500 text-white text-center shadow-xl transform transition-opacity duration-300 ease-in-out m-2 my-8 md:my-0 ${
         inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
       }`}
     >
