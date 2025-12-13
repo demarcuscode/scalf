@@ -31,7 +31,7 @@ export default function TestimonialsSection() {
       <h2 className="text-3xl font-bold text-center mb-4">
         What Our Users Say
       </h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:grid-cols-3 items-center gap-8 md:max-w-[95%] md:mx-auto ">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:grid-cols-3 items-center gap-8 mt-10 md:max-w-[95%] md:mx-auto ">
         {testimonials.map((t, i) => (
           <TestimonialCard key={i} message={t.message} author={t.author} />
         ))}
