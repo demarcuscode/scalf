@@ -45,32 +45,23 @@ export const faqs = [
 
 export default function FAQ() {
   return (
-    <div className="max-w-[90%] md:mx-auto  mt-10  p-4 h-full ">
+    <div className="max-w-[95%] mx-auto  my-30  p-4 h-full ">
       <h2 className="text-4xl md:text-5xl font-extrabold mb-4 text-center">
         Frequently Asked Questions
       </h2>
-      <div className=" md:flex md:items-center ">
-        <div className=" w-full md:max-w-[40%] h-[50vh] object-cover ">
-          <video
-            loop
-            className=" w-full md:w-[40vw] h-[50vh]  object-cover"
-            autoPlay={true}
-            preload="none"
-          >
-            <source
-              src="https://bez5btbsbycwy9xv.public.blob.vercel-storage.com/mapvideo.mp4"
-              type="video/mp4"
-              className="w-full  object-cover"
-            />
-            <track
-              src="/path/to/captions.vtt"
-              kind="subtitles"
-              srcLang="en"
-              label="English"
-            />
-            Your browser does not support the video tag.
-          </video>
-        </div>
+      <div className=" md:flex md:items-center gap-4 p-4 md:p-0 ">
+        <video
+          loop
+          className="w-full h-[50vh] md:h-[55vh] object-cover rounded-lg"
+          autoPlay={true}
+          preload="metadata"
+        >
+          <source
+            src="https://bez5btbsbycwy9xv.public.blob.vercel-storage.com/mapvideo.mp4"
+            type="video/mp4"
+            className="w-full h-[50vh] md:h-[55vh]  object-cover rounded-lg"
+          />
+        </video>
         <Accordion
           type="single"
           collapsible
