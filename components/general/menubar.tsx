@@ -27,12 +27,12 @@ export default function MobileNav() {
             <Avatar>
               <AvatarImage src={image as string} alt="" />
             </Avatar>
-            <Menu className={`h-10 w-10 text-miaccent z-40  p-2  `} />
+            <Menu className={`h-10 w-10 -miaccent shadow-lg   z-40  p-2  `} />
           </div>
         </SheetTrigger>
 
         {/* Slide-Out Menu */}
-        <SheetContent side="left" className=" w-72">
+        <SheetContent side="left" className=" w-100">
           <SheetHeader>
             <SheetTitle>
               <div className="text-center flex justify-center uppercase  font-bold">
@@ -51,57 +51,38 @@ export default function MobileNav() {
           </SheetHeader>
 
           {/* NAV LINKS */}
-          <nav className="mt-2 flex flex-col space-y-4 gap-4  text-base capitalize  text-blue-500 ease-out  hover:text-blue-600 font-medium   text-center">
+          <nav className="mt-2 flex flex-col space-y-4 gap-4  text-base uppercase group  text-lg  text-miprimary font-bold hover:misecondary ease-out  hover:text-blue-600 font-medium   items-center text-left ">
             <Link href="/" className="hover:text-black">
               Home
             </Link>
 
-            <Link href="/payments" className="hover:text-black">
-              hostels
+            <Link href="/hostel" className="hover:text-black">
+              hostel
             </Link>
 
-            <Link href="/manage-hostel" className="hover:text-black">
+            <Link href="/admin" className="hover:text-black">
               dashboard
             </Link>
 
-            <Link href="/list-hostel" className="hover:text-black">
+            <Link href="/chat" className="hover:text-black">
               chat
             </Link>
 
-            <Link href="/hostel" className="hover:text-black">
-              bookings
+            <Link href="/bookings" className="hover:text-black">
+              booking
             </Link>
 
-            <Link href="/payment" className="hover:text-black">
+            <Link href="/features" className="hover:text-black">
               featured
             </Link>
-
-            <Link href="#top-rated" className="hover:text-black">
-              your
+            <Link href="/notifications" className="hover:text-black">
+              notifications
             </Link>
-
-            <Link href="/announcements" className="hover:text-black">
-              Announcements
+            <Link href="/payments" className="hover:text-black">
+              payments
             </Link>
-
             <Link href="/auth" className="hover:text-black">
               Sign In
-            </Link>
-
-            <Link href="/hostel" className="hover:text-black">
-              Listings
-            </Link>
-
-            <Link href="/hostels" className="hover:text-black">
-              Hostels
-            </Link>
-
-            <Link href="/apartments" className="hover:text-black">
-              Apartments
-            </Link>
-
-            <Link href="/chat-manager" className="hover:text-black">
-              Chat with Manager
             </Link>
           </nav>
         </SheetContent>

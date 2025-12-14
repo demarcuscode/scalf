@@ -4,6 +4,7 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
+  --font-poppins: var(--font-poppins);
   --color-misecondary: var(--misecondary);
   --color-miaccent: var(--miaccent);
   --color-mibackground: var(--mibackgound);
@@ -136,7 +137,7 @@
       @apply border-border outline-ring/50;
     }
     body {
-      @apply bg-background text-foreground;
+      @apply bg-background text-foreground font-sans;
     }
   }
 }

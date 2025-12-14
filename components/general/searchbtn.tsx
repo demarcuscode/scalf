@@ -1,6 +1,11 @@
 "use client";
 import React from "react";
-import { CalendarIcon, MapPin, BedDouble } from "lucide-react";
+import {
+  CalendarIcon,
+  MapPin,
+  BedDouble,
+  ArrowRightCircle,
+} from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -92,10 +97,11 @@ export default function SearchBtn(props: searchprops) {
       <div className="flex items-end">
         <Button
           className={
-            "w-full h-11 text-white bg-miaccent/80 cursor-pointer font-bold tracking-wide hover:-translate-y-0.5 duration-500 ease-out font-semibold text-md hover:bg-miaccent  "
+            "w-full h-11 shadow-lg px-6 py-6 text-white bg-miaccent/80 cursor-pointer font-bold tracking-wide hover:-translate-y-0.5 duration-500 ease-out font-semibold text-md hover:bg-miaccent  "
           }
         >
           Book a Room
+          <ArrowRightCircle />
         </Button>
       </div>
     </div>

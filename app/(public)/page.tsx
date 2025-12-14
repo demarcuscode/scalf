@@ -8,6 +8,7 @@ import HeroInfo from "@/components/hero/info";
 import JoinNewsletter from "@/components/hero/joinnewsletter";
 import Map from "@/components/hero/map";
 import Rated from "@/components/hero/rated";
+import Sponsors from "@/components/hero/Sponsorslid";
 import TestimonialsSection from "@/components/hero/testdiv";
 
 export default function Home() {
@@ -17,6 +18,7 @@ export default function Home() {
         <Hero />
         <SearchBtn />
       </div>
+      <Sponsors />
       <ArtisticCounterDiv />
       <Rated />
       <HeroInfo />

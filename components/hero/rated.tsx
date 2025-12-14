@@ -1,6 +1,5 @@
 "use client";
 import { ratedhostels } from "@/lib/constant";
-import React from "react";
 import Hostelcard from "../hostel/hostecard";
 import {
   Carousel,
@@ -12,9 +11,9 @@ import {
 
 export default function Rated() {
   return (
-    <div className="max-w-[90%] mx-auto  my-30">
-      <Carousel className="w-full">
-        <CarouselContent className=" flex gap-4">
+    <div className="md:max-w-[90%] md:mx-auto  my-30">
+      <Carousel className="w-full p-6 md:p-10 shadow-none">
+        <CarouselContent className=" flex gap-4 p-4">
           {ratedhostels.map((item, index) => (
             <CarouselItem
               key={index}

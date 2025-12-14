@@ -1,21 +1,49 @@
-import SearchBtn from "@/components/general/searchbtn";
-import Hostelcard from "@/components/hostel/hostecard";
 import { ratedhostels } from "@/lib/constant";
+import Hostelcard from "./upload/hostelidcard";
+import HostelSearch from "./hostelsearctbar";
+
+const hostels = [
+  { id: "1", name: "Sunrise Hostel", type: "Hostel", price: 1200, roomKind: 1 },
+  {
+    id: "2",
+    name: "Palm Apartments",
+    type: "Apartment",
+    price: 2500,
+    roomKind: 2,
+  },
+  {
+    id: "3",
+    name: "Ocean View Hostel",
+    type: "Hostel",
+    price: 1500,
+    roomKind: 3,
+  },
+  {
+    id: "4",
+    name: "City Center Rooms",
+    type: "Hostel",
+    price: 1000,
+    roomKind: 4,
+  },
+];
 
 export default function page() {
   return (
-    <section className="max-w-full ">
-      {/* searchbar , hostel listing  */}
-      <div className="mt-20 p-4 flex flex-col gap-4  w-full">
-        <h2 className="text-xl text-left max-w-[90%] mx-auto  my-5 uppercase font-extrabold tracking-wide ">
-          <SearchBtn className="w-full p-4" />
-          Stop treking in want for a place. start searching{" "}
-        </h2>
-      </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-4 p-8">
-        {ratedhostels.map((item, index) => {
-          return <Hostelcard key={index + item.label} {...item} />;
-        })}
+    <section className="w-full">
+      <div className="max-w-[93%] mx-auto">
+        <div className="">
+          <h2 className="text-4xl text-left   pt-10 capitalize  text-misecondary font-extrabold tracking-wide ">
+            search for all hostels , homstels and apartments listing on your
+            campus here.
+          </h2>
+          <HostelSearch hostels={hostels} />
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 space-y-10  p-0 ">
+          {ratedhostels.map((item, index) => {
+            return <Hostelcard key={index + item.label} {...item} />;
+          })}
+        </div>
       </div>
     </section>
   );

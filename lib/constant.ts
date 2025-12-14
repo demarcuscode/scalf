@@ -80,3 +80,23 @@ export const colortheme = {
   card: "#FFFFFF",
   text: "#1E1B4B",
 };
+
+export const sponsors = [
+  {
+    imageUrl:
+      "https://upload.wikimedia.org/wikipedia/commons/9/9a/Vercel_logo_2025.svg",
+    name: "Vercel",
+  },
+  { imageUrl: "/supabasel.svg", name: "Supabase" },
+  {
+    imageUrl:
+      "https://upload.wikimedia.org/wikipedia/commons/6/69/Airbnb_Logo_B%C3%A9lo.svg",
+    name: "Airbnb",
+  },
+  {
+    imageUrl:
+      "https://upload.wikimedia.org/wikipedia/commons/0/0b/Paystack_Logo.png",
+    name: "Paystack",
+  },
+  { imageUrl: "/knust.png", name: "KNUST" },
+];
