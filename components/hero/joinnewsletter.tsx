@@ -1,6 +1,7 @@
 import React from "react";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
+import { PlusCircle } from "lucide-react";
 
 export default function JoinNewsletter() {
   return (
@@ -11,6 +12,7 @@ export default function JoinNewsletter() {
           placeholder="example@gmail.com"
         />
         <Button className="text-lg text-card bg-miaccent capitalize font-bold py-8 px-8">
+          <PlusCircle size={22} />
           join
         </Button>
       </div>

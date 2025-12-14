@@ -12,18 +12,18 @@ export default function Hero(props: heroprops) {
   return (
     <section
       className={cn(
-        "md:flex md:items-center md:max-w-[90%] md:mx-auto md:jusity-center w-full md:gap-12 md:p-12 ",
+        "md:flex md:items-center max-w-[80%] font-sans md:max-w-[70%] mx-auto md:jusity-center w-full md:gap-4 ",
         props.className
       )}
     >
-      <div className="flex  flex-col gap-4 p-4 md:max-w-lg  ">
+      <div className="flex  flex-col gap-4 p-4 max-w-4xl md:p-12 ">
         <Heading2
-          text="Get access to 500 plus hostels across ghana"
-          className=" capitalize  text-left text-4xl  md:text-5xl  tracking-wide leading-0.7 font-bold "
+          text="Access thousands of supervised, modern hostels nationwide."
+          className=" capitalize text-miprimary font-sans text-left text-4xl  md:text-5xl  tracking-wide leading-0.7 font-bold "
         />
         <Text
-          className="text-text text-base  text-left"
-          text="We provide clean hygienic students hostels  in affordable prices with safe and secure environments. "
+          className=" text-lg  text-left font-sans"
+          text="Clean, affordable student hostels in safe and secure environments. "
         />
       </div>
       <div className="max-w-full h-[60vh] object-cover ">

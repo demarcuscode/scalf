@@ -12,13 +12,13 @@ import { colortheme } from "@/lib/constant";
 export default function NavBar() {
   return (
     <section className="text-miaccent w-full  mx-auto h-10 fixed top-0 left-0 z-50 flex items-center  gap-4 justify-between p-4 bg-miprimary ">
-      <div className="h-10 md:w-50 object-contain ">
+      <div className="h-10 md:w-50 object-contain rounded-lg ">
         <Image
           src="/logo-1-primary.png"
           alt="logo"
           width={60}
           height={60}
-          className="w-20 md:w-30 h-10 p-2 object-cover"
+          className="w-20 md:w-30 h-10 p-2 object-cover rounded-lg"
         />
       </div>
       <div className="object-contain ">
