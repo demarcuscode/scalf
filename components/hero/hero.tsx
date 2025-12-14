@@ -26,13 +26,13 @@ export default function Hero(props: heroprops) {
           text="Clean, affordable student hostels in safe and secure environments. "
         />
       </div>
-      <div className="max-w-full h-[60vh] object-cover ">
+      <div className="max-w-full h-[50vh] object-cover ">
         <Image
           src="/hero.png"
           alt="logo"
           width={500}
           height={500}
-          className="  bg-blue-400 object-cover"
+          className="  h-[50vh] object-cover"
           priority={true}
         />
       </div>
