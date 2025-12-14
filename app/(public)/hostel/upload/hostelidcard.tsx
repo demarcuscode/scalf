@@ -15,6 +15,7 @@ import {
   Landmark,
   MapPin,
 } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 interface hostelcardprops {
   label: string;
@@ -23,9 +24,11 @@ interface hostelcardprops {
   rating?: string;
   className?: string;
   imageurl: string;
+  id: string;
 }
 
 export default function Hostelcard(props: hostelcardprops) {
+  const router = useRouter();
   const price = new Intl.NumberFormat("en-GH", {
     style: "currency",
     currency: "GHS",
@@ -79,7 +82,10 @@ export default function Hostelcard(props: hostelcardprops) {
           <span className="text-lg">{price}</span>
         </CardDescription>
 
-        <Button className=" w-full bg-miaccent/90 text-white cursor-pointer hover:bg-miaccent  tracking-wide hover:-translate-y-0.5 hover:shadow-misecondary hover:shadow-lg  px-6 py-6 duration-500 ease-out  capitalize text-lg font-extrabold shadow-lg  ">
+        <Button
+          onClick={() => router.push(`/hostel/${props.id}`)}
+          className=" w-full bg-miaccent/90 text-white cursor-pointer hover:bg-miaccent  tracking-wide hover:-translate-y-0.5 hover:shadow-misecondary hover:shadow-lg  px-6 py-6 duration-500 ease-out  capitalize text-lg font-extrabold shadow-lg  "
+        >
           view
           <ArrowRightCircle size={40} />
         </Button>
