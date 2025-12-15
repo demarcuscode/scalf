@@ -1,6 +1,7 @@
 import NavBar from "@/components/general/navbar";
 import React from "react";
 import { Poppins } from "next/font/google";
+import ChatIcon from "@/components/general/chatIccon";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -14,9 +15,12 @@ export default function PublicLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className={`max-w-[100%] ${poppins.variable} overflow-hidden`}>
+    <div
+      className={`max-w-[100%] ${poppins.variable} overflow-hidden relative`}
+    >
       <NavBar />
       <div>{children}</div>
+      <ChatIcon />
     </div>
   );
 }
