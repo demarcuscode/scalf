@@ -12,7 +12,7 @@ export default function Hero(props: heroprops) {
   return (
     <section
       className={cn(
-        "md:flex md:items-center max-w-[80%] font-sans md:max-w-[70%] mx-auto md:jusity-center w-full md:gap-4 ",
+        "md:flex md:items-center max-w-[90%] font-sans md:max-w-[70%] mx-auto md:jusity-center w-full md:gap-4 ",
         props.className
       )}
     >
