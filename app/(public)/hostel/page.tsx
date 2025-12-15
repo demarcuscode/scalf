@@ -31,7 +31,7 @@ export default function page() {
   return (
     <section className="w-full">
       <div className="max-w-[93%] mx-auto">
-        <div className="">
+        <div className="pt-10">
           <h2 className="text-4xl text-left   pt-10 capitalize  text-misecondary font-extrabold tracking-wide ">
             search for all hostels , homstels and apartments listing on your
             campus here.
