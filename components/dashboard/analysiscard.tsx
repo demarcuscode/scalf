@@ -30,14 +30,14 @@ export default function AnalyticsCard({
   dataKey = "revenue",
 }: any) {
   return (
-    <Card className="w-full rounded-xl shadow-lg hover:shadow-md transition">
+    <Card className="w-full rounded-lg shadow-lg hover:shadow-md transition">
       <CardHeader>
         <CardTitle className="font-bold text-xl text-center">{title}</CardTitle>
         <p className="text-lg text-center  mb-4">{total}</p>
         <CardDescription className="text-center">{description}</CardDescription>
       </CardHeader>
 
-      <CardContent>
+      <CardContent className="">
         {/* Total Revenue */}
 
         {/* Histogram Chart */}

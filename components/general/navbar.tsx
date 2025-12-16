@@ -29,15 +29,15 @@ export default function NavBar() {
           className="w-20 md:w-30 h-10 p-2 object-cover rounded-lg"
         />
       </div>
-      {user ? (
+      {true ? (
         <div className="flex">
-          <Avatar>
+          {/* <Avatar>
             <AvatarImage
               src={user.user_metadata.avatar_ur}
               alt="avatar"
               className="w-10 h-10"
             />
-          </Avatar>
+          </Avatar> */}
           <div className="object-contain ">
             <MobileNav />
           </div>

@@ -27,73 +27,73 @@ export default function HostelForm() {
   const form = useForm({ resolver: zodResolver(hostelSchema) });
 
   return (
-    <Card className="max-w-3xl mx-auto p-6  my-20  md:my-10">
+    <Card className="max-w-full shadow-lg   my-10  md:my-10">
       <CardHeader className="">
-        <CardTitle className="capitalize text-xl text-center  tracking-wide uppercase font-bold">
+        <CardTitle className="capitalize text-xl text-center  text-miprimary tracking-wide uppercase font-bold">
           create or edit hostels
         </CardTitle>
       </CardHeader>
       <CardContent>
         <form className="grid gap-6">
           <div className="grid gap-2">
-            <Label className="text-lg">Hostel Name</Label>
+            <Label className="text-base tracking-wide">Hostel Name</Label>
             <Input
               {...form.register("name")}
-              className="py-6"
+              className="py-6 shadow-lg"
               placeholder="Hostel Name"
             />
           </div>
 
           <div className="grid gap-2">
-            <Label className="text-lg">Description</Label>
+            <Label className="text-base tracking-wide">Description</Label>
             <Textarea
               {...form.register("description")}
               placeholder="Description"
-              className="py-6"
+              className="py-6 shadow-lg"
             />
           </div>
 
           <div className="grid gap-2">
-            <Label className="text-lg">Location</Label>
+            <Label className="text-base tracking-wide">Location</Label>
             <Input
               {...form.register("location")}
               placeholder="General Location"
-              className="py-6"
+              className="py-6 shadow-lg"
             />
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="grid gap-2">
-              <Label className="text-lg">Address</Label>
+              <Label className="text-base tracking-wide">Address</Label>
               <Input
-                className="py-6"
+                className="py-6 shadow-lg"
                 {...form.register("address")}
                 placeholder="Street Address"
               />
             </div>
 
             <div className="grid gap-2">
-              <Label className="text-lg">City</Label>
+              <Label className="text-base tracking-wide">City</Label>
               <Input
-                className="py-6"
+                className="py-6 shadow-lg"
                 {...form.register("city")}
                 placeholder="City"
               />
             </div>
 
             <div className="grid gap-2">
-              <Label className="text-lg">State</Label>
+              <Label className="text-base tracking-wide">State</Label>
               <Input
-                className="py-6"
+                className="py-6 shadow-lg"
                 {...form.register("state")}
                 placeholder="State/Region"
               />
             </div>
 
             <div className="grid gap-2">
-              <Label className="text-lg">Country</Label>
+              <Label className="text-base tracking-wide">Country</Label>
               <Input
-                className="py-6"
+                className="py-6 shadow-lg"
                 {...form.register("country")}
                 placeholder="Country"
               />
@@ -101,18 +101,20 @@ export default function HostelForm() {
           </div>
 
           <div className="grid gap-2">
-            <Label className="text-lg">Manager ID (profile uuid)</Label>
+            <Label className="text-base tracking-wide">
+              Manager ID (profile uuid)
+            </Label>
             <Input
-              className="py-6"
+              className="py-6 shadow-lg"
               {...form.register("manager_id")}
               placeholder="Manager Profile ID"
             />
           </div>
 
           <div className="grid gap-2">
-            <Label className="text-lg">Total Rooms</Label>
+            <Label className="text-base tracking-wide">Total Rooms</Label>
             <Input
-              className="py-6"
+              className="py-6 shadow-lg"
               type="number"
               {...form.register("total_rooms")}
               placeholder="Total Rooms in Hostel"
@@ -121,7 +123,7 @@ export default function HostelForm() {
 
           <Button
             type="submit"
-            className="w-full bg-miaccent/90 text-white cursor-pointer hover:bg-miaccent  tracking-wide hover:-translate-y-0.5 hover:shadow-misecondary hover:shadow-lg  px-6 py-6 duration-500 ease-out  capitalize text-lg font-extrabold shadow-lg "
+            className="w-full bg-miaccent/90 text-white cursor-pointer hover:bg-miaccent  tracking-wide hover:-translate-y-0.5 hover:shadow-misecondary hover:shadow-lg  px-6 py-6 duration-500 ease-out flex items-center capitalize text-lg font-extrabold shadow-lg "
           >
             Save Hostel
             <ArrowRightCircle />

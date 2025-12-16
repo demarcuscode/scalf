@@ -35,14 +35,13 @@ export default function ProfileForm() {
     defaultValues: {},
   });
 
-  function onSubmit(values: ProfileFormType) {
-    console.log(values);
-  }
+  function onSubmit(values: ProfileFormType) {}
 
   return (
-    <div className="max-w-xl mx-auto p-6 bg-white shadow rounded-xl">
-      <h2 className="text-xl font-semibold mb-4">Profile</h2>
-
+    <div className="mt-20 shadow-miprimary p-4 bg-white shadow rounded-xl md:max-w-[80%] md:mx-auto">
+      <h2 className="text-xl  text-center text-misecondary  tracking-wide font-semibold mb-4">
+        Profile
+      </h2>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
           <FormField
@@ -52,7 +51,11 @@ export default function ProfileForm() {
               <FormItem>
                 <FormLabel>Full Name</FormLabel>
                 <FormControl>
-                  <Input placeholder="Your full name" {...field} />
+                  <Input
+                    className="py-6 shadow-lg"
+                    placeholder="Your full name"
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -66,14 +69,18 @@ export default function ProfileForm() {
               <FormItem>
                 <FormLabel>Avatar URL</FormLabel>
                 <FormControl>
-                  <Input placeholder="Image URL" {...field} />
+                  <Input
+                    className="py-6 shadow-lg"
+                    placeholder="Image URL"
+                    {...field}
+                  />
                 </FormControl>
               </FormItem>
             )}
           />
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {["from_country", "contact", "school", "course", "level"].map(
+            {["from country", "contact", "school", "course", "level"].map(
               (k) => (
                 <FormField
                   key={k}
@@ -83,7 +90,7 @@ export default function ProfileForm() {
                     <FormItem>
                       <FormLabel>{k.replace("_", " ")}</FormLabel>
                       <FormControl>
-                        <Input {...field} />
+                        <Input {...field} className="py-6 shadow-lg" />
                       </FormControl>
                     </FormItem>
                   )}
@@ -102,6 +109,7 @@ export default function ProfileForm() {
                   <Input
                     type="number"
                     {...field}
+                    className="shadow-lg py-6"
                     onChange={(e) => field.onChange(+e.target.value)}
                   />
                 </FormControl>
@@ -119,13 +127,16 @@ export default function ProfileForm() {
                   <Textarea
                     placeholder="Tell us about yourself..."
                     {...field}
+                    className="py-6 shadow-lg"
                   />
                 </FormControl>
               </FormItem>
             )}
           />
 
-          <Button className="w-full">Save Profile</Button>
+          <Button className="w-full py-6 bg-miaccent tracking-wide hover:bg-miaccent hover:-translate-y-0.5  text-lg font-bold">
+            save profile
+          </Button>
         </form>
       </Form>
     </div>

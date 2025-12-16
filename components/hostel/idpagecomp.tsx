@@ -97,12 +97,18 @@ export default function Idpagecomp({ hostel }: idprops) {
       </Card>
 
       <div className="grid grid-cols-2  gap-4 py-10 p-4  ">
-        <Button className="w-full py-6 text-lg bg-white capitalize text-miprimary  shadow-lg ">
-          book now
+        <Button
+          onClick={() => router.push(`/bookings/${hostel.id}`)}
+          className="w-full py-6 text-lg bg-white hover:bg-FFFFAE hover:ease-out hover:-translate-y-0.5 capitalize text-miprimary  shadow-lg "
+        >
+          Book
           <BookOpenCheck />
         </Button>
-        <Button className="w-full py-6  text-lg shadow-lg capitalize bg-miprimary text-white">
-          chat manager
+        <Button
+          onClick={() => router.push(`/chat/${hostel?.id}}`)}
+          className="w-full py-6 hover:bg-miaccent cursor-pointer hover:ease-out hover:-translate-y-0.5  text-lg shadow-lg  bg-miaccent text-white"
+        >
+          Chat
           <MessageCircle />
         </Button>
       </div>

@@ -1,3 +1,4 @@
+"use client";
 import { BookOpen, Coffee, Droplet, Toilet, Wifi, Zap } from "lucide-react";
 import Image from "next/image";
 import React from "react";
