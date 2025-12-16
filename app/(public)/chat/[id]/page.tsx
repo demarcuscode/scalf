@@ -23,7 +23,7 @@ export default function Page() {
   if (!roomName || !username) return null; // or loading spinner
 
   return (
-    <div>
+    <div className="p-4 md:pt-20">
       <RealtimeChat username={username} roomName={roomName} />
     </div>
   );

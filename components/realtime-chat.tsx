@@ -81,7 +81,7 @@ export const RealtimeChat = ({
   );
 
   return (
-    <div className="flex flex-col h-full w-full bg-background text-foreground antialiased">
+    <div className="flex flex-col h-full w-full bg-background text-foreground antialiased min-h-screen md:min-h-[90vh]">
       {/* Messages */}
       <div ref={containerRef} className="flex-1 overflow-y-auto  p-4 space-y-4">
         {allMessages.length === 0 ? (
@@ -89,7 +89,7 @@ export const RealtimeChat = ({
             No messages yet. Start the conversation!
           </div>
         ) : null}
-        <div className="space-y-1 h-[80vh]">
+        <div className="space-y-1 ">
           {allMessages.map((message, index) => {
             const prevMessage = index > 0 ? allMessages[index - 1] : null;
             const showHeader =
