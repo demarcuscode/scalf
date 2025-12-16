@@ -11,6 +11,7 @@ import { Button } from "../ui/button";
 import { CheckCircle, Edit, Trash2 } from "lucide-react";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import PayButton from "../general/paybtn";
 
 interface bookingcardprops {
   className?: string;
@@ -65,10 +66,12 @@ export default function BookingCard(props: bookingcardprops) {
             <div className="tracking-wide">{props.hostel.startingDate}</div>
           </CardFooter>
           <div className="w-full grid md:grid-cols-2  gap-4 ">
-            <Button className="bg-miaccent text-white cursor-pointer shadow-lg hover:bg-miaccent hover:ease-out hover:-translate-y-0.5   py-6 capitalize  tracking-wide font-bold">
-              make payments
-              <CheckCircle size={22} />
-            </Button>
+            <PayButton
+              label="make payment"
+              amount={5000}
+              email="marcuoware@gmail.com"
+              subaccountCode="123"
+            />
             <Button
               onClick={() =>
                 toast.success("you deleted the booking successfully")

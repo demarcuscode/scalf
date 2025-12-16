@@ -1,7 +1,6 @@
 "use client";
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
-import { Button } from "../ui/button";
+import { useEffect, useState } from "react";
 import MobileNav from "./menubar";
 import { supabase } from "@/lib/supabase/client";
 import SignInBtn from "./signinbtn";
@@ -29,15 +28,15 @@ export default function NavBar() {
           className="w-20 md:w-30 h-10 p-2 object-cover rounded-lg"
         />
       </div>
-      {true ? (
+      {user ? (
         <div className="flex">
-          {/* <Avatar>
+          <Avatar>
             <AvatarImage
               src={user.user_metadata.avatar_ur}
               alt="avatar"
               className="w-10 h-10"
             />
-          </Avatar> */}
+          </Avatar>
           <div className="object-contain ">
             <MobileNav />
           </div>
