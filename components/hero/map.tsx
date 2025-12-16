@@ -1,9 +1,13 @@
+"use client";
 import Image from "next/image";
 import React from "react";
 import { Button } from "../ui/button";
-import { ArrowRightCircle } from "lucide-react";
+import { ArrowRightCircle, Router } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 export default function Map() {
+  const router = useRouter();
+
   return (
     <section className="  my-30 w-full ">
       <div className=" gap-8 w-full">
@@ -25,11 +29,17 @@ export default function Map() {
             <li>Higher occupancy rates and turnover</li>
             <li>No prior hospitality required to start </li>
             <div className="flex w-full gap-4 text-xl">
-              <Button className="bg-miaccent/80 text-xl text-white px-8 py-6 cursor-pointer hover:bg-miaccent font-bold tracking-wide shadow-lg hover:-translate-y-0.5 duration-500 ease-out">
+              <Button
+                onClick={() => router.push(`/hostel/upload/1`)}
+                className="bg-miaccent/80 text-xl text-white px-8 py-6 cursor-pointer hover:bg-miaccent font-bold tracking-wide shadow-lg hover:-translate-y-0.5 duration-500 ease-out "
+              >
                 list your hostel
                 <ArrowRightCircle />
               </Button>
-              <Button className="text-miaccent  text-xl font-bold shadow-lg bg-white cursor-pointer hover:bg-miaccent hover:text-misecondary px-8 py-6  font-bold tracking-wide hover:-translate-y-0.5 duration-500 ease-out ">
+              <Button
+                onClick={() => router.push(`/hostel`)}
+                className="text-miaccent  text-xl font-bold shadow-lg bg-white cursor-pointer hover:bg-miaccent hover:text-misecondary px-8 py-6  font-bold tracking-wide hover:-translate-y-0.5 duration-500 ease-out "
+              >
                 learn more
                 <ArrowRightCircle />
               </Button>

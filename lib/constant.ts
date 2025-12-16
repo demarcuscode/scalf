@@ -100,3 +100,46 @@ export const sponsors = [
   },
   { imageUrl: "/knust.png", name: "KNUST" },
 ];
+
+export const bookings = [
+  {
+    id: "1",
+    hostelName: "evandy",
+    applicant: "marcus oware",
+    type: "monthly",
+    startingDate: "12-05-25",
+    course: "computer science",
+  },
+  {
+    id: "2",
+    hostelName: "wangyingo",
+    applicant: "kofi oware",
+    type: "monthly",
+    startingDate: "12-05-25",
+    course: "computer science",
+  },
+  {
+    id: "3",
+    hostelName: "victory towers",
+    applicant: "esther oware",
+    type: "monthly",
+    startingDate: "12-05-25",
+    course: "computer science",
+  },
+  {
+    id: "4",
+    hostelName: "franco hostel",
+    applicant: "emma oware",
+    type: "monthly",
+    startingDate: "12-05-25",
+    course: "computer science",
+  },
+  {
+    id: "5",
+    hostelName: "amen hostel",
+    applicant: "joe lantern",
+    type: "monthly",
+    startingDate: "12-05-25",
+    course: "computer science",
+  },
+];

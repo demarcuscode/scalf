@@ -9,7 +9,7 @@ export default function AdminLayout({
 }) {
   return (
     <>
-      <div className="flex w-full min-h-screen">
+      <div className="flex gap-4 w-full min-h-screen">
         <AdminSidebar links={adminlinks} />
         <div className="flex-grow w-full ml-16 md:ml-50">{children}</div>
       </div>

@@ -17,7 +17,7 @@ interface sideprops {
 export default function Sidebar(props: sideprops) {
   return (
     <div className="flex fixed left-0 top-0 p-4 ">
-      <aside className="h-screen border-r   flex flex-col p-4 bg-blue-400 h-full rounded-lg items-center">
+      <aside className="h-screen border-r flex flex-col p-4 bg-white text-miprimary h-full rounded-lg items-center ">
         {/* Logo */}
         <div className="mb-10 h-10 w-10 object-contain">
           <Image
@@ -39,7 +39,7 @@ export default function Sidebar(props: sideprops) {
               className="flex items-center gap-3 text-gray-700 hover:text-white "
             >
               {/* ICON Visible Always */}
-              <Icon className="h-6 w-6 text-white font-extrabold" />
+              <Icon className="h-6 w-6 text-miprimary font-extrabold" />
 
               {/* LABEL hidden on mobile */}
               <span className="hidden md:inline text-lg font-extrabold uppercase">

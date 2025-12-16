@@ -4,6 +4,7 @@ import React from "react";
 import Heading2 from "../general/heading2";
 import { Text } from "../general/text";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 interface heroprops {
   className?: string;

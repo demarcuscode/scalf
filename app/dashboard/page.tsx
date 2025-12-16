@@ -12,45 +12,47 @@ const revenueData = [
 
 export default function Dashboard() {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 w-full lg:grid-cols-3 gap-6 p-4 w-full max-w-full">
-      <AnalyticsCard
-        title="Total Revenue"
-        description="Revenue generated for the selected month"
-        total="¢ 18,400"
-        buttonText="Open Revenue Page"
-        buttonLink="/dashboard/revenue"
-        chartData={revenueData}
-        dataKey="revenue"
-      />
+    <div className="max-w-full">
+      <div className="">
+        <AnalyticsCard
+          title="Total Revenue"
+          description="Revenue generated for the selected month"
+          total="¢ 18,400"
+          buttonText="Open Revenue Page"
+          buttonLink="/dashboard/revenue"
+          chartData={revenueData}
+          dataKey="revenue"
+        />
 
-      <AnalyticsCard
-        title="Total Bookings"
-        description="Bookings completed this month"
-        total="356"
-        buttonText="Go to Bookings"
-        buttonLink="/dashboard/bookings"
-        chartData={[
-          { month: "Jan", revenue: 40 },
-          { month: "Feb", revenue: 70 },
-          { month: "Mar", revenue: 55 },
-          { month: "Apr", revenue: 90 },
-        ]}
-        dataKey="revenue"
-      />
-      <AnalyticsCard
-        title="Total Chats"
-        description="messaging completed this month"
-        total="6000"
-        buttonText="Go to chart"
-        buttonLink="/dashboard/chat"
-        chartData={[
-          { month: "Jan", revenue: 1000 },
-          { month: "Feb", revenue: 2000 },
-          { month: "Mar", revenue: 550 },
-          { month: "Apr", revenue: 910 },
-        ]}
-        dataKey="revenue"
-      />
+        <AnalyticsCard
+          title="Total Bookings"
+          description="Bookings completed this month"
+          total="356"
+          buttonText="Go to Bookings"
+          buttonLink="/dashboard/bookings"
+          chartData={[
+            { month: "Jan", revenue: 40 },
+            { month: "Feb", revenue: 70 },
+            { month: "Mar", revenue: 55 },
+            { month: "Apr", revenue: 90 },
+          ]}
+          dataKey="revenue"
+        />
+        <AnalyticsCard
+          title="Total Chats"
+          description="messaging completed this month"
+          total="6000"
+          buttonText="Go to chart"
+          buttonLink="/dashboard/chat"
+          chartData={[
+            { month: "Jan", revenue: 1000 },
+            { month: "Feb", revenue: 2000 },
+            { month: "Mar", revenue: 550 },
+            { month: "Apr", revenue: 910 },
+          ]}
+          dataKey="revenue"
+        />
+      </div>
       <RevenueBookingsChart />
       <PaymentsTable />
     </div>

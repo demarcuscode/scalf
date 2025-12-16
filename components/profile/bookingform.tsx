@@ -22,6 +22,7 @@ import {
   SelectContent,
   SelectItem,
 } from "@/components/ui/select";
+import { PlusCircle } from "lucide-react";
 
 // Adjusting the Zod schema for payment_type as required
 const bookingSchema = z.object({
@@ -46,11 +47,16 @@ export default function BookingForm() {
   }
 
   return (
-    <div className="max-w-xl mx-auto p-6 bg-white shadow rounded-xl">
-      <h2 className="text-xl font-semibold mb-4">Make Booking</h2>
+    <div className="mt-20 max-w-[90%] mx-auto p-6 bg-white shadow-lg border  rounded-lg shadow-misecondary">
+      <h2 className="text-xl text-miprimary text-center font-semibold mb-4">
+        Make Booking
+      </h2>
 
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="space-y-4 flex flex-col gap-4"
+        >
           <FormField
             name="user_id"
             control={form.control}
@@ -58,7 +64,11 @@ export default function BookingForm() {
               <FormItem>
                 <FormLabel>User ID</FormLabel>
                 <FormControl>
-                  <Input placeholder="User ID" {...field} />
+                  <Input
+                    className="py-6 shadow-lg"
+                    placeholder="User ID"
+                    {...field}
+                  />
                 </FormControl>
               </FormItem>
             )}
@@ -71,7 +81,11 @@ export default function BookingForm() {
               <FormItem>
                 <FormLabel>Hostel ID</FormLabel>
                 <FormControl>
-                  <Input placeholder="Hostel ID" {...field} />
+                  <Input
+                    placeholder="Hostel ID"
+                    className="py-6 shadow-lg"
+                    {...field}
+                  />
                 </FormControl>
               </FormItem>
             )}
@@ -84,7 +98,11 @@ export default function BookingForm() {
               <FormItem>
                 <FormLabel>Room Type ID</FormLabel>
                 <FormControl>
-                  <Input placeholder="Room Type ID" {...field} />
+                  <Input
+                    className="py-6 shadow-lg"
+                    placeholder="Room Type ID"
+                    {...field}
+                  />
                 </FormControl>
               </FormItem>
             )}
@@ -98,7 +116,7 @@ export default function BookingForm() {
                 <FormItem>
                   <FormLabel>Check-in Date</FormLabel>
                   <FormControl>
-                    <Input type="date" {...field} />
+                    <Input type="date" className="py-6 shadow-lg" {...field} />
                   </FormControl>
                 </FormItem>
               )}
@@ -111,7 +129,7 @@ export default function BookingForm() {
                 <FormItem>
                   <FormLabel>Check-out Date</FormLabel>
                   <FormControl>
-                    <Input type="date" {...field} />
+                    <Input className="py-6 shadow-lg" type="date" {...field} />
                   </FormControl>
                 </FormItem>
               )}
@@ -122,7 +140,7 @@ export default function BookingForm() {
             name="payment_type"
             control={form.control}
             render={({ field }) => (
-              <FormItem>
+              <FormItem className="">
                 <FormLabel>Payment Type</FormLabel>
                 <Select
                   value={field.value} // Make sure 'value' is used here
@@ -131,7 +149,7 @@ export default function BookingForm() {
                   <SelectTrigger>
                     <SelectValue placeholder="Select payment type" />
                   </SelectTrigger>
-                  <SelectContent>
+                  <SelectContent className="shadow-lg py-6">
                     <SelectItem value="semester">Semester</SelectItem>
                     <SelectItem value="monthly">Monthly</SelectItem>
                   </SelectContent>
@@ -140,7 +158,10 @@ export default function BookingForm() {
             )}
           />
 
-          <Button className="w-full">Submit Booking</Button>
+          <Button className="w-full  bg-miaccent py-6 capitalize hover:bg-miaccent cursor-pointer hover:-translate-y-0.5 hover:ease-out tracking-wide shadow-lg text-white font-bold ">
+            Submit Booking
+            <PlusCircle size={22} />
+          </Button>
         </form>
       </Form>
     </div>

@@ -22,6 +22,7 @@ import {
 } from "@/components/ui/popover";
 import { Calendar } from "@/components/ui/calendar";
 import { cn } from "@/lib/utils";
+import { useRouter } from "next/navigation";
 
 interface searchprops {
   className?: string;
@@ -29,6 +30,7 @@ interface searchprops {
 
 export default function SearchBtn(props: searchprops) {
   const [date, setDate] = React.useState<Date>();
+  const router = useRouter();
 
   return (
     <div
@@ -96,6 +98,7 @@ export default function SearchBtn(props: searchprops) {
       {/* -------- Search Button -------- */}
       <div className="flex items-end">
         <Button
+          onClick={() => router.push("/hostel")}
           className={
             "w-full h-11 shadow-lg px-6 py-6 text-white bg-miaccent/80 cursor-pointer font-bold tracking-wide hover:-translate-y-0.5 duration-500 ease-out font-semibold text-md hover:bg-miaccent  "
           }

@@ -21,28 +21,31 @@ export default function ChatIcon() {
   return (
     <Link
       href={`/chat/${user?.id}`}
-      className="absolute bottom-5 right-5 z-40 fixed "
+      className="absolute bottom-5 right-5 z-40 fixed max-w-25   object-contain p-2"
     >
-      {pathname.startsWith("/hostel/") ? (
+      {pathname.startsWith("/hostel/") ||
+      pathname.startsWith("/bookings") ||
+      pathname.startsWith("/profile") ||
+      pathname.startsWith("/chat") ? (
         <div
-          className={`object-contain w-12 h-12 shadow-lg rounded-full bg-miaccent p-1 flex items-center justify-center hidden`}
+          className={`object-contain w-10 h-10 shadow-lg rounded-full  bg-miaccent p-1 flex items-center justify-center hidden `}
         >
+          <Image
+            src="/icons.png"
+            alt="icon"
+            width={200}
+            height={200}
+            className="text-miaccent w-10 h-10  object-contain"
+          />
+        </div>
+      ) : (
+        <div className="object-contain w-15 h-15 shadow-lg rounded-full bg-miaccent p-3 flex items-center justify-center">
           <Image
             src="/icons.png"
             alt="icon"
             width={400}
             height={400}
             className="text-miaccent w-15 h-15  object-contain"
-          />
-        </div>
-      ) : (
-        <div className="object-contain w-30 h-25 shadow-lg rounded-full bg-miaccent p-3 flex items-center justify-center">
-          <Image
-            src="/icons.png"
-            alt="icon"
-            width={400}
-            height={400}
-            className="text-miaccent w-20 h-20  object-contain"
           />
         </div>
       )}

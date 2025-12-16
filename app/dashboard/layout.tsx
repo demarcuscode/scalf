@@ -7,11 +7,9 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   return (
-    <>
-      <div className="flex w-full min-h-screen">
-        <Sidebar links={dashboardlinks} />
-        <div className="flex-grow w-full ml-16 md:ml-50">{children}</div>
-      </div>
-    </>
+    <div className="flex w-full min-h-screen">
+      <Sidebar links={dashboardlinks} />
+      <div className="flex-grow w-full ml-16 md:ml-20">{children}</div>
+    </div>
   );
 }
