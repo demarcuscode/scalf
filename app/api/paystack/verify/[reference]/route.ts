@@ -1,13 +1,13 @@
 import { paystack } from "@/lib/paystack";
-import { NextResponse } from "next/server";
+import { NextResponse, NextRequest } from "next/server";
 
 export async function GET(
-  req: Request,
-  { params }: { params: { reference: string } }
+  _req: NextRequest,
+  context: { params: Promise<{ reference: string }> }
 ) {
-  const response = await paystack.get(
-    `/transaction/verify/${params.reference}`
-  );
+  const { reference } = await context.params;
+
+  const response = await paystack.get(`/transaction/verify/${reference}`);
 
   return NextResponse.json(response.data);
 }
