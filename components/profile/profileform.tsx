@@ -14,6 +14,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
+import { PlusCircle } from "lucide-react";
 
 const profileSchema = z.object({
   full_name: z.string().min(2),
@@ -134,8 +135,9 @@ export default function ProfileForm() {
             )}
           />
 
-          <Button className="w-full py-6 bg-miaccent tracking-wide hover:bg-miaccent hover:-translate-y-0.5  text-lg font-bold">
+          <Button className="w-full py-6 bg-miaccent tracking-wide hover:bg-miaccent hover:-translate-y-0.5  text-lg font-bold tracking-wide">
             save profile
+            <PlusCircle />
           </Button>
         </form>
       </Form>

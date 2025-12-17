@@ -30,26 +30,29 @@ export default function AnalyticsCard({
   dataKey = "revenue",
 }: any) {
   return (
-    <Card className="w-full rounded-lg shadow-lg hover:shadow-md transition">
+    <Card className="max-w-lg  rounded-lg shadow-lg shadow-miprimary w-full  transition">
       <CardHeader>
         <CardTitle className="font-bold text-xl text-center">{title}</CardTitle>
         <p className="text-lg text-center  mb-4">{total}</p>
         <CardDescription className="text-center">{description}</CardDescription>
       </CardHeader>
 
-      <CardContent className="">
+      <CardContent className="w-full">
         {/* Total Revenue */}
 
         {/* Histogram Chart */}
-        <div className="h-40 w-full">
-          <ResponsiveContainer className="" width="100%" height="100%">
-            <BarChart className="bg-gray-300 text-blue-500" data={chartData}>
+        <div className=" w-full h-60 rounded-lg p-2">
+          <ResponsiveContainer className="w-full" width="100%" height="100%">
+            <BarChart
+              className="bg-misecondary text-miprimary hover:bg-miprimary"
+              data={chartData}
+            >
               <XAxis dataKey="month" hide />
-              <YAxis hide className="bg-gray-300" />
+              <YAxis hide className="bg-miprimary text-xl" />
               <Tooltip labelClassName="rounded-lg" />
               <Bar
                 dataKey={dataKey}
-                className="text-blue-400"
+                className="text-miprimary text-m"
                 radius={[4, 4, 0, 0]}
               />
             </BarChart>
@@ -59,7 +62,7 @@ export default function AnalyticsCard({
 
       <CardFooter>
         <Link href={buttonLink} className="w-full">
-          <Button className="w-full bg-blue-400 text-white ">
+          <Button className="w-full  bg-miaccent py-6 capitalize hover:bg-miaccent cursor-pointer hover:-translate-y-0.5 hover:ease-out tracking-wide shadow-lg text-white font-bold ">
             {buttonText}
           </Button>
         </Link>

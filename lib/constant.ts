@@ -1,6 +1,7 @@
 import {
   BarChart2,
   Bell,
+  Building2,
   CreditCard,
   FileText,
   Home,
@@ -56,12 +57,12 @@ export const ratedhostels = [
 ];
 
 export const dashboardlinks = [
-  { name: "Dashboard", href: "/", icon: Home },
-  { name: "Charts", href: "/charts", icon: BarChart2 },
-  { name: "Chat", href: "/chat", icon: MessageSquare },
-  { name: "Payments", href: "/payments", icon: CreditCard },
-  { name: "Notifications", href: "/notifications", icon: Bell },
-  { name: "Content", href: "/content", icon: FileText },
+  { name: "Dashboard", href: "/hostel", icon: "Building2" },
+  { name: "Charts", href: "/charts", icon: " BarChart2" },
+  { name: "Chat", href: "/chat", icon: "MessageSquare" },
+  { name: "Payments", href: "/payments", icon: "CreditCard" },
+  { name: "Notifications", href: "/notifications", icon: "Bell" },
+  { name: "Content", href: "/content", icon: "FileText" },
 ];
 export const adminlinks = [
   { name: "Dashboard", href: "/", icon: Home },
