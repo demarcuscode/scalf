@@ -116,6 +116,17 @@ export default function MobileNav() {
               payments
             </Link>
             <Link
+              href="/dashboard"
+              className={`hover:text-miprimary tracking-wide hover:underline hover:underline-miprimary cursor-pointer ${
+                pathname == "/profile"
+                  ? "underline underline-miprimary underline-offset-4"
+                  : "opacity-50"
+              }`}
+            >
+              dashboard
+            </Link>
+
+            <Link
               href="/profile"
               className={`hover:text-miprimary tracking-wide hover:underline hover:underline-miprimary cursor-pointer ${
                 pathname == "/profile"
