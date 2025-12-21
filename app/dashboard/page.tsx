@@ -12,8 +12,8 @@ const revenueData = [
 
 export default function Dashboard() {
   return (
-    <div className="max-w-full">
-      <div className=" flex flex-wrap gap-4 md:gap-8">
+    <div className="max-w-full flex flex-col gap-8 w-full">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  p-8  gap-4 ">
         <AnalyticsCard
           title="Total Revenue"
           description="Revenue generated for the selected month"

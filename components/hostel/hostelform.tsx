@@ -1,132 +1,176 @@
 "use client";
+
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
+import { hostelDetailsSchema, HostelDetailsValues } from "./schema";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
-import { ArrowRightCircle } from "lucide-react";
+import { useState } from "react";
+import { toast } from "sonner";
+import { redirect } from "next/navigation";
+import { supabase } from "@/lib/supabase/client";
 
-// Supabase-aligned schema for `hostels` table
-const hostelSchema = z.object({
-  name: z.string().min(2),
-  description: z.string().optional(),
-  location: z.string().optional(),
-  address: z.string().optional(),
-  city: z.string().optional(),
-  state: z.string().optional(),
-  country: z.string().optional(),
-  manager_id: z.string().uuid().optional(),
-  total_rooms: z.coerce.number().optional(),
-  metadata: z.any().optional(),
-});
+type HostelPayload = HostelDetailsValues & {
+  images: string[];
+};
 
-export default function HostelForm() {
-  const form = useForm({ resolver: zodResolver(hostelSchema) });
+export function HostelDetailsForm() {
+  const [imageUrls, setImageUrls] = useState<string[]>([]);
+  const [uploading, setUploading] = useState(false);
+  const [saving, setSaving] = useState(false);
+
+  const form = useForm<HostelDetailsValues>({
+    resolver: zodResolver(hostelDetailsSchema),
+    defaultValues: {
+      label: "",
+      establishment_year: "",
+      number_of_buildings: "",
+      description: "",
+      owner_name: "",
+      owner_contact: "",
+    },
+  });
+
+  // ✅ IMAGE UPLOAD
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (!files || files.length === 0) return;
+
+    setUploading(true);
+    const formData = new FormData();
+    Array.from(files).forEach((file) => formData.append("files", file));
+
+    const res = await fetch("/api/upload", {
+      method: "POST",
+      body: formData,
+    });
+
+    if (!res.ok) {
+      console.error("Upload failed");
+      setUploading(false);
+      return;
+    }
+
+    const { urls } = await res.json();
+    setImageUrls((prev) => [...prev, ...urls]);
+    setUploading(false);
+  };
+
+  // ✅ FORM SUBMIT
+  const onSubmit = async (data: HostelDetailsValues) => {
+    setSaving(true);
+
+    const payload: HostelPayload = {
+      ...data,
+      images: imageUrls,
+    };
+
+    // Insert hostel into Supabase
+    const { data: createdHostel, error } = await supabase
+      .from("hostels")
+      .insert([payload])
+      .select("id") // select the inserted ID
+      .single();
+
+    // Redirect to /hostel/upload/[id]
+    redirect(`/hostel/upload/${createdHostel?.id}`);
+  };
 
   return (
-    <Card className="max-w-full shadow-lg   my-10  md:my-10">
-      <CardHeader className="">
-        <CardTitle className="capitalize text-xl text-center  text-miprimary tracking-wide uppercase font-bold">
-          create or edit hostels
-        </CardTitle>
+    <Card className="shadow-lg shadow-miprimary">
+      <CardHeader className="text-2xl font-bold text-center">
+        <CardTitle>Hostel Information</CardTitle>
       </CardHeader>
+
       <CardContent>
-        <form className="grid gap-6">
-          <div className="grid gap-2">
-            <Label className="text-base tracking-wide">Hostel Name</Label>
-            <Input
-              {...form.register("name")}
-              className="py-6 shadow-lg"
-              placeholder="Hostel Name"
-            />
+        <form className="grid gap-6" onSubmit={form.handleSubmit(onSubmit)}>
+          <div>
+            <Label className="text-lg">Hostel Name</Label>
+            <Input className="py-6 text-lg" {...form.register("label")} />
           </div>
 
-          <div className="grid gap-2">
-            <Label className="text-base tracking-wide">Description</Label>
+          <div>
+            <Label className="text-lg">Description</Label>
             <Textarea
+              className="py-6 text-lg"
               {...form.register("description")}
-              placeholder="Description"
-              className="py-6 shadow-lg"
             />
           </div>
 
-          <div className="grid gap-2">
-            <Label className="text-base tracking-wide">Location</Label>
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <Label className="text-lg">Estabilishment Year</Label>
+              <Input
+                type="number"
+                className="py-6 text-lg"
+                {...form.register("establishment_year")}
+              />
+            </div>
+
+            <div>
+              <Label className="text-lg">Buildings</Label>
+              <Input
+                type="number"
+                className="py-6 text-lg"
+                {...form.register("number_of_buildings")}
+              />
+            </div>
+          </div>
+
+          <div>
+            <Label className="text-lg">Owner Name</Label>
+            <Input className="py-6 text-lg" {...form.register("owner_name")} />
+          </div>
+
+          <div>
+            <Label className="text-lg">Owner Contact</Label>
             <Input
-              {...form.register("location")}
-              placeholder="General Location"
-              className="py-6 shadow-lg"
+              className="py-6 text-lg"
+              {...form.register("owner_contact")}
             />
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="grid gap-2">
-              <Label className="text-base tracking-wide">Address</Label>
-              <Input
-                className="py-6 shadow-lg"
-                {...form.register("address")}
-                placeholder="Street Address"
-              />
-            </div>
-
-            <div className="grid gap-2">
-              <Label className="text-base tracking-wide">City</Label>
-              <Input
-                className="py-6 shadow-lg"
-                {...form.register("city")}
-                placeholder="City"
-              />
-            </div>
-
-            <div className="grid gap-2">
-              <Label className="text-base tracking-wide">State</Label>
-              <Input
-                className="py-6 shadow-lg"
-                {...form.register("state")}
-                placeholder="State/Region"
-              />
-            </div>
-
-            <div className="grid gap-2">
-              <Label className="text-base tracking-wide">Country</Label>
-              <Input
-                className="py-6 shadow-lg"
-                {...form.register("country")}
-                placeholder="Country"
-              />
-            </div>
-          </div>
-
-          <div className="grid gap-2">
-            <Label className="text-base tracking-wide">
-              Manager ID (profile uuid)
-            </Label>
+          {/* IMAGE UPLOAD */}
+          <div className="">
+            <Label className="text-lg">Hostel Images</Label>
             <Input
-              className="py-6 shadow-lg"
-              {...form.register("manager_id")}
-              placeholder="Manager Profile ID"
+              className="py-6"
+              type="file"
+              accept="image/*"
+              multiple
+              disabled={uploading}
+              onChange={handleImageUpload}
             />
-          </div>
 
-          <div className="grid gap-2">
-            <Label className="text-base tracking-wide">Total Rooms</Label>
-            <Input
-              className="py-6 shadow-lg"
-              type="number"
-              {...form.register("total_rooms")}
-              placeholder="Total Rooms in Hostel"
-            />
+            {uploading && (
+              <p className="text-sm text-muted-foreground mt-1">
+                Uploading images…
+              </p>
+            )}
+
+            {imageUrls.length > 0 && (
+              <div className="grid grid-cols-3 gap-2 mt-3">
+                {imageUrls.map((url) => (
+                  <img
+                    key={url}
+                    src={url}
+                    alt="Hostel"
+                    className="h-24 w-full rounded object-cover"
+                  />
+                ))}
+              </div>
+            )}
           </div>
 
           <Button
             type="submit"
-            className="w-full bg-miaccent/90 text-white cursor-pointer hover:bg-miaccent  tracking-wide hover:-translate-y-0.5 hover:shadow-misecondary hover:shadow-lg  px-6 py-6 duration-500 ease-out flex items-center capitalize text-lg font-extrabold shadow-lg "
+            className="py-6 text-lg bg-miaccent text-white"
+            disabled={uploading || saving}
           >
-            Save Hostel
-            <ArrowRightCircle />
+            {saving ? "Saving..." : "Save Hostel"}
           </Button>
         </form>
       </CardContent>

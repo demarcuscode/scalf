@@ -1,4 +1,4 @@
-import BookingForm from "@/components/profile/bookingform";
+// import BookingForm from "@/components/profile/bookingform";
 
 interface PageProps {
   params: Promise<{
@@ -9,9 +9,5 @@ interface PageProps {
 export default async function Page({ params }: PageProps) {
   const { id } = await params;
 
-  return (
-    <section className="">
-      <BookingForm />
-    </section>
-  );
+  return <section className="pt-20 ">{/* <BookingForm /> */}</section>;
 }

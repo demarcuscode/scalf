@@ -28,13 +28,15 @@ export default function Idpagecomp({ hostel }: idprops) {
   return (
     <div className="relative">
       <div className="max-w-full h-[60vh] relative  object-cover">
-        <Image
-          src={hostel?.imageurl as string}
-          alt={hostel?.label as string}
-          width={1000}
-          height={800}
-          className="w-full h-[60vh] object-cover"
-        />
+        {hostel?.imageurl && (
+          <Image
+            src={hostel?.imageurl as string}
+            alt={hostel?.label as string}
+            width={1000}
+            height={800}
+            className="w-full h-[60vh] object-cover"
+          />
+        )}
         <ChevronLeftCircle
           className="z-20 text-card absolute top-12 left-3 "
           size={50}

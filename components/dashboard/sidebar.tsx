@@ -35,7 +35,7 @@ export default function Sidebar() {
       {/* Mobile Toggle */}
       <button
         onClick={() => setOpen(true)}
-        className="fixed top-4 left-4 z-50 md:hidden bg-miprimary text-white p-2 rounded-lg"
+        className="fixed top-4 left-2 z-50 md:hidden bg-miprimary text-white p-2 rounded-lg"
       >
         <Menu />
       </button>

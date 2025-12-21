@@ -30,7 +30,7 @@ export default function AnalyticsCard({
   dataKey = "revenue",
 }: any) {
   return (
-    <Card className="max-w-lg  rounded-lg shadow-lg shadow-miprimary w-full  transition">
+    <Card className="  rounded-lg shadow-lg shadow-miprimary  object-contain  transition">
       <CardHeader>
         <CardTitle className="font-bold text-xl text-center">{title}</CardTitle>
         <p className="text-lg text-center  mb-4">{total}</p>

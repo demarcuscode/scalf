@@ -1,5 +1,4 @@
 "use client";
-
 import {
   Sheet,
   SheetTrigger,
@@ -8,32 +7,58 @@ import {
   SheetTitle,
   SheetDescription,
 } from "@/components/ui/sheet";
-import { colortheme } from "@/lib/constant";
-import { Menu } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import { Avatar, AvatarImage } from "../ui/avatar";
 import { useCurrentUserImage } from "@/hooks/use-current-user-image";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import { Menu } from "lucide-react";
+import { supabase } from "@/lib/supabase/client";
+import SignInBtn from "./signinbtn";
+import { Button } from "../ui/button";
+import { useEffect, useState } from "react";
 
 export default function MobileNav() {
   const image: any = useCurrentUserImage();
   const pathname = usePathname();
-  console.log(pathname);
+  const [user, setUser] = useState<any>(null);
+  const router = useRouter();
 
+  // logout function
+  const logout = async () => await supabase.auth.signOut();
+
+  // get users session
+  useEffect(() => {
+    async function getusers() {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+      setUser((prev: any) => user);
+    }
+    getusers();
+  }, []);
   return (
     <div className={"z-20"}>
       <Sheet>
         {/* Hamburger Button */}
 
-        <SheetTrigger asChild className="">
-          <div className="flex items-center gap-2 ">
-            <Avatar>
-              <AvatarImage src={image as string} alt="" />
-            </Avatar>
-            <Menu className={`h-10 w-10 -miaccent shadow-lg   z-40  p-2  `} />
+        {user ? (
+          <div className="flex gap-2 items-center">
+            <div className="flex items-center gap-2 ">
+              <Avatar>
+                <AvatarImage src={(image as string) ?? ""} alt="" />
+              </Avatar>
+            </div>
+            <SheetTrigger asChild className="">
+              <Menu className="cursor-pointer" />
+            </SheetTrigger>
           </div>
-        </SheetTrigger>
+        ) : (
+          <div className="flex gap-2 item-center">
+            <SignInBtn />
+            <Menu />
+          </div>
+        )}
 
         {/* Slide-Out Menu */}
         <SheetContent side="left" className=" w-75">
@@ -136,16 +161,19 @@ export default function MobileNav() {
             >
               profile
             </Link>
-            <Link
-              href="/auth"
-              className={`hover:text-miprimary tracking-wide hover:underline hover:underline-miprimary cursor-pointer ${
+            <Button
+              onClick={() => {
+                logout();
+                router.replace("/hostel");
+              }}
+              className={`hover:text-white hover:bg-miaccent hover:-translate-y-0.5  hover:ease-out tracking-wide bg-miaccent text-white hover:underline hover:underline-miprimary cursor-pointer ${
                 pathname == "/auth"
-                  ? "underline underline-miprimary"
-                  : "opacity-50"
+                  ? "underline underline-miprimary text-white"
+                  : "opacity-100"
               }`}
             >
               log out
-            </Link>
+            </Button>
           </nav>
         </SheetContent>
       </Sheet>
