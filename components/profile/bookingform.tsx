@@ -1,169 +1,212 @@
-"use client";
+// "use client";
 
-import { z } from "zod";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+// import { useForm } from "react-hook-form";
+// import { zodResolver } from "@hookform/resolvers/zod";
 
-import {
-  Form,
-  FormItem,
-  FormControl,
-  FormLabel,
-  FormField,
-  FormMessage,
-} from "@/components/ui/form";
+// import {
+//   Form,
+//   FormItem,
+//   FormControl,
+//   FormLabel,
+//   FormField,
+//   FormMessage,
+// } from "@/components/ui/form";
 
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import {
-  Select,
-  SelectTrigger,
-  SelectValue,
-  SelectContent,
-  SelectItem,
-} from "@/components/ui/select";
-import { PlusCircle } from "lucide-react";
+// import { Input } from "@/components/ui/input";
+// import { Button } from "@/components/ui/button";
 
-// Adjusting the Zod schema for payment_type as required
-const bookingSchema = z.object({
-  user_id: z.string(),
-  hostel_id: z.string(),
-  room_type_id: z.string(),
-  checkin_date: z.string(),
-  checkout_date: z.string(),
-  payment_type: z.enum(["semester", "monthly"]), // Now it's required in Zod
-});
+// import {
+//   Select,
+//   SelectTrigger,
+//   SelectValue,
+//   SelectContent,
+//   SelectItem,
+// } from "@/components/ui/select";
 
-type BookingFormType = z.infer<typeof bookingSchema>;
+// import { PlusCircle } from "lucide-react";
+// import { bookingSchema, BookingFormValues } from "../hostel/schema";
 
-export default function BookingForm() {
-  const form = useForm<BookingFormType>({
-    resolver: zodResolver(bookingSchema), // Use the zod schema directly
-    // Default value will be managed by the schema
-  });
+// export default function BookingForm() {
+//   const form = useForm<BookingFormValues>({
+//     resolver: zodResolver(bookingSchema),
+//     defaultValues: {
+//       hostel_name: "",
+//       applicant_name: "",
+//       course: "",
+//       year_in_campus: undefined,
+//       gender: "male",      // contact: "",
+//       price: "",
+//       report_date_start: "",
+//       report_date_end: "",
+//       payment_type: "semester",
+//     },
+//   });
 
-  function onSubmit(values: BookingFormType) {
-    console.log(values);
-  }
+//   async function onSubmit(values: BookingFormValues) {
+//     console.log("Booking payload:", values);
+//   }
 
-  return (
-    <div className="mt-20 max-w-[90%] mx-auto p-6 bg-white shadow-lg border  rounded-lg shadow-misecondary">
-      <h2 className="text-xl text-miprimary text-center font-semibold mb-4">
-        Make Booking
-      </h2>
+//   return (
+//     <div className="mt-10 max-w-[900px] mx-auto p-6 bg-white border rounded-lg shadow-lg">
+//       <h2 className="text-xl text-miprimary text-center font-semibold mb-6">
+//         Make Hostel Booking
+//       </h2>
 
-      <Form {...form}>
-        <form
-          onSubmit={form.handleSubmit(onSubmit)}
-          className="space-y-4 flex flex-col gap-4"
-        >
-          <FormField
-            name="user_id"
-            control={form.control}
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>User ID</FormLabel>
-                <FormControl>
-                  <Input
-                    className="py-6 shadow-lg"
-                    placeholder="User ID"
-                    {...field}
-                  />
-                </FormControl>
-              </FormItem>
-            )}
-          />
+//       <Form {...form}>
+//         <form onSubmit={form.handleSubmit(onSubmit)} className="grid gap-5">
+//           <FormField
+//             name="hostel_name"
+//             control={form.control}
+//             render={({ field }) => (
+//               <FormItem>
+//                 <FormLabel>Hostel Name</FormLabel>
+//                 <FormControl>
+//                   <Input className="py-6" {...field} />
+//                 </FormControl>
+//                 <FormMessage />
+//               </FormItem>
+//             )}
+//           />
 
-          <FormField
-            name="hostel_id"
-            control={form.control}
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Hostel ID</FormLabel>
-                <FormControl>
-                  <Input
-                    placeholder="Hostel ID"
-                    className="py-6 shadow-lg"
-                    {...field}
-                  />
-                </FormControl>
-              </FormItem>
-            )}
-          />
+//           <FormField
+//             name="applicant_name"
+//             control={form.control}
+//             render={({ field }) => (
+//               <FormItem>
+//                 <FormLabel>Applicant Name</FormLabel>
+//                 <FormControl>
+//                   <Input className="py-6" {...field} />
+//                 </FormControl>
+//                 <FormMessage />
+//               </FormItem>
+//             )}
+//           />
 
-          <FormField
-            name="room_type_id"
-            control={form.control}
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Room Type ID</FormLabel>
-                <FormControl>
-                  <Input
-                    className="py-6 shadow-lg"
-                    placeholder="Room Type ID"
-                    {...field}
-                  />
-                </FormControl>
-              </FormItem>
-            )}
-          />
+//           <FormField
+//             name="course"
+//             control={form.control}
+//             render={({ field }) => (
+//               <FormItem>
+//                 <FormLabel>Course</FormLabel>
+//                 <FormControl>
+//                   <Input className="py-6" {...field} />
+//                 </FormControl>
+//               </FormItem>
+//             )}
+//           />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <FormField
-              name="checkin_date"
-              control={form.control}
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Check-in Date</FormLabel>
-                  <FormControl>
-                    <Input type="date" className="py-6 shadow-lg" {...field} />
-                  </FormControl>
-                </FormItem>
-              )}
-            />
+//           <div className="grid md:grid-cols-2 gap-4">
+//             <FormField
+//               name="year_in_campus"
+//               control={form.control}
+//               render={({ field }) => (
+//                 <FormItem>
+//                   <FormLabel>Year in Campus</FormLabel>
+//                   <FormControl>
+//                     <Input
+//                       type="number"
+//                       value={field.value ?? ""}
+//                       onChange={(e) =>
+//                         field.onChange(
+//                           e.target.value === ""
+//                             ? undefined
+//                             : e.target.valueAsNumber
+//                         )
+//                       }
+//                     />
+//                   </FormControl>
+//                 </FormItem>
+//               )}
+//             />
 
-            <FormField
-              name="checkout_date"
-              control={form.control}
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Check-out Date</FormLabel>
-                  <FormControl>
-                    <Input className="py-6 shadow-lg" type="date" {...field} />
-                  </FormControl>
-                </FormItem>
-              )}
-            />
-          </div>
+//             <FormField
+//               name="gender"
+//               control={form.control}
+//               render={({ field }) => (
+//                 <FormItem>
+//                   <FormLabel>Gender</FormLabel>
+//                   <Select value={field.value} onValueChange={field.onChange}>
+//                     <SelectTrigger>
+//                       <SelectValue placeholder="Select gender" />
+//                     </SelectTrigger>
+//                     <SelectContent>
+//                       <SelectItem value="male">Male</SelectItem>
+//                       <SelectItem value="female">Female</SelectItem>
+//                       <SelectItem value="other">Other</SelectItem>
+//                     </SelectContent>
+//                   </Select>
+//                 </FormItem>
+//               )}
+//             />
+//           </div>
 
-          <FormField
-            name="payment_type"
-            control={form.control}
-            render={({ field }) => (
-              <FormItem className="">
-                <FormLabel>Payment Type</FormLabel>
-                <Select
-                  value={field.value} // Make sure 'value' is used here
-                  onValueChange={field.onChange}
-                >
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select payment type" />
-                  </SelectTrigger>
-                  <SelectContent className="shadow-lg py-6">
-                    <SelectItem value="semester">Semester</SelectItem>
-                    <SelectItem value="monthly">Monthly</SelectItem>
-                  </SelectContent>
-                </Select>
-              </FormItem>
-            )}
-          />
+//           <div className="grid md:grid-cols-2 gap-4">
+//             <FormField
+//               name="report_date_start"
+//               control={form.control}
+//               render={({ field }) => (
+//                 <FormItem>
+//                   <FormLabel>Report Start Date</FormLabel>
+//                   <FormControl>
+//                     <Input type="date" className="py-6" {...field} />
+//                   </FormControl>
+//                 </FormItem>
+//               )}
+//             />
 
-          <Button className="w-full  bg-miaccent py-6 capitalize hover:bg-miaccent cursor-pointer hover:-translate-y-0.5 hover:ease-out tracking-wide shadow-lg text-white font-bold ">
-            Submit Booking
-            <PlusCircle size={22} />
-          </Button>
-        </form>
-      </Form>
-    </div>
-  );
-}
+//             <FormField
+//               name="report_date_end"
+//               control={form.control}
+//               render={({ field }) => (
+//                 <FormItem>
+//                   <FormLabel>Report End Date</FormLabel>
+//                   <FormControl>
+//                     <Input type="date" className="py-6" {...field} />
+//                   </FormControl>
+//                 </FormItem>
+//               )}
+//             />
+//           </div>
+
+//           <FormField
+//             name="payment_type"
+//             control={form.control}
+//             render={({ field }) => (
+//               <FormItem>
+//                 <FormLabel>Payment Type</FormLabel>
+//                 <Select value={field.value} onValueChange={field.onChange}>
+//                   <SelectTrigger>
+//                     <SelectValue placeholder="Select payment type" />
+//                   </SelectTrigger>
+//                   <SelectContent>
+//                     <SelectItem value="semester">Semester</SelectItem>
+//                     <SelectItem value="monthly">Monthly</SelectItem>
+//                   </SelectContent>
+//                 </Select>
+//               </FormItem>
+//             )}
+//           />
+
+//           <FormField
+//             name="price"
+//             control={form.control}
+//             render={({ field }) => (
+//               <FormItem>
+//                 <FormLabel>Price (GHS)</FormLabel>
+//                 <FormControl>
+//                   <Input {...field} />
+//                 </FormControl>
+//                 <FormMessage />
+//               </FormItem>
+//             )}
+//           />
+
+//           <Button className="w-full py-6 bg-miaccent hover:bg-miaccent/90">
+//             Submit Booking
+//             <PlusCircle size={20} />
+//           </Button>
+//         </form>
+//       </Form>
+//     </div>
+//   );
+// }

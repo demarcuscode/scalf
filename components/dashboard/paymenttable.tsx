@@ -31,7 +31,7 @@ export default function PaymentsTable() {
   }, []);
 
   return (
-    <Card className="w-full col-span-full shadow-md rounded-2xl">
+    <Card className="w-full col-span-full shadow-lg shadow-misecondary m-2 my-20 max-w-[95%] mx-auto rounded-2xl">
       <CardContent className="w-full">
         <CardHeader>
           <CardTitle className="text-xl font-bold">

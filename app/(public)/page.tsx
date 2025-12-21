@@ -19,7 +19,7 @@ export default function Home() {
         <SearchBtn />
       </div>
       <Sponsors />
-      <ArtisticCounterDiv />
+      {/* <ArtisticCounterDiv /> */}
       <Rated />
       <HeroInfo />
       <FAQ />

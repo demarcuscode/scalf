@@ -91,11 +91,6 @@ export const sponsors = [
   { imageUrl: "/supabasel.svg", name: "Supabase" },
   {
     imageUrl:
-      "https://upload.wikimedia.org/wikipedia/commons/6/69/Airbnb_Logo_B%C3%A9lo.svg",
-    name: "Airbnb",
-  },
-  {
-    imageUrl:
       "https://upload.wikimedia.org/wikipedia/commons/0/0b/Paystack_Logo.png",
     name: "Paystack",
   },

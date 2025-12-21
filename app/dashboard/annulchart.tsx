@@ -29,7 +29,7 @@ const data = [
 
 export default function RevenueBookingsChart() {
   return (
-    <Card className="w-full rounded-2xl shadow-lg border border-neutral-200 dark:border-neutral-800 bg-gradient-to-br from-white to-neutral-50 col-span-full dark:from-neutral-900 dark:to-neutral-800 p-6">
+    <Card className="w-full rounded-2xl shadow-lg border border-neutral-200 dark:border-neutral-800 bg-gradient-to-br from-white to-neutral-50 col-span-full dark:from-neutral-900 max-w-[95%] mx-auto  shadow-lg shadow-miprimary dark:to-neutral-800 p-6">
       <CardContent className="w-full">
         <CardHeader>
           <CardTitle className="text-2xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100">
