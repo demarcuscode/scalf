@@ -1,12 +1,16 @@
 "use client";
 import { supabase } from "@/lib/supabase/client";
-import { set } from "date-fns";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useEffectEvent, useState } from "react";
+import { useEffect, useState } from "react";
+import { set } from "zod";
 
-export default function ChatIcon() {
+interface chaticonprops {
+  receiverId?: string;
+}
+
+export default function ChatIcon(props: chaticonprops) {
   const [user, setUser] = useState<any>(null);
   const pathname = usePathname();
 
