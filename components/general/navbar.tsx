@@ -3,11 +3,6 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import MobileNav from "./menubar";
 import { supabase } from "@/lib/supabase/client";
-import SignInBtn from "./signinbtn";
-import { Avatar } from "../ui/avatar";
-import { AvatarImage } from "@radix-ui/react-avatar";
-import { Menu } from "lucide-react";
-import Sidebar from "../dashboard/sidebar";
 
 export default function NavBar() {
   const [user, setUser] = useState<any>(null);
@@ -20,7 +15,7 @@ export default function NavBar() {
     fetchuser();
   }, []);
   return (
-    <section className="text-miaccent w-full  mx-auto h-28 fixed top-0 left-0 z-50 flex items-center gap-4 justify-between p-4 bg-miprimary ">
+    <section className="text-miaccent w-full  mx-auto h-16 fixed top-0 left-0 z-50 flex items-center gap-4 justify-between p-4 bg-miprimary ">
       <div className="h-15 md:w-50 object-contain rounded-lg ">
         <Image
           src="/logo-1-primary.png"

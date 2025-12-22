@@ -1,22 +1,24 @@
 "use client";
-
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import { RealtimeChat } from "@/components/realtime-chat";
 import { supabase } from "@/lib/supabase/client";
 
-export default function Page() {
+interface pageprops {
+  params: {
+    id: string;
+  };
+}
+export default function Page(props: pageprops) {
+  const [username, setUsername] = useState<string | null>(null);
   const params = useParams<{ id: string }>();
   const roomName = params.id;
-
-  const [username, setUsername] = useState<string | null>(null);
 
   useEffect(() => {
     const getUser = async () => {
       const { data } = await supabase.auth.getUser();
       setUsername(data.user?.email ?? "anonymous");
     };
-
     getUser();
   }, []);
 

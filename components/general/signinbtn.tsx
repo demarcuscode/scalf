@@ -21,7 +21,7 @@ export default function SignInBtn() {
       provider: "google",
       options: {
         queryParams: {
-          role: selectedRole, // Optional: pass role as metadata
+          role: selectedRole,
         },
       },
     });
