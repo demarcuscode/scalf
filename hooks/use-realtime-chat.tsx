@@ -12,7 +12,7 @@ export interface ChatMessage {
   id: string;
   content: string;
   user: {
-    name: string;
+    email: string;
   };
   createdAt: string;
 }
@@ -56,7 +56,7 @@ export function useRealtimeChat({ roomName, username }: UseRealtimeChatProps) {
         id: crypto.randomUUID(),
         content,
         user: {
-          name: username,
+          email: username,
         },
         createdAt: new Date().toISOString(),
       };

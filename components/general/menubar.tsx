@@ -56,7 +56,9 @@ export default function MobileNav() {
         ) : (
           <div className="flex gap-2 item-center">
             <SignInBtn />
-            <Menu />
+            <SheetTrigger asChild className="">
+              <Menu />
+            </SheetTrigger>
           </div>
         )}
 
