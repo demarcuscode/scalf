@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Send } from "lucide-react";
 import { useCallback, useEffect, useMemo, useState } from "react";
+import { supabase } from "@/lib/supabase/client";
 
 interface RealtimeChatProps {
   roomName: string;
@@ -54,7 +55,6 @@ export const RealtimeChat = ({
     const sortedMessages = uniqueMessages.sort((a, b) =>
       a.createdAt.localeCompare(b.createdAt)
     );
-
     return sortedMessages;
   }, [initialMessages, realtimeMessages]);
 
@@ -70,11 +70,15 @@ export const RealtimeChat = ({
   }, [allMessages, scrollToBottom]);
 
   const handleSendMessage = useCallback(
-    (e: React.FormEvent) => {
+    async (e: React.FormEvent) => {
       e.preventDefault();
       if (!newMessage.trim() || !isConnected) return;
 
       sendMessage(newMessage);
+
+      await supabase
+        .from("chat")
+        .insert({ room_id: roomName, message: newMessage });
       setNewMessage("");
     },
     [newMessage, isConnected, sendMessage]
@@ -89,7 +93,7 @@ export const RealtimeChat = ({
             No messages yet. Start the conversation!
           </div>
         ) : null}
-        <div className="space-y-1">
+        <div className="space-y-1 h-[82vh]">
           {allMessages.map((message, index) => {
             const prevMessage = index > 0 ? allMessages[index - 1] : null;
             const showHeader =
