@@ -73,19 +73,19 @@ export const RealtimeChat = ({
     async (e: React.FormEvent) => {
       e.preventDefault();
       if (!newMessage.trim() || !isConnected) return;
-
       sendMessage(newMessage);
 
-      await supabase
-        .from("chat")
-        .insert({ room_id: roomName, message: newMessage });
+      await supabase.from("chat_messages").insert({
+        room_id: roomName,
+        message: newMessage,
+      });
       setNewMessage("");
     },
     [newMessage, isConnected, sendMessage]
   );
 
   return (
-    <div className="flex flex-col h-full w-full bg-background text-foreground antialiased">
+    <div className="flex flex-col h-full w-full bg-background shadow-lg shadow-miaccent rounded-lg text-foreground antialiased">
       {/* Messages */}
       <div ref={containerRef} className="flex-1 overflow-y-auto p-4 space-y-4">
         {allMessages.length === 0 ? (
@@ -93,7 +93,7 @@ export const RealtimeChat = ({
             No messages yet. Start the conversation!
           </div>
         ) : null}
-        <div className="space-y-1 h-[82vh]">
+        <div className="space-y-1 h-[82vh] md:h-[70vh]">
           {allMessages.map((message, index) => {
             const prevMessage = index > 0 ? allMessages[index - 1] : null;
             const showHeader =

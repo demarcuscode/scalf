@@ -10,9 +10,9 @@ interface pageprops {
   };
 }
 export default function Page(props: pageprops) {
-  const [username, setUsername] = useState<string | null>(null);
   const params = useParams<{ id: string }>();
   const roomName = params.id;
+  const [username, setUsername] = useState<string | any>("");
 
   useEffect(() => {
     const getUser = async () => {
@@ -22,10 +22,26 @@ export default function Page(props: pageprops) {
     getUser();
   }, []);
 
-  if (!roomName || !username) return null; // or loading spinner
+  useEffect(() => {
+    const ensureRoomExists = async () => {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+
+      if (!user) return;
+
+      // try insert; ignore if already exists
+      await supabase.from("chat_rooms").upsert({
+        id: roomName,
+        created_by: user.id,
+      });
+    };
+
+    ensureRoomExists();
+  }, [roomName]);
 
   return (
-    <div className="p-4 bg-misecondary pt-16">
+    <div className="p-4 bg-misecondary pt-16 md:p-24">
       <RealtimeChat username={username} roomName={roomName} />
     </div>
   );
