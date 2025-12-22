@@ -13,7 +13,7 @@ export default function Map() {
       <div className=" gap-8 w-full">
         <div className="max-w-full h-[60vh]  w-full object-contain md:object-cover ">
           <Image
-            src="/map.jpg"
+            src="https://bez5btbsbycwy9xv.public.blob.vercel-storage.com/map.jpg"
             alt="map"
             width={900}
             height={500}
