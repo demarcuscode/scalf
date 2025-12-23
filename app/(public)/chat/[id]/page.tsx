@@ -15,6 +15,7 @@ export default function Page(props: pageprops) {
   const roomName = params.id;
   const [username, setUsername] = useState<string | any>("");
   const [previousMessages, setPreviousMessages] = useState<ChatMessage[]>([]);
+  const [mdata, setMdata] = useState<any>(null);
 
   useEffect(() => {
     const getUser = async () => {
@@ -44,9 +45,11 @@ export default function Page(props: pageprops) {
 
   useEffect(() => {
     const loadMessages = async () => {
-      const { data: auth } = await supabase.auth.getUser();
-      setUsername(auth.user?.email ?? "anonymous");
-
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+      setMdata((prev: any) => user);
+      setUsername(user?.email ?? "anonymous");
       const { data, error } = await supabase
         .from("chat_messages")
         .select(
@@ -60,18 +63,17 @@ export default function Page(props: pageprops) {
         .eq("room_id", roomName)
         .order("created_at");
 
-      const formatted: ChatMessage[] = data.map((m: any) => ({
+      const formatted: ChatMessage[] = mdata?.map((m: any) => ({
         id: m.id,
         content: m.message,
         createdAt: m.created_at,
         user: {
-          email: m.username ?? "unknown",
+          email: m.username ?? "anonymous",
         },
       }));
 
       setPreviousMessages(formatted);
     };
-
     loadMessages();
   }, [roomName]);
 
