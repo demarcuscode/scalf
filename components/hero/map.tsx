@@ -30,7 +30,7 @@ export default function Map() {
             <li>No prior hospitality required to start </li>
             <div className="flex w-full gap-4 text-xl">
               <Button
-                onClick={() => router.push(`/hostel/upload/1`)}
+                onClick={() => router.push(`/hostel/newform`)}
                 className="bg-miaccent/80 text-xl text-white px-8 py-6 cursor-pointer hover:bg-miaccent font-bold tracking-wide shadow-lg hover:-translate-y-0.5 duration-500 ease-out "
               >
                 list your hostel

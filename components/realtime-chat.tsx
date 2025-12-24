@@ -51,6 +51,7 @@ export const RealtimeChat = ({
       (message, index, self) =>
         index === self.findIndex((m) => m.id === message.id)
     );
+
     // Sort by creation date
     const sortedMessages = uniqueMessages.sort((a, b) =>
       a.createdAt.localeCompare(b.createdAt)

@@ -14,8 +14,10 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { PlusCircle } from "lucide-react";
+import { PlusCircle, Users } from "lucide-react";
 import { useEffect, useState } from "react";
+import { supabase } from "@/lib/supabase/client";
+import { toast } from "sonner";
 
 const profileSchema = z.object({
   full_name: z.string().min(2, "Name is too short"),
@@ -30,20 +32,63 @@ const profileSchema = z.object({
 
 type ProfileFormType = z.infer<typeof profileSchema>;
 
+interface pageprops {
+  profile: any;
+}
+
 export default function ProfileForm() {
-  const [user, setUser] = useState<any>(null);
-  const [profile, setProfile] = useState<any>(null);
+  const [user, setUser] = useState<any>();
+  const [profile, setProfile] = useState<any>();
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    const fetchuser = async () => {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+      setUser(user);
+    };
+    fetchuser();
+  }, []);
 
+  useEffect(() => {
+    if (!user) return; // Wait until user is fetched
+
+    const fetchProfile = async () => {
+      const { data, error } = await supabase
+        .from("profiles")
+        .select("*")
+        .eq("id", user.id)
+        .single();
+
+      if (error) {
+        console.log("Error fetching profile:", error);
+      } else {
+        setProfile(data);
+      }
+    };
+
+    fetchProfile();
+  }, [user]);
+
+  console.log("the profile", profile);
   const form = useForm<ProfileFormType>({
     resolver: zodResolver(profileSchema),
-    defaultValues: {},
+    defaultValues: {
+      bio: profile?.bio || "",
+      budget: profile?.budget || "",
+      contact: profile?.contact || "",
+      course: profile?.contact || "",
+      from_country: profile?.from_country || "",
+      full_name: profile?.from_profile || "",
+      level: profile?.level || "",
+    },
   });
 
-  function onSubmit(values: ProfileFormType) {
-    console.log(values);
-  }
+  const onSubmit = async (values: ProfileFormType) => {
+    // Insert hostel into Supabase
+    form.reset();
+    toast.success("😊profile was updated!🔥");
+  };
 
   return (
     <div className="mt-20 shadow-miprimary p-4 bg-white shadow rounded-xl md:max-w-[80%] md:mx-auto">
