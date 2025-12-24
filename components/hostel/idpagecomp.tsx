@@ -41,7 +41,7 @@ export default function Idpagecomp({ hostel }: idprops) {
   return (
     <div className="relative">
       <div className="max-w-full h-[60vh] relative  object-cover">
-        <div className="w-full h-full absolute inset-0 bg-black/70 z-20" />
+        <div className="w-full h-full absolute inset-0 bg-black/60 z-20" />
         {hostel?.imageurl && (
           <Image
             src={hostel?.imageurl as string}
