@@ -74,9 +74,9 @@ export function HostelDetailsForm() {
       .insert([payload])
       .select("id") // select the inserted ID
       .single();
-
-    // Redirect to /hostel/upload/[id]
-    redirect(`/hostel/upload/${createdHostel?.id}`);
+    form.reset();
+    toast.success("😊hostel was listed!🔥");
+    redirect("/hostel");
   };
 
   return (
@@ -89,13 +89,16 @@ export function HostelDetailsForm() {
         <form className="grid gap-6" onSubmit={form.handleSubmit(onSubmit)}>
           <div>
             <Label className="text-lg">Hostel Name</Label>
-            <Input className="py-6 text-lg" {...form.register("label")} />
+            <Input
+              className="py-6 text-lg shadow-lg"
+              {...form.register("label")}
+            />
           </div>
 
           <div>
             <Label className="text-lg">Description</Label>
             <Textarea
-              className="py-6 text-lg"
+              className="py-6 text-lg shadow-lg"
               {...form.register("description")}
             />
           </div>
@@ -105,7 +108,7 @@ export function HostelDetailsForm() {
               <Label className="text-lg">Estabilishment Year</Label>
               <Input
                 type="number"
-                className="py-6 text-lg"
+                className="py-6 text-lg shadow-lg"
                 {...form.register("establishment_year")}
               />
             </div>
@@ -114,7 +117,7 @@ export function HostelDetailsForm() {
               <Label className="text-lg">Buildings</Label>
               <Input
                 type="number"
-                className="py-6 text-lg"
+                className="py-6 text-lg shadow-lg"
                 {...form.register("number_of_buildings")}
               />
             </div>
@@ -122,13 +125,16 @@ export function HostelDetailsForm() {
 
           <div>
             <Label className="text-lg">Owner Name</Label>
-            <Input className="py-6 text-lg" {...form.register("owner_name")} />
+            <Input
+              className="py-6 text-lg shadow-lg"
+              {...form.register("owner_name")}
+            />
           </div>
 
           <div>
-            <Label className="text-lg">Owner Contact</Label>
+            <Label className="py-6 text-lg ">Owner Contact</Label>
             <Input
-              className="py-6 text-lg"
+              className="py-6 text-lg shadow-lg"
               {...form.register("owner_contact")}
             />
           </div>
@@ -137,7 +143,7 @@ export function HostelDetailsForm() {
           <div className="">
             <Label className="text-lg">Hostel Images</Label>
             <Input
-              className="py-6"
+              className="p-8  text-lg shadow-lg"
               type="file"
               accept="image/*"
               multiple

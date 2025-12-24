@@ -1,25 +1,17 @@
-import { cn } from "@/lib/utils";
-import React from "react";
+"use client";
 import ProfileForm from "./profileform";
+import { useEffect, useState } from "react";
+import { supabase } from "@/lib/supabase/client";
 
 interface profileviewprops {
   className?: string;
-  user?: any;
 }
-export default function ProfileView(props: profileviewprops) {
-  const fakeprofile = {
-    full_name: "marcus",
-    avatar_url: "",
-    from_country: "ghana",
-    contact: "0543304604",
-    school: "crown prince",
-    course: "physic",
-    level: "200",
-    budget: "60000",
-    bio: "",
-  };
+export default function ProfileView() {
+  const [user, setUser] = useState<any>();
+  const [profile, setProfile] = useState<any>();
+
   return (
-    <div className={cn("", props.className)}>
+    <div className={""}>
       <ProfileForm />
     </div>
   );

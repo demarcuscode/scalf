@@ -3,7 +3,7 @@ import React from "react";
 
 export default function page() {
   return (
-    <div className="p-8 mt-30">
+    <div className="p-4 mt-30 md:px-30">
       <HostelDetailsForm />
     </div>
   );

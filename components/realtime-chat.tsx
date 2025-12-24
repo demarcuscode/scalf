@@ -31,6 +31,7 @@ export const RealtimeChat = ({
   onMessage,
   messages: initialMessages = [],
 }: RealtimeChatProps) => {
+  const [newMessage, setNewMessage] = useState("");
   const { containerRef, scrollToBottom } = useChatScroll();
 
   const {
@@ -41,7 +42,6 @@ export const RealtimeChat = ({
     roomName,
     username,
   });
-  const [newMessage, setNewMessage] = useState("");
 
   // Merge realtime messages with initial messages
   const allMessages = useMemo(() => {
@@ -51,6 +51,7 @@ export const RealtimeChat = ({
       (message, index, self) =>
         index === self.findIndex((m) => m.id === message.id)
     );
+
     // Sort by creation date
     const sortedMessages = uniqueMessages.sort((a, b) =>
       a.createdAt.localeCompare(b.createdAt)
@@ -78,6 +79,7 @@ export const RealtimeChat = ({
       await supabase.from("chat_messages").insert({
         room_id: roomName,
         message: newMessage,
+        username: username,
       });
       setNewMessage("");
     },
