@@ -1,32 +1,15 @@
-import { Bell, Building, Notebook } from "lucide-react";
+"use client";
+
+import CreateNotifications from "@/components/dashboard/createnotifications";
+import { HostelDetailsForm } from "@/components/hostel/hostelform";
 import React from "react";
-import ContentCard from "./contentcard";
 
 export default function page() {
-  const contentlist = [
-    {
-      label: "add hostel",
-      icon: <Building />,
-      href: "/hostel/upload/",
-    },
-
-    {
-      label: "bookings",
-      icon: <Notebook />,
-      href: "/hostel/upload/",
-    },
-    {
-      label: "create notifications",
-      icon: <Bell />,
-      href: "/hostel/upload/",
-    },
-  ];
   return (
-    <div className="p-8">
-      <div className="grid grid-cols-1 p-4 gap-8">
-        {contentlist.map((item, index) => {
-          return <ContentCard key={index} {...item} />;
-        })}
+    <div className="p-4 md:p-8">
+      <div className="flex flex-col gap-8">
+        <CreateNotifications />
+        <HostelDetailsForm />
       </div>
     </div>
   );

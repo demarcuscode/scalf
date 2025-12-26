@@ -1,33 +1,21 @@
+"use client";
 import { ratedhostels } from "@/lib/constant";
 import Hostelcard from "./upload/hostelidcard";
 import HostelSearch from "./hostelsearctbar";
-
-const hostels = [
-  { id: "1", name: "Sunrise Hostel", type: "Hostel", price: 1200, roomKind: 1 },
-  {
-    id: "2",
-    name: "Palm Apartments",
-    type: "Apartment",
-    price: 2500,
-    roomKind: 2,
-  },
-  {
-    id: "3",
-    name: "Ocean View Hostel",
-    type: "Hostel",
-    price: 1500,
-    roomKind: 3,
-  },
-  {
-    id: "4",
-    name: "City Center Rooms",
-    type: "Hostel",
-    price: 1000,
-    roomKind: 4,
-  },
-];
+import { useEffect, useState } from "react";
+import { supabase } from "@/lib/supabase/client";
 
 export default function page() {
+  const [hostels, setHostels] = useState<any>(null);
+
+  useEffect(() => {
+    const fetchhostels = async () => {
+      const { data, error } = await supabase.from("hostels").select("*");
+      setHostels(data);
+    };
+    fetchhostels();
+  }, []);
+
   return (
     <section className="w-full">
       <div className="max-w-[93%] mx-auto">
@@ -40,7 +28,7 @@ export default function page() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 space-y-10  p-0 ">
-          {ratedhostels.map((item, index) => {
+          {hostels?.map((item: any, index: number) => {
             return <Hostelcard key={index + item.label} {...item} />;
           })}
         </div>

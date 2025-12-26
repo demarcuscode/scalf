@@ -12,6 +12,8 @@ import { CheckCircle, Edit, Trash2 } from "lucide-react";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import PayButton from "../general/paybtn";
+import { supabase } from "@/lib/supabase/client";
+import { useEffect, useState } from "react";
 
 interface bookingcardprops {
   className?: string;
@@ -19,14 +21,49 @@ interface bookingcardprops {
 }
 
 export default function BookingCard(props: bookingcardprops) {
+  const [profile, setProfile] = useState<any>(null);
+  const [user, setUser] = useState<any>(null);
   const router = useRouter();
+
+  // delete a book
+  const deleteBooking = async () => {
+    if (!props?.hostel?.id) return;
+    await supabase.from("hostel_bookings").delete().eq("id", props.hostel.id);
+  };
+
+  useEffect(() => {
+    const fetchuser = async () => {
+      const { data, error } = await supabase.auth.getUser();
+      setUser(data?.user);
+    };
+    fetchuser();
+  }, []);
+  useEffect(() => {
+    const fetchprofile = async () => {
+      if (!user?.id) return;
+      const { data, error } = await supabase
+        .from("profiles")
+        .select("*")
+        .eq("id", user.id)
+        .single();
+      setProfile(data.user);
+    };
+    fetchprofile();
+  }, []);
+  if (!props?.hostel) {
+    return (
+      <div className="pt-20 text-2xl mt-20 text-miprimary">
+        <p>you have no bookings yet.</p>
+      </div>
+    );
+  }
   return (
     <div className={cn("p-4 relative w-full", props.className)}>
       <Card className="w-full shadow-lg relative shadow-misecondary">
         <Edit
           onClick={() => router.push(`/bookings/${props.hostel.id}/edit`)}
-          className="absolute cursor-pointer hover:-translate-y-0.5 hover:ease-out  top-3 right-3"
           size={22}
+          className="absolute cursor-pointer hover:-translate-y-0.5 hover:ease-out  top-3 right-3"
         />
         <CardContent className="flex flex-col gap-2 w-full justify-between">
           <CardTitle className="text-lg text-center font-bold  tracking-wide text-miprimary ">
@@ -36,7 +73,7 @@ export default function BookingCard(props: bookingcardprops) {
             <CardDescription className="flex justify-between gap-8">
               <span className="text-left text-lg tracking-wide">applicant</span>
               <span className="text-right text-lg capitalize tracking-wide font-sans">
-                {props.hostel.applicant}
+                {props?.hostel?.applicant_name}
               </span>
             </CardDescription>
             <CardDescription className="flex justify-between gap-8">
@@ -44,7 +81,7 @@ export default function BookingCard(props: bookingcardprops) {
                 hostel name
               </span>
               <span className="text-right text-lg capitalize tracking-wide font-sans">
-                {props.hostel.hostelName}
+                {props.hostel.hostel_name}
               </span>
             </CardDescription>
             <CardDescription className="flex justify-between gap-8">
@@ -52,18 +89,20 @@ export default function BookingCard(props: bookingcardprops) {
                 type of booking
               </span>
               <span className="text-right text-lg capitalize tracking-wide font-sans">
-                {props.hostel.type}
+                {props.hostel.payment_type}
               </span>
             </CardDescription>
             <CardDescription className="flex justify-between gap-8">
-              <span className="text-left text-lg tracking-wide">course</span>
+              <span className="text-left text-lg tracking-wide">
+                reporting date
+              </span>
               <span className="text-right text-lg capitalize tracking-wide font-sans">
-                {props.hostel.course}
+                {props.hostel.report_date_start}
               </span>
             </CardDescription>
           </div>
           <CardFooter className="flex items-center justify-center text-lg p-4">
-            <div className="tracking-wide">{props.hostel.startingDate}</div>
+            <div className="tracking-wide">{props.hostel.report_date_end}</div>
           </CardFooter>
           <div className="w-full grid md:grid-cols-2  gap-4 ">
             <PayButton
@@ -73,9 +112,11 @@ export default function BookingCard(props: bookingcardprops) {
               subaccountCode="123"
             />
             <Button
-              onClick={() =>
-                toast.success("you deleted the booking successfully")
-              }
+              onClick={() => {
+                deleteBooking();
+                toast.success("you deleted the booking successfully");
+                router.refresh();
+              }}
               className="bg-red-500 text-white  hover:bg-red-500 hover:ease-out hover:-translate-y-0.5 w-full cursor-pointer    py-6 capitalize  tracking-wide font-bold shadow-lg"
             >
               delete

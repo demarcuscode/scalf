@@ -156,6 +156,12 @@ export default function SiteFooter() {
       <div className="border-t py-4 text-center text-sm text-miaccent font-extrabold p-6">
         © {new Date().getFullYear()} Scalf.io. All rights reserved.
       </div>
+      <a
+        href="https://www.flaticon.com/free-icons/success"
+        title="success icons"
+      >
+        Success icons created by Talha Dogar - Flaticon
+      </a>
     </footer>
   );
 }

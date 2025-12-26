@@ -4,7 +4,7 @@ import {
   Badge,
   BookOpenCheck,
   CheckCircle,
-  ChevronLeft,
+  ChevronDownCircle,
   ChevronLeftCircle,
   FootprintsIcon,
   Landmark,
@@ -12,21 +12,34 @@ import {
   MessageCircle,
   XCircle,
 } from "lucide-react";
-import { amenities } from "../hero/info";
-import { Card, CardContent, CardDescription, CardTitle } from "../ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "../ui/card";
 import Image from "next/image";
 import { currencyfunc } from "@/lib/utils";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase/client";
+import Link from "next/link";
+import { Input } from "../ui/input";
+import { Textarea } from "../ui/textarea";
+import { toast } from "sonner";
 
 interface idprops {
   hostel: any;
+  hostelId: string;
 }
-export default function Idpagecomp({ hostel }: idprops) {
+export default function Idpagecomp({ hostel, hostelId }: idprops) {
+  const [message, setMessage] = useState("");
   const [user, setUser] = useState<any>(null);
   const newPrice = currencyfunc(hostel?.price);
   const router = useRouter();
+  const imagerul = hostel?.images[0];
+  console.log(message);
 
   useEffect(() => {
     const fetchuser = async () => {
@@ -38,19 +51,32 @@ export default function Idpagecomp({ hostel }: idprops) {
     fetchuser();
   }, []);
 
+  const sendreview = async () => {
+    if (!hostel || !user) return;
+
+    const { data, error } = await supabase.from("reviews").upsert({
+      hostel_id: hostel.id,
+      user_id: user.id,
+      message: message.trim(),
+    });
+
+    console.log(data);
+
+    setMessage("");
+    toast.success("review sent!");
+  };
+
   return (
     <div className="relative">
-      <div className="max-w-full h-[60vh] relative  object-cover">
-        <div className="w-full h-full absolute inset-0 bg-black/60 z-20" />
-        {hostel?.imageurl && (
-          <Image
-            src={hostel?.imageurl as string}
-            alt={hostel?.label as string}
-            width={1000}
-            height={800}
-            className="w-full h-[60vh] object-cover"
-          />
-        )}
+      <div className="max-w-full h-[60vh] relative  object-cover ">
+        <div className="w-full h-full absolute transparent  inset-0 bg-black/60 z-20" />
+        <Image
+          src={imagerul ?? "/logo.png"}
+          alt={hostel?.label ?? "hostel image"}
+          width={1000}
+          height={800}
+          className="w-full h-[60vh] object-cover"
+        />
       </div>
       <Card className="relative p-0 shadow-none rounded-none h-full">
         <CardContent className="md:flex  gap-8 gap-4 p-4 ">
@@ -95,11 +121,18 @@ export default function Idpagecomp({ hostel }: idprops) {
             </CardDescription>
           </div>
         </CardContent>
+        <Link
+          href={"#reviewform"}
+          className="flex flex-col items-center jusity-center gap-4"
+        >
+          <p className="text-lg">add a review</p>
+          <ChevronDownCircle className="text-miaccent" />
+        </Link>
       </Card>
 
       <div className="grid grid-cols-2  gap-4 py-10 p-4  ">
         <Button
-          onClick={() => router.push(`/bookings/${hostel.id}`)}
+          onClick={() => router.push(`/bookings/${hostelId}`)}
           className="w-full py-6 text-lg bg-white hover:bg-FFFFAE hover:ease-out hover:-translate-y-0.5 capitalize text-miprimary  shadow-lg "
         >
           Book
@@ -112,6 +145,29 @@ export default function Idpagecomp({ hostel }: idprops) {
           Chat
           <MessageCircle />
         </Button>
+      </div>
+      <div className="p-4 md:p-8">
+        <Card className="w-full">
+          <CardHeader>
+            <CardTitle className="text-center">Add a Review</CardTitle>
+          </CardHeader>
+          <CardContent className="w-full">
+            <Textarea
+              value={message}
+              onChange={(e) => setMessage(e.target.value.trim())}
+              cols={500}
+              className="shadow-lg p-8 col-span-[500] my-5 "
+              placeholder="enter your review"
+            />
+            <Button
+              onClick={sendreview}
+              variant={"secondary"}
+              className="bg-miaccent w-full hover:bg-miaccent cursor-pointer py-6"
+            >
+              send a review
+            </Button>
+          </CardContent>
+        </Card>
       </div>
     </div>
   );

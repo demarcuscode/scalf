@@ -23,6 +23,7 @@ export default function HostelSearch({ hostels }: HostelSearchProps) {
 
   // Filter hostels based on query
   const filteredHostels = useMemo(() => {
+    if (!hostels) return;
     const lower = query.toLowerCase();
 
     return hostels.filter((hostel) => {
@@ -33,7 +34,7 @@ export default function HostelSearch({ hostels }: HostelSearchProps) {
 
       return matchesName || matchesType || matchesPrice || matchesRoom;
     });
-  }, [query, hostels]);
+  }, [query]);
 
   return (
     <div className="w-full my-10 mx-auto space-y-4">
