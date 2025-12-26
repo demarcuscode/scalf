@@ -23,7 +23,7 @@ interface hostelcardprops {
   price: string;
   rating?: string;
   className?: string;
-  imageurl: string;
+  images: string[];
   id: string;
 }
 
@@ -35,12 +35,12 @@ export default function Hostelcard(props: hostelcardprops) {
     currencyDisplay: "code",
     maximumFractionDigits: 2,
   }).format(parseInt(props.price));
-
+  const imageurl = props?.images[0];
   return (
     <Card className=" overflow-hidden p-0 shadow-lg shadow-misecondary ease-out   rounded-lg relative hover:scale-[1.02] transition-all cursor-pointer">
       <div className="h-[30vh] w-full max-w-full p-0 rounded-t-lg object-contain ">
         <Image
-          src={props.imageurl}
+          src={imageurl ?? "/logo.png"}
           alt={props.label}
           width={800}
           height={800}
@@ -62,14 +62,13 @@ export default function Hostelcard(props: hostelcardprops) {
         </div>
 
         <CardTitle className="text-2xl uppercase  font-extrabold tracking-wide  ">
-          {props.label} hostel
+          {props.label}
         </CardTitle>
 
         <CardDescription className="flex gap-2 tracking-wide  items-end w-full">
           <Footprints size={22} className="text-miprimary" />
-          <span className="text-lg  capitalize">
-            800 miles from main campus
-          </span>
+          800 miles from main campus
+          <span className="text-lg  capitalize"></span>
         </CardDescription>
 
         <CardDescription className=" font-sans flex gap-2  tracking-wide ">

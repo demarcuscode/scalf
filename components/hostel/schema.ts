@@ -34,3 +34,13 @@ export const bookingSchema = z.object({
 });
 
 export type BookingFormValues = z.infer<typeof bookingSchema>;
+
+export const notificationSchema = z.object({
+  message: z
+    .string()
+    .min(3, "Message is too short")
+    .max(500, "Message is too long"),
+  type: z.enum(["info", "success", "warning", "error"]),
+});
+
+export type NotificationValues = z.infer<typeof notificationSchema>;

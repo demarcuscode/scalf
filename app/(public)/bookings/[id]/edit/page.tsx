@@ -1,13 +1,36 @@
-// import BookingForm from "@/components/profile/bookingform";
+"use client";
+import BookingForm from "@/components/profile/bookingform";
+import { supabase } from "@/lib/supabase/client";
+import { useParams } from "next/navigation";
+import { useEffect, useState } from "react";
 
 interface PageProps {
-  params: Promise<{
+  params: {
     id: string;
-  }>;
+  };
 }
 
-export default async function Page({ params }: PageProps) {
-  const { id } = await params;
+export default function Page(props: PageProps) {
+  const params = useParams<{ id: string }>();
+  const { id } = params;
+  const [booking, setBooking] = useState<any>();
 
-  return <section className="pt-20 ">{/* <BookingForm /> */}</section>;
+  // fetches the user profile -> bookingform
+  useEffect(() => {
+    const fetchbooking = async () => {
+      const { data, error } = await supabase
+        .from("hostel_bookings")
+        .select("*")
+        .eq("id", id)
+        .maybeSingle();
+      setBooking(data);
+    };
+    fetchbooking();
+  }, []);
+
+  return (
+    <section className="mt-20 p-8">
+      <BookingForm booking={booking} />{" "}
+    </section>
+  );
 }

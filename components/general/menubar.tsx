@@ -154,7 +154,8 @@ export default function MobileNav() {
             </Link>
 
             <Link
-              href="/profile"
+              rel={"script"}
+              href={`/profile/${user?.id}`}
               className={`hover:text-miprimary tracking-wide hover:underline hover:underline-miprimary cursor-pointer ${
                 pathname == "/profile"
                   ? "underline underline-miprimary underline-offset-4"
