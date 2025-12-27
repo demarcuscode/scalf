@@ -24,6 +24,7 @@ export default function BookingCard(props: bookingcardprops) {
   const [profile, setProfile] = useState<any>(null);
   const [user, setUser] = useState<any>(null);
   const router = useRouter();
+  const createdAt = new Date(props.hostel.created_at);
 
   // delete a book
   const deleteBooking = async () => {
@@ -98,6 +99,30 @@ export default function BookingCard(props: bookingcardprops) {
               </span>
               <span className="text-right text-lg capitalize tracking-wide font-sans">
                 {props.hostel.report_date_start}
+              </span>
+            </CardDescription>
+            <CardDescription className="flex justify-between gap-8">
+              <span className="text-left text-lg tracking-wide">
+                reporting date
+              </span>
+              <span className="text-right text-lg capitalize tracking-wide font-sans">
+                {props.hostel.report_date_start}
+              </span>
+            </CardDescription>
+            <CardDescription className="flex justify-between gap-8">
+              <span className="text-left text-lg tracking-wide">
+                reporting date
+              </span>
+              <span className="text-right text-lg capitalize tracking-wide font-sans">
+                {props.hostel.report_date_start}
+              </span>
+            </CardDescription>
+            <CardDescription className="flex justify-between gap-8">
+              <span className="text-left text-lg tracking-wide">
+                created at
+              </span>
+              <span className="text-right text-lg capitalize tracking-wide font-sans">
+                {createdAt.toDateString()}
               </span>
             </CardDescription>
           </div>

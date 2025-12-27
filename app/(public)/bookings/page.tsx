@@ -24,7 +24,8 @@ export default function page() {
       const { data, error } = await supabase
         .from("hostel_bookings")
         .select("*")
-        .eq("student_id", user.id);
+        .eq("student_id", user.id)
+        .order("created_at", { ascending: false });
       setBookings(data);
 
       // get the hostel

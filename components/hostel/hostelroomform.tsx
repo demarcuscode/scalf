@@ -15,10 +15,18 @@ import {
   FormMessage,
 } from "../ui/form";
 import { useState } from "react";
+import { HousePlus } from "lucide-react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../ui/select";
 
 export const roomSchema = z.object({
   room_type: z.string().min(1, "Room type is required"),
-  price: z.number().min(0),
+  price: z.string().min(2),
 });
 
 export type RoomValues = z.infer<typeof roomSchema>;
@@ -26,19 +34,18 @@ export type RoomValues = z.infer<typeof roomSchema>;
 type Hostel = { id: string; label: string };
 
 type RoomPayload = RoomValues & {
-  hostel_id: string;
   image: string;
 };
 
-export function HostelRoomForm({ hostel }: { hostel: Hostel }) {
+export function HostelRoomForm({ hostel }: { hostel?: any }) {
   const [imageUrl, setImageUrl] = useState<string | null>(null);
   const [uploading, setUploading] = useState(false);
 
   const form = useForm<RoomValues>({
     resolver: zodResolver(roomSchema),
     defaultValues: {
-      room_type: "1 in 1",
-      price: 0,
+      room_type: "",
+      price: "",
     },
   });
 
@@ -75,7 +82,6 @@ export function HostelRoomForm({ hostel }: { hostel: Hostel }) {
     const payload: RoomPayload = {
       ...data,
       image: imageUrl,
-      hostel_id: hostel.id,
     };
 
     const res = await fetch("/api/rooms", {
@@ -97,35 +103,29 @@ export function HostelRoomForm({ hostel }: { hostel: Hostel }) {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Add Room – {hostel.label}</CardTitle>
+        <CardTitle className="text-lg text-center">
+          Add Room – {hostel?.label}
+        </CardTitle>
       </CardHeader>
       <CardContent>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="grid gap-4">
-            {/* Room Type */}
-            <FormField
-              control={form.control}
-              name="room_type"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Room Type</FormLabel>
-                  <FormControl>
-                    <Input placeholder="1 in 1, 2 in 1" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
+          <form
+            onSubmit={form.handleSubmit(onSubmit)}
+            className="grid gap-4 text-lg"
+          >
             {/* Price */}
             <FormField
               control={form.control}
               name="price"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Price</FormLabel>
+                  <FormLabel className="py-2 text-lg">Price</FormLabel>
                   <FormControl>
-                    <Input type="number" placeholder="Price" {...field} />
+                    <Input
+                      placeholder="Price"
+                      className="px-4 py-8"
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -133,11 +133,12 @@ export function HostelRoomForm({ hostel }: { hostel: Hostel }) {
             />
 
             {/* Image Upload */}
-            <FormItem>
-              <FormLabel>Room Image</FormLabel>
+            <FormItem className="py-3">
+              <FormLabel className="py-2 text-lg">Room Image</FormLabel>
               <Input
                 type="file"
                 accept="image/*"
+                className="px-4 py-8"
                 disabled={uploading}
                 onChange={handleImageUpload}
               />
@@ -156,9 +157,42 @@ export function HostelRoomForm({ hostel }: { hostel: Hostel }) {
                 </div>
               )}
             </FormItem>
+            {/* Room Type */}
+            <FormField
+              control={form.control}
+              name="room_type"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="py-2 text-lg">Room Type</FormLabel>
+                  <FormControl>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <SelectTrigger className="px-4 py-3">
+                        <SelectValue placeholder="Select Room Type" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="1 in 1">1 in 1</SelectItem>
+                        <SelectItem value="2 in 1">2 in 1</SelectItem>
+                        <SelectItem value="3 in 1">3 in 1</SelectItem>
+                        <SelectItem value="4 in 1">4 in 1</SelectItem>
+                        <SelectItem value="5 in 1">5 in 1</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
 
-            <Button type="submit" disabled={uploading}>
+            <Button
+              type="submit"
+              className="px-4 py-8 bg-miaccent hover:bg-miaccent text-lg"
+              disabled={uploading}
+            >
               Add Room
+              <HousePlus />
             </Button>
           </form>
         </Form>

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import { Button } from "../ui/button";
 import {
   DropdownMenu,
@@ -16,15 +16,15 @@ export default function SignInBtn() {
   const handleSignIn = async (selectedRole: "student" | "manager") => {
     setRole(selectedRole);
 
+    localStorage.setItem("selectedRole", selectedRole);
     // Trigger Google OAuth
-    const { error } = await supabase.auth.signInWithOAuth({
+    const { data, error } = await supabase.auth.signInWithOAuth({
       provider: "google",
       options: {
-        queryParams: {
-          role: selectedRole,
-        },
+        redirectTo: `${window.location.origin}/hostel`,
       },
     });
+    // After redirect, call:
 
     if (error) {
       console.error("Error signing in:", error.message);

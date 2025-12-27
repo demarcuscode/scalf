@@ -7,14 +7,16 @@ export const hostelDetailsSchema = z.object({
   number_of_buildings: z.string(),
   owner_name: z.string(),
   owner_contact: z.string(),
+  price: z.string(),
+  city: z.string(),
   images: z.array(z.string().url()).optional(),
 });
 
 export type HostelDetailsValues = z.infer<typeof hostelDetailsSchema>;
 
 export const roomSchema = z.object({
-  room_type: z.string().min(1),
-  price: z.string().min(1),
+  room_type: z.string(),
+  price: z.string().min(2),
   images: z.string().optional(),
 });
 
