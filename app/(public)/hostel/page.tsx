@@ -1,5 +1,5 @@
 "use client";
-import { ratedhostels } from "@/lib/constant";
+
 import Hostelcard from "./upload/hostelidcard";
 import HostelSearch from "./hostelsearctbar";
 import { useEffect, useState } from "react";
@@ -27,7 +27,7 @@ export default function page() {
           <HostelSearch hostels={hostels} />
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 space-y-10  p-0 ">
+        <div className="grid grid-cols-1 md:grid-cols-2 item-center    lg:grid-cols-3 gap-4 space-y-10  py-10 ">
           {hostels?.map((item: any, index: number) => {
             return <Hostelcard key={index + item.label} {...item} />;
           })}

@@ -12,6 +12,7 @@ import { useState } from "react";
 import { toast } from "sonner";
 import { redirect } from "next/navigation";
 import { supabase } from "@/lib/supabase/client";
+import { UploadCloud } from "lucide-react";
 
 type HostelPayload = HostelDetailsValues & {
   images: string[];
@@ -20,6 +21,9 @@ type HostelPayload = HostelDetailsValues & {
 export function HostelDetailsForm() {
   const [imageUrls, setImageUrls] = useState<string[]>([]);
   const [uploading, setUploading] = useState(false);
+  const [user, setUser] = useState<any>(null);
+
+  const [profile, setProfile] = useState<any>(null);
   const [saving, setSaving] = useState(false);
 
   const form = useForm<HostelDetailsValues>({
@@ -31,10 +35,11 @@ export function HostelDetailsForm() {
       description: "",
       owner_name: "",
       owner_contact: "",
+      price: "",
+      city: "",
     },
   });
 
-  // ✅ IMAGE UPLOAD
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (!files || files.length === 0) return;
@@ -59,7 +64,6 @@ export function HostelDetailsForm() {
     setUploading(false);
   };
 
-  // ✅ FORM SUBMIT
   const onSubmit = async (data: HostelDetailsValues) => {
     setSaving(true);
 
@@ -68,12 +72,12 @@ export function HostelDetailsForm() {
       images: imageUrls,
     };
 
-    // Insert hostel into Supabase
     const { data: createdHostel, error } = await supabase
       .from("hostels")
       .insert([payload])
-      .select("id") // select the inserted ID
+      .select("id")
       .single();
+
     form.reset();
     toast.success("😊hostel was listed!🔥");
     redirect("/hostel");
@@ -86,64 +90,89 @@ export function HostelDetailsForm() {
       </CardHeader>
 
       <CardContent>
-        <form className="grid gap-6" onSubmit={form.handleSubmit(onSubmit)}>
-          <div>
-            <Label className="text-lg">Hostel Name</Label>
-            <Input
-              className="py-6 text-lg shadow-lg"
-              {...form.register("label")}
-            />
+        <form className="grid gap-2" onSubmit={form.handleSubmit(onSubmit)}>
+          <div className="flex flex-col capitalize gap-4  py-5">
+            <div>
+              <Label className="text-lg py-2">Hostel Name</Label>
+              <Input
+                placeholder="enter hostel name"
+                className="px-4 py-8  text-lg shadow-lg"
+                {...form.register("label")}
+              />
+            </div>
+
+            <div>
+              <Label className="text-lg py-2 capitalize">price</Label>
+              <Input
+                placeholder="enter average pricing "
+                className="px-4 py-8  text-lg shadow-lg"
+                {...form.register("price")}
+              />
+            </div>
+
+            <div>
+              <Label className="text-lg py-2">location</Label>
+              <Input
+                placeholder="enter city where the hostel is located"
+                className="px-4 py-8 text-lg shadow-lg"
+                {...form.register("city")}
+              />
+            </div>
           </div>
 
           <div>
-            <Label className="text-lg">Description</Label>
+            <Label className="text-lg py-2">Description</Label>
             <Textarea
-              className="py-6 text-lg shadow-lg"
+              placeholder="tell us a little about your hostel."
+              className="px-4 py-8 text-lg shadow-lg"
               {...form.register("description")}
             />
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <Label className="text-lg">Estabilishment Year</Label>
+              <Label className="text-lg py-2">Estabilishment Year</Label>
               <Input
+                placeholder="year hostel was built"
                 type="number"
-                className="py-6 text-lg shadow-lg"
+                className="px-4 py-8 text-lg shadow-lg"
                 {...form.register("establishment_year")}
               />
             </div>
 
             <div>
-              <Label className="text-lg">Buildings</Label>
+              <Label className="text-lg py-2">Buildings</Label>
               <Input
+                placeholder="number of hostel with the same name"
                 type="number"
-                className="py-6 text-lg shadow-lg"
+                className="px-4 py-8 text-lg shadow-lg"
                 {...form.register("number_of_buildings")}
               />
             </div>
           </div>
 
           <div>
-            <Label className="text-lg">Owner Name</Label>
+            <Label className="text-lg py-2">Owner's Name</Label>
             <Input
-              className="py-6 text-lg shadow-lg"
+              placeholder="the name of  the  owner"
+              className="px-4 py-8 text-lg shadow-lg"
               {...form.register("owner_name")}
             />
           </div>
 
           <div>
-            <Label className="py-6 text-lg ">Owner Contact</Label>
+            <Label className="text-lg py-2">Owner Contact</Label>
             <Input
-              className="py-6 text-lg shadow-lg"
+              placeholder="the phone number of owner"
+              className="px-4 py-8 text-lg shadow-lg"
               {...form.register("owner_contact")}
             />
           </div>
 
-          {/* IMAGE UPLOAD */}
-          <div className="">
-            <Label className="text-lg">Hostel Images</Label>
+          <div className="py-5">
+            <Label className="text-lg py-2">Hostel Images</Label>
             <Input
-              className="p-8  text-lg shadow-lg"
+              className="px-4 py-8 text-lg shadow-lg"
               type="file"
               accept="image/*"
               multiple
@@ -152,7 +181,7 @@ export function HostelDetailsForm() {
             />
 
             {uploading && (
-              <p className="text-sm text-muted-foreground mt-1">
+              <p className="text-sm text-muted-foreground mt-1 py-2">
                 Uploading images…
               </p>
             )}
@@ -173,10 +202,11 @@ export function HostelDetailsForm() {
 
           <Button
             type="submit"
-            className="py-6 text-lg bg-miaccent text-white"
+            className="py-8 px-4 hover:bg-miaccent text-lg bg-miaccent text-white"
             disabled={uploading || saving}
           >
             {saving ? "Saving..." : "Save Hostel"}
+            <UploadCloud size={22} />
           </Button>
         </form>
       </CardContent>
