@@ -17,10 +17,13 @@ interface hostelcardprops {
   price: string;
   rating?: string;
   className?: string;
-  imageurl: string;
+  images: string[];
 }
 
 export default function Hostelcard(props: hostelcardprops) {
+  // get the first image in the list
+  const imageurl = props?.images[0];
+  // format pricing in GHS
   const price = new Intl.NumberFormat("en-GH", {
     style: "currency",
     currency: "GHS",
@@ -32,7 +35,7 @@ export default function Hostelcard(props: hostelcardprops) {
     <Card className=" overflow-hidden shadow-lg shadow-misecondary ease-out  rounded-lg relative hover:scale-[1.02] p-0 transition-all cursor-pointer">
       <div className="h-[50%] w-full overflow-hidden aspect-rect p-0 rounded-t-lg object-cover ">
         <Image
-          src={props.imageurl}
+          src={imageurl ?? "/logo.png"}
           alt={props.label}
           width={800}
           height={800}

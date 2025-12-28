@@ -1,7 +1,6 @@
 "use client";
 import { Button } from "../ui/button";
 import {
-  Badge,
   BookOpenCheck,
   CheckCircle,
   ChevronDownCircle,
@@ -25,14 +24,15 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase/client";
 import Link from "next/link";
-import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
 import { toast } from "sonner";
+import RoomDetailsCard from "../rooms/roomdetailscard";
 
 interface idprops {
   hostel: any;
   hostelId: string;
 }
+
 export default function Idpagecomp({ hostel, hostelId }: idprops) {
   const [message, setMessage] = useState("");
   const [user, setUser] = useState<any>(null);
@@ -145,6 +145,21 @@ export default function Idpagecomp({ hostel, hostelId }: idprops) {
           Chat
           <MessageCircle />
         </Button>
+      </div>
+      {hostel?.rooms ? (
+        <p className="text-center text-2xl text-miprimary font-bold  py-5">
+          Rooms types and pricing
+        </p>
+      ) : (
+        <p className="text-center text-2xl text-miprimary font-bold  py-5">
+          you have no room pricing listed here.
+        </p>
+      )}
+      <div className="flex flex-col gap-4 md:grid md:grid-col-2 lg:grid-cols-3 items-center md:max-w-[95%] md:mx-auto p-4 md:p-8 ">
+        {hostel?.rooms &&
+          hostel.rooms?.map((item: any, index: number) => {
+            return <RoomDetailsCard key={index} {...item} />;
+          })}
       </div>
       <div className="p-4 md:p-8">
         <Card className="w-full">

@@ -45,7 +45,7 @@ export const faqs = [
 
 export default function FAQ() {
   return (
-    <div className="max-w-[95%] mx-auto  my-30  p-4 h-full ">
+    <div className="md:max-w-[95%] md:mx-auto  my-30  p-4 h-full ">
       <h2 className="text-4xl md:text-5xl font-extrabold mb-4 text-center">
         Frequently Asked Questions
       </h2>
@@ -54,7 +54,7 @@ export default function FAQ() {
           loop
           muted
           autoPlay
-          className="w-full h-[50vh] md:h-[55vh] object-cover rounded-lg"
+          className="w-full h-[50vh] md:h-[55vh] my-15 object-cover rounded-lg"
           playsInline
           preload="auto"
         >
@@ -67,7 +67,7 @@ export default function FAQ() {
         <Accordion
           type="single"
           collapsible
-          className="w-full flex flex-col rounded-lg gap-4"
+          className="w-full flex flex-col rounded-lg gap-4 items-center justify-center"
         >
           {faqs.map((item) => (
             <AccordionItem

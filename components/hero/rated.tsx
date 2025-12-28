@@ -1,6 +1,5 @@
 "use client";
 
-import { ratedhostels } from "@/lib/constant";
 import Hostelcard from "../hostel/hostecard";
 import {
   Carousel,
@@ -12,12 +11,25 @@ import {
 
 import Autoplay from "embla-carousel-autoplay";
 import { useEffect, useState } from "react";
+import { supabase } from "@/lib/supabase/client";
 
 export default function Rated() {
+  // state variables
   const [isMobile, setIsMobile] = useState(false);
+  const [ratedhostels, setRatedhostels] = useState<any>(null);
 
-  // Detect screen size safely (no hydration error)
   useEffect(() => {
+    // gets hostels with ratiing above 5
+    const fetchratedhostels = async () => {
+      const { data, error }: any = await supabase
+        .from("hostels")
+        .select("*")
+        .gte("rating", 4.5)
+        .limit(10);
+      setRatedhostels(data);
+    };
+    // Detect screen size safely (no hydration error)
+    fetchratedhostels();
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
     checkMobile();
     window.addEventListener("resize", checkMobile);
@@ -27,7 +39,7 @@ export default function Rated() {
   return (
     <div className="md:max-w-[95%] md:mx-auto my-30">
       <Carousel
-        className="w-full p-6 md:p-10 shadow-none"
+        className="w-full p-2 md:p-10 shadow-none"
         plugins={
           isMobile
             ? [
@@ -40,7 +52,7 @@ export default function Rated() {
         }
       >
         <CarouselContent className="flex gap-4 p-4">
-          {ratedhostels.map((item, index) => (
+          {ratedhostels?.map((item: any, index: number) => (
             <CarouselItem
               key={index}
               className="basis-full sm:basis-1/2 md:basis-1/3"

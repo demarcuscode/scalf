@@ -127,24 +127,6 @@ export default function ProfileForm({ profile, id }: pageprops) {
                       </FormItem>
                     )}
                   />
-                  {/* email */}
-                  <FormField
-                    name="email"
-                    control={form.control}
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Email</FormLabel>
-                        <FormControl>
-                          <Input
-                            className="py-6 shadow-lg"
-                            placeholder="Your current email"
-                            {...field}
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {[

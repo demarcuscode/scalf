@@ -1,15 +1,16 @@
 import { z } from "zod";
 
 export const hostelDetailsSchema = z.object({
-  label: z.string().min(1),
-  description: z.string(),
+  label: z.string(),
+  description: z.string().optional(),
   establishment_year: z.string(),
-  number_of_buildings: z.string(),
+  number_of_buildings: z.string().optional(),
   owner_name: z.string(),
   owner_contact: z.string(),
-  price: z.string(),
-  city: z.string(),
-  images: z.array(z.string().url()).optional(),
+  price: z.string().optional(),
+  city: z.string().optional(),
+  manager_name: z.string().optional(),
+  manager_contact: z.string().optional(),
 });
 
 export type HostelDetailsValues = z.infer<typeof hostelDetailsSchema>;
@@ -18,6 +19,7 @@ export const roomSchema = z.object({
   room_type: z.string(),
   price: z.string().min(2),
   images: z.string().optional(),
+  hostel_name: z.string(),
 });
 
 export type RoomValues = z.infer<typeof roomSchema>;

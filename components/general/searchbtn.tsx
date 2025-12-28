@@ -35,7 +35,7 @@ export default function SearchBtn(props: searchprops) {
   return (
     <div
       className={cn(
-        "bg-micard  rounded-lg z-40 relative -top-20 max-w-[80%] mx-auto shadow-lg shadow-misecondary border p-4",
+        "bg-micard  rounded-lg z-40 relative -top-20 max-w-[97%] md:max-w-[80%] mx-auto shadow-lg shadow-misecondary border p-4",
         props.className
       )}
     >
