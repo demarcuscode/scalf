@@ -23,29 +23,28 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
+import { supabase } from "@/lib/supabase/client";
+import { useRouter } from "next/navigation";
 
 export const roomSchema = z.object({
   room_type: z.string().min(1, "Room type is required"),
-  price: z.string().min(2),
+  price: z.string(),
+  hostel_name: z.string(),
 });
 
 export type RoomValues = z.infer<typeof roomSchema>;
 
-type Hostel = { id: string; label: string };
-
-type RoomPayload = RoomValues & {
-  image: string;
-};
-
-export function HostelRoomForm({ hostel }: { hostel?: any }) {
+export function HostelRoomForm() {
   const [imageUrl, setImageUrl] = useState<string | null>(null);
   const [uploading, setUploading] = useState(false);
+  const router = useRouter();
 
   const form = useForm<RoomValues>({
     resolver: zodResolver(roomSchema),
     defaultValues: {
       room_type: "",
       price: "",
+      hostel_name: "",
     },
   });
 
@@ -78,33 +77,33 @@ export function HostelRoomForm({ hostel }: { hostel?: any }) {
       form.setError("room_type", { message: "Room image is required" });
       return;
     }
-
-    const payload: RoomPayload = {
+    const payload = {
       ...data,
       image: imageUrl,
     };
+    console.log(payload);
+    const { data: room, error }: any = await supabase
+      .from("hostels")
+      .select("rooms")
+      .eq("label", payload.hostel_name.toLowerCase);
 
-    const res = await fetch("/api/rooms", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-    });
-
-    if (!res.ok) {
-      const err = await res.json();
-      console.error("Failed to save room", err);
-      return;
-    }
+    if (!data?.hostel_name) return;
+    await supabase
+      .from("hostels")
+      .update({ rooms: [...room, payload] })
+      .eq("label", payload.hostel_name.toLowerCase());
 
     form.reset();
     setImageUrl(null);
+    form.reset();
+    router.push("/hostel");
   };
 
   return (
     <Card>
       <CardHeader>
         <CardTitle className="text-lg text-center">
-          Add Room – {hostel?.label}
+          Add room various prices for your hostel
         </CardTitle>
       </CardHeader>
       <CardContent>
@@ -113,6 +112,25 @@ export function HostelRoomForm({ hostel }: { hostel?: any }) {
             onSubmit={form.handleSubmit(onSubmit)}
             className="grid gap-4 text-lg"
           >
+            {/* Hostel name */}
+            <FormField
+              control={form.control}
+              name="hostel_name"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="py-2 text-lg">hostel name</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="always add either hostel or homstel to your hostel name"
+                      className="px-4 py-8"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
             {/* Price */}
             <FormField
               control={form.control}
