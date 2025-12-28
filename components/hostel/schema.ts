@@ -48,3 +48,23 @@ export const notificationSchema = z.object({
 });
 
 export type NotificationValues = z.infer<typeof notificationSchema>;
+
+export const subaccountSchema = z.object({
+  business_name: z
+    .string()
+    .min(3, "Business name must be at least 3 characters"),
+
+  settlement_bank: z.string().min(1, "Please select a bank"),
+
+  account_number: z
+    .string()
+    .length(10, "Account number must be exactly 10 digits")
+    .regex(/^\d+$/, "Account number must be numeric"),
+
+  percentage_charge: z
+    .number()
+    .min(1, "Minimum is 1%")
+    .max(100, "Maximum is 100%"),
+});
+
+export type SubaccountValues = z.infer<typeof subaccountSchema>;
