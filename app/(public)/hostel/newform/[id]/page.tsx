@@ -10,7 +10,7 @@ interface pageprops {
 export default function page(props: pageprops) {
   return (
     <div>
-      <HostelRoomForm hostel={{ id: "", label: "" }} />{" "}
+      <HostelRoomForm />{" "}
     </div>
   );
 }
