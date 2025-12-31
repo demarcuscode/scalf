@@ -1,5 +1,6 @@
 import SiteFooter from "@/components/general/foot";
 import SearchBtn from "@/components/general/searchbtn";
+import Subscriptions from "@/components/general/subscriptions";
 import LastImage from "@/components/hero/actionheroinfoimg";
 import ArtisticCounterDiv from "@/components/hero/artisticcounter";
 import FAQ from "@/components/hero/faq";
@@ -21,7 +22,9 @@ export default function Home() {
       <Sponsors />
       {/* <ArtisticCounterDiv /> */}
       <Rated />
+
       <HeroInfo />
+      <Subscriptions />
       <FAQ />
       <TestimonialsSection />
       <Map />

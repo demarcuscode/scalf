@@ -44,7 +44,10 @@ export const amenities: Amenity[] = [
 export default function HeroInfo() {
   return (
     <section className="my-30 md:flex  md:flex-row-reverse ">
-      <div className="w-full    bg-miprimary/75 bg-gradient-to-r flex items-center justify-center flex-col from-misecondary/80 md:h-[screen] md:py-20 md:p-8 p-4 ">
+      <div
+        id="more-info"
+        className="w-full    bg-miprimary/75 bg-gradient-to-r flex items-center justify-center flex-col from-misecondary/80 md:h-[screen] md:py-20 md:p-8 p-4 "
+      >
         <Heading2
           className=" capitalize text-4xl text-right text-white  md:text-5xl max-w-[80%]   leading-0.7 tracking-wide p-4"
           text="Eco-friendly student's housing with all essentials included"

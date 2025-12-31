@@ -6,23 +6,30 @@ import { Button } from "../ui/button";
 export default function PayButton({
   email,
   amount,
-  subaccountCode,
+  subaccount_code,
   label,
+  booking_id,
 }: {
   email: string;
   amount: number;
-  subaccountCode: string;
+  subaccount_code: string;
   label: string;
+  booking_id: string;
 }) {
   const pay = async () => {
     const res = await fetch("/api/paystack/initialize", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, amount, subaccount_code: subaccountCode }),
+      body: JSON.stringify({
+        email,
+        amount,
+        subaccount_code,
+        booking_id,
+      }),
     });
+    // const { data } = await res.json();
 
-    const data = await res.json();
-    window.location.href = data.data.authorization_url;
+    // window.location.href = data?.authorization_url;
   };
 
   return (

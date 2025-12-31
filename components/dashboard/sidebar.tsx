@@ -2,15 +2,12 @@
 
 import {
   Home,
-  BarChart2,
   MessageSquare,
   CreditCard,
   Bell,
   FileText,
   Menu,
   X,
-  BarChart,
-  BarChart3,
   BarChart4,
 } from "lucide-react";
 
@@ -22,7 +19,7 @@ const links = [
   { name: "Home", href: "/hostel", icon: Home },
   { name: "Analytics", href: "/dashboard", icon: BarChart4 },
   { name: "Messages", href: "/dashboard/chat", icon: MessageSquare },
-  { name: "Payments", href: "/dashboard/revenue", icon: CreditCard },
+  { name: "Payments", href: "/payments/paymentlist", icon: CreditCard },
   { name: "bookings", href: "/dashboard/bookings", icon: Bell },
   { name: "Contents", href: "/dashboard/content", icon: FileText },
 ];

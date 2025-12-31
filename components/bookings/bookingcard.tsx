@@ -5,6 +5,7 @@ import {
   CardContent,
   CardDescription,
   CardFooter,
+  CardHeader,
   CardTitle,
 } from "../ui/card";
 import { Button } from "../ui/button";
@@ -14,6 +15,8 @@ import { useRouter } from "next/navigation";
 import PayButton from "../general/paybtn";
 import { supabase } from "@/lib/supabase/client";
 import { useEffect, useState } from "react";
+import Image from "next/image";
+import { subscribe } from "diagnostics_channel";
 
 interface bookingcardprops {
   className?: string;
@@ -23,6 +26,8 @@ interface bookingcardprops {
 export default function BookingCard(props: bookingcardprops) {
   const [profile, setProfile] = useState<any>(null);
   const [user, setUser] = useState<any>(null);
+  const [subcode, setSubcode] = useState<any>(null);
+  const charges = 0.005 * parseInt(props.hostel.amount);
   const router = useRouter();
   const createdAt = new Date(props.hostel.created_at);
 
@@ -34,23 +39,36 @@ export default function BookingCard(props: bookingcardprops) {
 
   useEffect(() => {
     const fetchuser = async () => {
+      // fetch users
       const { data, error } = await supabase.auth.getUser();
       setUser(data?.user);
-    };
-    fetchuser();
-  }, []);
-  useEffect(() => {
-    const fetchprofile = async () => {
+
       if (!user?.id) return;
-      const { data, error } = await supabase
+
+      // fetch user's profile for more info
+      const { data: profile, error: profileError } = await supabase
         .from("profiles")
         .select("*")
         .eq("id", user.id)
         .single();
-      setProfile(data.user);
+      setProfile(profile);
     };
-    fetchprofile();
+    fetchuser();
   }, []);
+  useEffect(() => {
+    const getsubs = async () => {
+      const hostelId = props.hostel.hostel_id;
+      // get the subaccount for the hotel
+      const subs = await supabase
+        .from("hostels")
+        .select("*")
+        .eq("id", hostelId);
+
+      setSubcode(subs);
+    };
+  }, []);
+  console.log(subcode);
+
   if (!props?.hostel) {
     return (
       <div className="pt-20 text-2xl mt-20 text-miprimary">
@@ -59,17 +77,27 @@ export default function BookingCard(props: bookingcardprops) {
     );
   }
   return (
-    <div className={cn("p-4 relative w-full", props.className)}>
+    <div className={cn(" relative w-full", props.className)}>
       <Card className="w-full shadow-lg relative shadow-misecondary">
         <Edit
           onClick={() => router.push(`/bookings/${props.hostel.id}/edit`)}
           size={22}
           className="absolute cursor-pointer hover:-translate-y-0.5 hover:ease-out  top-3 right-3"
         />
-        <CardContent className="flex flex-col gap-2 w-full justify-between">
+        <CardHeader>
           <CardTitle className="text-lg text-center font-bold  tracking-wide text-miprimary ">
             Booking{" "}
           </CardTitle>
+        </CardHeader>
+
+        <CardContent className="flex flex-col gap-2 w-full justify-between">
+          <Image
+            className="opacity-30 bg-gray-400"
+            src={"/logo.png"}
+            alt=""
+            width={500}
+            height={500}
+          />
           <div className=" flex flex-col gap-3">
             <CardDescription className="flex justify-between gap-8">
               <span className="text-left text-lg tracking-wide">applicant</span>
@@ -101,14 +129,7 @@ export default function BookingCard(props: bookingcardprops) {
                 {props.hostel.report_date_start}
               </span>
             </CardDescription>
-            <CardDescription className="flex justify-between gap-8">
-              <span className="text-left text-lg tracking-wide">
-                reporting date
-              </span>
-              <span className="text-right text-lg capitalize tracking-wide font-sans">
-                {props.hostel.report_date_start}
-              </span>
-            </CardDescription>
+
             <CardDescription className="flex justify-between gap-8">
               <span className="text-left text-lg tracking-wide">
                 reporting date
@@ -132,9 +153,10 @@ export default function BookingCard(props: bookingcardprops) {
           <div className="w-full grid md:grid-cols-2  gap-4 ">
             <PayButton
               label="make payment"
-              amount={5000}
-              email="marcuoware@gmail.com"
-              subaccountCode="123"
+              amount={props.hostel.amount}
+              email={profile?.email}
+              subaccount_code={subcode}
+              booking_id={props.hostel.id}
             />
             <Button
               onClick={() => {

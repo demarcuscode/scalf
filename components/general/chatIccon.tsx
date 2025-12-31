@@ -4,7 +4,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { set } from "zod";
 
 interface chaticonprops {
   receiverId?: string;
@@ -24,13 +23,12 @@ export default function ChatIcon(props: chaticonprops) {
 
   return (
     <Link
-      href={`/chat/${user?.id}?roomName=${user?.id}&username=${user?.email}`}
+      href={`/chat/${user?.email + user?.id}?roomName=${
+        user?.email + user?.id
+      }&username=${user?.email}`}
       className="absolute bottom-5 right-5 z-40 fixed max-w-25   object-contain p-2"
     >
-      {pathname.startsWith("/hostel/") ||
-      pathname.startsWith("/bookings") ||
-      pathname.startsWith("/profile") ||
-      pathname.startsWith("/chat") ? (
+      {pathname.startsWith("/hostel/") || pathname.startsWith("/chat") ? (
         <div
           className={`object-contain w-10 h-10 shadow-lg rounded-full  bg-miaccent p-1 flex items-center justify-center hidden `}
         >

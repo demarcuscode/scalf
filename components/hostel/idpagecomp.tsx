@@ -19,13 +19,13 @@ import {
   CardTitle,
 } from "../ui/card";
 import Image from "next/image";
+import { toast } from "sonner";
 import { currencyfunc } from "@/lib/utils";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase/client";
 import Link from "next/link";
 import { Textarea } from "../ui/textarea";
-import { toast } from "sonner";
 import RoomDetailsCard from "../rooms/roomdetailscard";
 
 interface idprops {
@@ -69,12 +69,12 @@ export default function Idpagecomp({ hostel, hostelId }: idprops) {
   return (
     <div className="relative">
       <div className="max-w-full h-[60vh] relative  object-cover ">
-        <div className="w-full h-full absolute transparent  inset-0 bg-black/60 z-20" />
+        {/* <div className="w-full h-full absolute transparent  inset-0 bg-black/60 z-20" /> */}
         <Image
           src={imagerul ?? "/logo.png"}
           alt={hostel?.label ?? "hostel image"}
-          width={1000}
-          height={800}
+          width={800}
+          height={500}
           className="w-full h-[60vh] object-cover"
         />
       </div>
@@ -139,7 +139,13 @@ export default function Idpagecomp({ hostel, hostelId }: idprops) {
           <BookOpenCheck />
         </Button>
         <Button
-          onClick={() => router.push(`/chat/${user.id}}`)}
+          onClick={() =>
+            router.push(
+              `/chat/${hostel?.label + user.id}?roomName=${
+                hostel?.label + user?.id
+              }&username=${user?.email}}`
+            )
+          }
           className="w-full py-6 hover:bg-miaccent cursor-pointer hover:ease-out hover:-translate-y-0.5  text-lg shadow-lg  bg-miaccent text-white"
         >
           Chat
@@ -177,7 +183,7 @@ export default function Idpagecomp({ hostel, hostelId }: idprops) {
             <Button
               onClick={sendreview}
               variant={"secondary"}
-              className="bg-miaccent w-full hover:bg-miaccent cursor-pointer py-6"
+              className="bg-miaccent w-full  hover:bg-miaccent cursor-pointer py-6"
             >
               send a review
             </Button>

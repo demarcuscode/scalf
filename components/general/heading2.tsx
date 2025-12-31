@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import React from "react";
+
 interface headingprops {
   text: string;
   className?: string;

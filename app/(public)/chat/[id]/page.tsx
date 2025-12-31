@@ -4,6 +4,7 @@ import { useParams } from "next/navigation";
 import { RealtimeChat } from "@/components/realtime-chat";
 import { supabase } from "@/lib/supabase/client";
 import { ChatMessage } from "@/hooks/use-realtime-chat";
+import { id } from "date-fns/locale";
 
 interface pageprops {
   params: {
@@ -54,13 +55,13 @@ export default function Page(props: pageprops) {
         .from("chat_messages")
         .select(
           `
-  id
-  message
-  created_at
-  username
+          id
+          message
+          created_at
+          username
 `
         )
-        .eq("room_id", roomName)
+        .eq("room_id", username + roomName)
         .order("created_at");
 
       const formatted: ChatMessage[] = mdata?.map((m: any) => ({
@@ -75,10 +76,13 @@ export default function Page(props: pageprops) {
       setPreviousMessages(formatted);
     };
     loadMessages();
-  }, [roomName]);
+  }, [username, roomName]);
 
   return (
-    <div className="p-4 bg-misecondary pt-16 md:p-24">
+    <div className="w-full h-screen p-4 md:p-6 mt-20 md:max-w-[60%] md:mx-auto gap-4 flex flex-col ">
+      <p className="text-2xl capitalize text-miprimary text-center">
+        {roomName.startsWith("scalf.io") && "Welcome to our supports"}
+      </p>
       <RealtimeChat
         username={username}
         roomName={roomName}

@@ -19,6 +19,7 @@ import { supabase } from "./supabase/client";
 /**
  * Create (or get) a chat room for a user
  */
+
 export async function getOrCreateChatRoom(userId: string) {
   // Check if room already exists
   const { data: existingRoom } = await supabase

@@ -13,11 +13,12 @@ const revenueData = [
 export default function Dashboard() {
   return (
     <div className="max-w-full flex flex-col gap-8 w-full">
+      <div></div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  p-8  gap-4 ">
         <AnalyticsCard
           title="Total Revenue"
           description="Revenue generated for the selected month"
-          total="¢ 18,400"
+          total="¢18,400"
           buttonText="Open Revenue Page"
           buttonLink="/dashboard/revenue"
           chartData={revenueData}
