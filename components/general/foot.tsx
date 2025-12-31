@@ -1,8 +1,24 @@
 "use client";
 
+import { supabase } from "@/lib/supabase/client";
 import Link from "next/link";
+import { seteuid } from "process";
+import { useEffect, useState } from "react";
 
 export default function SiteFooter() {
+  const [user, setUser] = useState<any>(null);
+
+  useEffect(() => {
+    const fetchuser = async () => {
+      const {
+        data: { user },
+        error,
+      } = await supabase.auth.getUser();
+      setUser(user);
+    };
+    fetchuser();
+  }, []);
+
   return (
     <footer className="w-full  border-t  bg-miprimary ">
       <div className="p-12  grid grid-cols-2 lg:grid-cols-3  md:max-w-[85%] md:gap-8 md:mx-auto justify-center ">
@@ -17,17 +33,10 @@ export default function SiteFooter() {
                 Home
               </Link>
             </li>
+
             <li>
               <Link
-                href="/payments"
-                className="hover:text-misecondary text-white"
-              >
-                Payments
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/manage-hostel"
+                href="/dashboard"
                 className="hover:text-misecondary text-white"
               >
                 Manage Hostel
@@ -35,26 +44,26 @@ export default function SiteFooter() {
             </li>
             <li>
               <Link
-                href="/list-hostel"
+                href="#subscriptions"
                 className="hover:text-misecondary text-white"
               >
-                List a Hostel
+                Subscriptons
               </Link>
             </li>
             <li>
               <Link
                 className="hover:text-misecondary text-white"
-                href="/book-hostel"
+                href="/hostel"
               >
                 Book a Hostel
               </Link>
             </li>
             <li>
               <Link
-                href="/make-payment"
                 className="hover:text-misecondary text-white"
+                href="/hostel"
               >
-                Make Payment
+                Search
               </Link>
             </li>
           </ul>
@@ -66,47 +75,38 @@ export default function SiteFooter() {
           <ul className="space-y-2 text-white text-base md:text-lg p-4  flex flex-col gap-4">
             <li>
               <Link
-                href="/top-rated"
+                href="#top-rated"
                 className="hover:text-misecondary text-white"
               >
                 Top Rated Hostels
               </Link>
             </li>
             <li>
-              <Link
-                href="/announcements"
-                className="hover:text-misecondary text-white"
-              >
-                Announcements
+              <Link href="/news" className="hover:text-misecondary text-white">
+                Campus Gossips
               </Link>
             </li>
             <li>
               <Link
-                href="/more-info"
+                href="#more-info"
                 className="hover:text-misecondary text-white"
               >
                 More Info
               </Link>
             </li>
+
             <li>
               <Link
-                href="/listings"
+                href="#testimonials"
                 className="hover:text-misecondary text-white"
               >
-                Listings
+                testimonials
               </Link>
             </li>
+
             <li>
-              <Link href="/hostels" className=" text-white">
+              <Link href="/hostel" className=" text-white">
                 Hostels
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/apartments"
-                className="hover:text-misecondary text-white"
-              >
-                Apartments
               </Link>
             </li>
           </ul>
@@ -117,23 +117,12 @@ export default function SiteFooter() {
           <ul className="space-y-2  text-base md:text-lg p-4 flex flex-col gap-4">
             <li>
               <Link
-                href="/chat-manager"
+                href={`/chat/${"scalf.io" + user?.id}?roomName=${
+                  user?.id
+                }&username=${user?.email}`}
                 className="hover:text-misecondary text-white"
               >
-                Chat with a Manager
-              </Link>
-            </li>
-            <li>
-              <Link href="/help" className="hover:text-misecondary text-white">
-                Help Center
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/contact"
-                className="hover:text-misecondary text-white"
-              >
-                Contact Us
+                Help center
               </Link>
             </li>
             <li>
@@ -143,7 +132,7 @@ export default function SiteFooter() {
             </li>
             <li>
               <Link
-                href="/privacy"
+                href="/policy"
                 className="hover:text-misecondary text-white"
               >
                 Privacy Policy

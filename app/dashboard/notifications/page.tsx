@@ -9,7 +9,6 @@ export default function page() {
         message="A new guest has booked Room 302. Please review."
         time="2 min ago"
         unread
-        onClick={() => console.log("Open notification")}
       />
 
       <NotificationCard

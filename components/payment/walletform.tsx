@@ -1,5 +1,4 @@
 "use client";
-
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -23,49 +22,88 @@ import {
 import { toast } from "sonner";
 import { subaccountSchema, SubaccountValues } from "@/components/hostel/schema";
 import { WalletCards } from "lucide-react";
+import { ghanaPaymentProviders } from "@/lib/constant";
+import { useRouter } from "next/navigation";
+import { supabase } from "@/lib/supabase/client";
+import { useEffect, useState } from "react";
 
 export function WalletForm() {
+  const [user, setUser] = useState<any>(null);
+  const router = useRouter();
+
   const form = useForm<SubaccountValues>({
     resolver: zodResolver(subaccountSchema),
     defaultValues: {
-      business_name: "",
+      business_name: "Mastercard hostel",
       settlement_bank: "",
       account_number: "",
-      percentage_charge: 5,
+      provider_type: "mobile_money",
+      percentage_charge: 1,
     },
   });
 
+  useEffect(() => {
+    // fetchs the user details
+    const fetchuser = async () => {
+      const {
+        data: { user },
+        error,
+      } = await supabase.auth.getUser();
+      setUser(user);
+    };
+
+    fetchuser();
+  }, []);
+
   const onSubmit = async (data: SubaccountValues) => {
-    try {
-      const res = await fetch("/api/paystack/subaccount", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
-
-      if (!res.ok) throw new Error("Failed to create subaccount");
-
-      toast.success("🎉 Subaccount created successfully");
-      form.reset();
-    } catch (error) {
-      toast.error("❌ Could not create subaccount");
-      console.error(error);
+    if (!user) {
+      toast.error("You must be logged in");
+      return;
     }
+
+    const res: any = await fetch("/api/paystack/subaccount", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        business_name: data.business_name,
+        settlement_bank: data.settlement_bank,
+        account_number: data.account_number,
+        provider_type: data.provider_type,
+        percentage_charge: 1,
+        owner_id: user.id,
+      }),
+    });
+    const result = await res.json();
+    console.log(result);
+
+    if (!res.ok) {
+      console.log("Subaccount creation failed");
+      toast.error("❌ Could not create wallet");
+    }
+    // ✅ update hostel with subaccount_code
+    await supabase
+      .from("hostels")
+      .update({ subaccount_code: result.subaccount_code })
+      .eq("manager_id", user.id);
+
+    toast.success("🎉 Wallet created successfully");
+    form.reset();
+    router.refresh();
   };
 
   return (
-    <Card className="w-full ">
+    <Card className="w-full">
       <CardHeader>
         <CardTitle className="text-xl text-center">
-          Create Paystack Subaccount
+          Create Paystack Wallet
         </CardTitle>
       </CardHeader>
 
-      <CardContent className="">
+      <CardContent>
         <Form {...form}>
           <form
-            className="flex flex-col gap-8 "
             onSubmit={form.handleSubmit(onSubmit)}
+            className="flex flex-col gap-4 md:gap-8"
           >
             {/* Business Name */}
             <FormField
@@ -73,44 +111,14 @@ export function WalletForm() {
               name="business_name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-lg">Business Name</FormLabel>
+                  <FormLabel>Business Name</FormLabel>
                   <FormControl>
                     <Input
                       className="px-4 py-8 shadow-lg"
-                      placeholder="e.g. Sunrise Hostel"
+                      placeholder="Sunrise Hostel"
                       {...field}
                     />
                   </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            {/* Settlement Bank */}
-            <FormField
-              control={form.control}
-              name="settlement_bank"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="text-lg">Settlement Bank</FormLabel>
-                  <Select onValueChange={field.onChange}>
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue
-                          className="px-4 py-8 shadow-lg"
-                          placeholder="Select bank"
-                        />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent className="px-4 py-8 shadow-lg">
-                      {/* Example Ghana banks – replace with Paystack list */}
-                      <SelectItem value="MTN">MTN MoMo</SelectItem>
-                      <SelectItem value="VOD">Vodafone Cash</SelectItem>
-                      <SelectItem value="ATL">AirtelTigo</SelectItem>
-                      <SelectItem value="ECO">Ecobank</SelectItem>
-                      <SelectItem value="GCB">GCB Bank</SelectItem>
-                    </SelectContent>
-                  </Select>
                   <FormMessage />
                 </FormItem>
               )}
@@ -122,11 +130,11 @@ export function WalletForm() {
               name="account_number"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-lg">Account Number</FormLabel>
+                  <FormLabel>Account Number</FormLabel>
                   <FormControl>
                     <Input
                       className="px-4 py-8 shadow-lg"
-                      placeholder="10-digit account number"
+                      placeholder="10-digit number"
                       {...field}
                     />
                   </FormControl>
@@ -135,34 +143,52 @@ export function WalletForm() {
               )}
             />
 
-            {/* Percentage Charge */}
             <FormField
               control={form.control}
-              name="percentage_charge"
+              name="settlement_bank"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-lg">Platform Charge (%)</FormLabel>
-                  <FormControl>
-                    <Input
-                      className="px-4 py-8 shadow-lg"
-                      type="number"
-                      min={1}
-                      max={100}
-                      {...field}
-                      onChange={(e) => field.onChange(Number(e.target.value))}
-                    />
-                  </FormControl>
+                  <FormLabel>Settlement Method</FormLabel>
+
+                  <Select
+                    value={field.value}
+                    onValueChange={(value) => {
+                      field.onChange(value); // ✅ IMPORTANT
+
+                      const provider = ghanaPaymentProviders.find(
+                        (p) => p.code === value
+                      );
+
+                      if (provider) {
+                        form.setValue("provider_type", provider.type);
+                      }
+                    }}
+                  >
+                    <FormControl>
+                      <SelectTrigger className="px-4 py-8 shadow-lg">
+                        <SelectValue placeholder="Select bank or MoMo" />
+                      </SelectTrigger>
+                    </FormControl>
+
+                    <SelectContent>
+                      {ghanaPaymentProviders.map((p) => (
+                        <SelectItem key={p.code} value={p.code}>
+                          {p.label}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+
                   <FormMessage />
                 </FormItem>
               )}
             />
-
             <Button
               type="submit"
-              className="w-full bg-miaccent hover:bg-miaccent  text-white py-8 px-4  text-lg"
+              className="w-full gap-2 py-7 text-lg hover:-translate-y-0.5 ease-out cursor-pointer bg-miaccent shadow-lg hover:bg-miaccent "
             >
               Create Wallet
-              <WalletCards size={22} />
+              <WalletCards size={20} />
             </Button>
           </form>
         </Form>

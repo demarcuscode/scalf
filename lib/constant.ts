@@ -139,3 +139,83 @@ export const bookings = [
     course: "computer science",
   },
 ];
+
+export const ghanaMobileMoney = [
+  {
+    label: "MTN MoMo",
+    code: "MTN",
+    type: "mobile_money",
+  },
+  {
+    label: "Vodafone Cash",
+    code: "VOD",
+    type: "mobile_money",
+  },
+  {
+    label: "AirtelTigo Money",
+    code: "ATL",
+    type: "mobile_money",
+  },
+];
+export const ghanaPaymentProviders = [
+  { label: "MTN MoMo", code: "MTN", type: "mobile_money" },
+  { label: "Vodafone Cash", code: "VOD", type: "mobile_money" },
+  { label: "AirtelTigo Money", code: "ATL", type: "mobile_money" },
+] as const; // ✅ VERY IMPORTANT
+
+export const subscriptions = [
+  {
+    id: "1",
+    label: "basic",
+    details: [
+      {
+        id: "5",
+        content: "100 plus users communication",
+      },
+      {
+        id: "1",
+        content: "100 plus users communication",
+      },
+      {
+        id: "2",
+        content: "hostel listing and publishing",
+      },
+      {
+        id: "3",
+        content: "management dashboard ",
+      },
+      {
+        id: "4",
+        content: "secure mobile money payments",
+      },
+    ],
+    amount: "300",
+  },
+  {
+    id: "2",
+    label: "premium",
+    details: [
+      {
+        id: "5",
+        content: "unlimited texting and chatting",
+      },
+      {
+        id: "1",
+        content: "push notifications",
+      },
+      {
+        id: "2",
+        content: "verified accounts",
+      },
+      {
+        id: "3",
+        content: "1 featured posting ",
+      },
+      {
+        id: "4",
+        content: "security managements ",
+      },
+    ],
+    amount: "500",
+  },
+];

@@ -1,6 +1,7 @@
 "use client";
 import { Card, CardHeader, CardContent } from "@/components/ui/card";
 import { Quote } from "lucide-react";
+import Image from "next/image";
 
 interface testprops {
   message: string;
@@ -19,6 +20,13 @@ export function TestimonialCard(props: testprops) {
       </CardHeader>
 
       <CardContent className="relative z-10 mt-4 p-0">
+        <Image
+          src={"/logo.png"}
+          alt="logo"
+          width={200}
+          height={200}
+          className="opacity-40"
+        />
         <p className="font-semibold text-lg text-miprimary font-bold text-right">
           — {props.author}
         </p>

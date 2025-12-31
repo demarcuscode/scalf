@@ -32,6 +32,7 @@ const profileSchema = z.object({
   level: z.string().optional(),
   budget: z.string().optional(),
   bio: z.string().optional(),
+  hostel_id: z.string().optional(),
 });
 
 type ProfileFormType = z.infer<typeof profileSchema>;
@@ -58,6 +59,7 @@ export default function ProfileForm({ profile, id }: pageprops) {
       level: "",
       budget: "",
       bio: "",
+      hostel_id: "",
     },
   });
 

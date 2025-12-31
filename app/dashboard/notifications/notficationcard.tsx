@@ -9,7 +9,6 @@ interface NotificationCardProps {
   message: string;
   time: string;
   unread?: boolean;
-  onClick?: () => void;
 }
 
 export default function NotificationCard({
@@ -17,26 +16,26 @@ export default function NotificationCard({
   message,
   time,
   unread = false,
-  onClick,
 }: NotificationCardProps) {
   return (
     <Card
-      onClick={onClick}
       className={cn(
-        "w-full cursor-pointer rounded-xl border bg-white dark:bg-neutral-900 shadow-sm hover:shadow-md transition-all",
-        unread && "border-blue-500"
+        "shadow-lg shadow-misecondary",
+        unread && "shadow-miprimary"
       )}
     >
       <CardContent className="p-4 flex items-start gap-4">
         {/* Icon */}
-        <div className="p-3 rounded-full bg-blue-100 dark:bg-blue-900">
-          <Bell className="w-5 h-5 text-blue-600 dark:text-blue-300" />
+        <div className="p-2 rounded-full bg-misecondary dark:bg-miprimary">
+          <Bell size={40} className="w-10 h-10 text-white dark:text-white" />
         </div>
 
         {/* Content */}
-        <div className="flex flex-col flex-1">
+        <div className="flex flex-col flex-1 ">
           <div className="flex items-center justify-between w-full">
-            <h3 className="text-lg font-semibold">{title}</h3>
+            <h3 className="text-lg font-semibold capitalize tracking-wide">
+              {title}
+            </h3>
 
             <span className="text-xs text-neutral-500">{time}</span>
           </div>

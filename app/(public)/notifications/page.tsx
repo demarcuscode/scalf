@@ -1,56 +1,54 @@
 "use client";
+import NotificationCard from "@/app/dashboard/notifications/notficationcard";
+import { BellMinus, MailWarning } from "lucide-react";
+import React, { useEffect, useState } from "react";
 
-import { Bell } from "lucide-react";
-import { Card, CardContent } from "@/components/ui/card";
-import { cn } from "@/lib/utils";
+export default function page() {
+  const [notices, setNotices] = useState<any>(true);
+  const [user, setUser] = useState<any>(null);
 
-interface NotificationCardProps {
-  title: string;
-  message: string;
-  time: string;
-  unread?: boolean;
-  onClick?: () => void;
-}
+  const data = [
+    {
+      message: "this is new",
+      time: "12-04-23",
+      title: "crane",
+      unread: true,
+    },
+    {
+      message: "this mage",
+      time: "12-04-23",
+      title: "tiger",
+      unread: true,
+    },
+    {
+      message: "is new",
+      time: "12-04-23",
+      title: "monkey",
+      unread: true,
+    },
+    {
+      message: "this new",
+      time: "12-04-23",
+      title: "panda",
+      unread: true,
+    },
+  ];
 
-export default function NotificationCard({
-  title,
-  message,
-  time,
-  unread = false,
-  onClick,
-}: NotificationCardProps) {
+  useEffect(() => {}, []);
+  if (!notices)
+    return (
+      <div className="text-4xl flex  w-full justify-center gap-4 text-miprimary font-extrabold  mt-20 text-center  capitalize">
+        you have no notifications.
+        <BellMinus size={34} />
+      </div>
+    );
   return (
-    <Card
-      onClick={onClick}
-      className={cn(
-        "w-full cursor-pointer rounded-xl mt-20 max-w-[90%] mx-auto border bg-white dark:bg-neutral-900 shadow-sm hover:shadow-md transition-all",
-        unread && "border-blue-500"
-      )}
-    >
-      <CardContent className="p-4 flex items-start gap-4">
-        {/* Icon */}
-        <div className="p-3 rounded-full bg-blue-100 dark:bg-blue-900">
-          <Bell className="w-5 h-5 text-blue-600 dark:text-blue-300" />
-        </div>
-
-        {/* Content */}
-        <div className="flex flex-col flex-1">
-          <div className="flex items-center justify-between w-full">
-            <h3 className="text-lg font-semibold">{title}</h3>
-
-            <span className="text-xs text-neutral-500">{time}</span>
-          </div>
-
-          <p className="text-sm text-neutral-600 dark:text-neutral-400 mt-1 max-w-[250px] truncate">
-            {message}
-          </p>
-        </div>
-
-        {/* Unread Dot */}
-        {unread && (
-          <span className="w-3 h-3 rounded-full bg-blue-600 shadow-md"></span>
-        )}
-      </CardContent>
-    </Card>
+    <div className="mt-20 p-4 md:p-8">
+      <div className="flex flex-col  gap-4">
+        {data?.map((item, index) => {
+          return <NotificationCard key={index} {...item} />;
+        })}
+      </div>
+    </div>
   );
 }

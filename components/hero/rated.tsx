@@ -37,7 +37,7 @@ export default function Rated() {
   }, []);
 
   return (
-    <div className="md:max-w-[95%] md:mx-auto my-30">
+    <div id="top-rated" className="md:max-w-[95%] md:mx-auto my-30">
       <Carousel
         className="w-full p-2 md:p-10 shadow-none"
         plugins={

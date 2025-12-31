@@ -37,7 +37,7 @@ export default function page() {
     };
     fetchprofile();
   }, [user]);
-  console.log(user);
+
   return (
     <div className="mt-20 text-black p-4 md:p-8 md:max-w-[80%] md:mx-auto  ">
       <Card>
