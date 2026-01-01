@@ -1,38 +1,25 @@
 "use client";
-import NotificationCard from "@/app/dashboard/notifications/notficationcard";
+import NotificationsFeed from "@/app/dashboard/notifications/notficationlogic";
+import NotificationCard from "@/app/dashboard/notifications/notficationlogic";
+import { supabase } from "@/lib/supabase/client";
 import { BellMinus, MailWarning } from "lucide-react";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function page() {
   const [notices, setNotices] = useState<any>(true);
   const [user, setUser] = useState<any>(null);
 
-  const data = [
-    {
-      message: "this is new",
-      time: "12-04-23",
-      title: "crane",
-      unread: true,
-    },
-    {
-      message: "this mage",
-      time: "12-04-23",
-      title: "tiger",
-      unread: true,
-    },
-    {
-      message: "is new",
-      time: "12-04-23",
-      title: "monkey",
-      unread: true,
-    },
-    {
-      message: "this new",
-      time: "12-04-23",
-      title: "panda",
-      unread: true,
-    },
-  ];
+  useEffect(() => {
+    const fetchuser = async () => {
+      const {
+        data: { user },
+        error,
+      } = await supabase.auth.getUser();
+
+      setUser(user);
+    };
+    fetchuser();
+  }, []);
 
   useEffect(() => {}, []);
   if (!notices)
@@ -44,10 +31,8 @@ export default function page() {
     );
   return (
     <div className="mt-20 p-4 md:p-8">
-      <div className="flex flex-col  gap-4">
-        {data?.map((item, index) => {
-          return <NotificationCard key={index} {...item} />;
-        })}
+      <div>
+        <NotificationsFeed key={user?.id} userId={user?.id} />
       </div>
     </div>
   );

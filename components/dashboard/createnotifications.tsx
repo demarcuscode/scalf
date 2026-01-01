@@ -31,55 +31,62 @@ export default function CreateNotifications() {
   });
 
   const onSubmit = async (values: NotificationValues) => {
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
+    try {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
 
-    if (!user) {
-      toast.error("Not authenticated");
-      return;
+      if (!user) {
+        toast.error("Not authenticated");
+        return;
+      }
+
+      const { error } = await supabase.from("notifications").insert({
+        message: values.message,
+        type: values.type,
+        created_by: user.id,
+      });
+
+      if (error) {
+        toast.error(error.message);
+        return;
+      }
+
+      toast.success("Notification created");
+      form.reset();
+    } catch (err: any) {
+      toast.error(err.message || "Something went wrong");
     }
-
-    const { error } = await supabase.from("notifications").insert({
-      message: values.message,
-      type: values.type,
-      created_by: user.id,
-    });
-
-    if (error) {
-      toast.error(error.message);
-      return;
-    }
-
-    toast.success("Notification created");
-    form.reset();
   };
 
   useEffect(() => {
-    const setup = async () => {
+    let channel: any;
+
+    const setupRealtime = async () => {
       const {
         data: { user },
       } = await supabase.auth.getUser();
 
       if (!user) return;
 
-      const channel = supabase
+      // Subscribe to notifications table
+      channel = supabase
         .channel("notifications-realtime")
         .on(
           "postgres_changes",
-          {
-            event: "INSERT",
-            schema: "public",
-            table: "notifications",
-          },
-          (payload) => {}
+          { event: "INSERT", schema: "public", table: "notifications" },
+          (payload) => {
+            console.log("New notification received:", payload.new);
+            // Here you could optionally update local state or trigger a toast
+          }
         )
         .subscribe();
+    };
 
-      setup();
-      return () => {
-        supabase.removeChannel(channel);
-      };
+    setupRealtime();
+
+    return () => {
+      if (channel) supabase.removeChannel(channel);
     };
   }, []);
 
@@ -105,7 +112,7 @@ export default function CreateNotifications() {
         />
 
         <Button
-          className="bg-miaccent text-white text-lg hover:bg-miaccent"
+          className="bg-miaccent text-white text-lg hover:bg-miaccent flex items-center gap-2"
           type="submit"
         >
           create notification <PlusCircle size={20} />
