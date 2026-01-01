@@ -9,14 +9,13 @@ import {
   CardTitle,
 } from "../ui/card";
 import { Button } from "../ui/button";
-import { CheckCircle, Edit, Trash2 } from "lucide-react";
+import { Edit, Trash2 } from "lucide-react";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import PayButton from "../general/paybtn";
 import { supabase } from "@/lib/supabase/client";
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import { subscribe } from "diagnostics_channel";
 
 interface bookingcardprops {
   className?: string;
@@ -27,9 +26,11 @@ export default function BookingCard(props: bookingcardprops) {
   const [profile, setProfile] = useState<any>(null);
   const [user, setUser] = useState<any>(null);
   const [subcode, setSubcode] = useState<any>(null);
-  const charges = 0.005 * parseInt(props.hostel.amount);
   const router = useRouter();
+
+  const hostelId: string = props.hostel?.hostel_id;
   const createdAt = new Date(props.hostel.created_at);
+  const charges = 0.005 * parseInt(props.hostel?.amount);
 
   // delete a book
   const deleteBooking = async () => {
@@ -53,22 +54,25 @@ export default function BookingCard(props: bookingcardprops) {
         .single();
       setProfile(profile);
     };
+
     fetchuser();
-  }, []);
-  useEffect(() => {
+
+    if (!hostelId) return;
     const getsubs = async () => {
-      const hostelId = props.hostel.hostel_id;
       // get the subaccount for the hotel
-      const subs = await supabase
+      const { data, error } = await supabase
         .from("hostels")
         .select("*")
-        .eq("id", hostelId);
+        .eq("id", hostelId)
+        .single();
 
-      setSubcode(subs);
+      if (!error && data) {
+        setSubcode(data);
+      }
     };
+    getsubs();
   }, []);
   console.log(subcode);
-
   if (!props?.hostel) {
     return (
       <div className="pt-20 text-2xl mt-20 text-miprimary">
@@ -152,10 +156,11 @@ export default function BookingCard(props: bookingcardprops) {
           </CardFooter>
           <div className="w-full grid md:grid-cols-2  gap-4 ">
             <PayButton
-              label="make payment"
-              amount={props.hostel.amount}
-              email={profile?.email}
-              subaccount_code={subcode}
+              disabled={!subcode}
+              label="hostel_payments"
+              amount={subcode?.price}
+              email={user?.email}
+              subaccount_code={subcode?.subaccount_code}
               booking_id={props.hostel.id}
             />
             <Button

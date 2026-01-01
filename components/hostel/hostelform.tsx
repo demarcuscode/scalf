@@ -229,9 +229,9 @@ export function HostelDetailsForm() {
 
             {imageUrls.length > 0 && (
               <div className="grid grid-cols-3 gap-2 mt-3">
-                {imageUrls.map((url) => (
+                {imageUrls.map((url, index) => (
                   <img
-                    key={url}
+                    key={url + index}
                     src={url}
                     alt="Hostel"
                     className="h-24 w-full rounded object-cover"

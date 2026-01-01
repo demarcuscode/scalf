@@ -1,14 +1,15 @@
 "use client";
 
-import { Bell } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
+import { Bell } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface NotificationCardProps {
-  title: string;
+  title?: string;
   message: string;
   time: string;
   unread?: boolean;
+  onClick?: () => void;
 }
 
 export default function NotificationCard({
@@ -16,12 +17,14 @@ export default function NotificationCard({
   message,
   time,
   unread = false,
+  onClick,
 }: NotificationCardProps) {
   return (
     <Card
+      onClick={onClick}
       className={cn(
-        "shadow-lg shadow-misecondary",
-        unread && "shadow-miprimary"
+        "shadow-lg shadow-misecondary cursor-pointer",
+        unread && "border-l-4 border-blue-500 shadow-miprimary"
       )}
     >
       <CardContent className="p-4 flex items-start gap-4">
@@ -31,16 +34,15 @@ export default function NotificationCard({
         </div>
 
         {/* Content */}
-        <div className="flex flex-col flex-1 ">
+        <div className="flex flex-col flex-1">
           <div className="flex items-center justify-between w-full">
-            <h3 className="text-lg font-semibold capitalize tracking-wide">
-              {title}
+            <h3 className="text-lg font-semibold tracking-wide">
+              {title && title}
             </h3>
-
-            <span className="text-xs text-neutral-500">{time}</span>
+            <span className="text-xs text-neutral-500">{time && time}</span>
           </div>
 
-          <p className="text-sm text-neutral-600 dark:text-neutral-400 mt-1 max-w-[250px] truncate">
+          <p className="text-sm text-neutral-600 dark:text-neutral-400 mt-1 truncate max-w-[250px]">
             {message}
           </p>
         </div>

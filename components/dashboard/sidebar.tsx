@@ -70,7 +70,8 @@ export default function Sidebar() {
             width={40}
             height={40}
             alt="logo"
-            className="mb-10"
+            priority
+            className="mb-10 "
           />
 
           {/* Nav */}

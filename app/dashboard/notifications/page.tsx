@@ -1,5 +1,5 @@
 "use client";
-import NotificationCard from "./notficationcard";
+import NotificationCard from "./notficationlogic";
 
 export default function page() {
   return (
