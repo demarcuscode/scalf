@@ -5,7 +5,7 @@ import Image from "next/image";
 
 interface roomprops {
   hostel_name: string;
-  image: string;
+  image: { publicUrl: string };
   room_type: string;
   available_rooms?: string;
   className?: string;
@@ -13,7 +13,7 @@ interface roomprops {
 }
 
 function RoomDetailsCard(props: roomprops) {
-  const image = props.image ?? "/logo.png";
+  console.log(props);
   return (
     <div
       className={cn("rounded-lg shadow-lg shadow-miprimary ", props.className)}
@@ -22,7 +22,7 @@ function RoomDetailsCard(props: roomprops) {
         <CardContent className="flex flex-col p-0 w-full rounded-lg">
           <div className="aspect-rect object-contain max-w-full ">
             <Image
-              src={image}
+              src={props.image.publicUrl ?? "/logo.png"}
               alt="roomsdetails pics"
               width={500}
               height={500}

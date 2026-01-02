@@ -14,7 +14,7 @@ import { supabase } from "@/lib/supabase/client";
 import { UploadCloud } from "lucide-react";
 
 type HostelPayload = HostelDetailsValues & {
-  images: string[];
+  images: any[];
   payment_type: string[];
   manager_id: string;
 };
@@ -90,7 +90,6 @@ export function HostelDetailsForm() {
       subscription.unsubscribe();
     };
   }, []);
-
   // submit the forms to database
   const onSubmit = async (data: HostelDetailsValues) => {
     setSaving(true);
@@ -232,7 +231,7 @@ export function HostelDetailsForm() {
                 {imageUrls.map((url, index) => (
                   <img
                     key={url + index}
-                    src={url}
+                    src={url ?? "/logo.png"}
                     alt="Hostel"
                     className="h-24 w-full rounded object-cover"
                   />

@@ -5,6 +5,7 @@ import { RealtimeChat } from "@/components/realtime-chat";
 import { supabase } from "@/lib/supabase/client";
 import { ChatMessage } from "@/hooks/use-realtime-chat";
 import { id } from "date-fns/locale";
+import Image from "next/image";
 
 interface pageprops {
   params: {
@@ -79,8 +80,15 @@ export default function Page(props: pageprops) {
   }, [username, roomName]);
 
   return (
-    <div className="w-full h-screen p-4 md:p-6 mt-20 md:max-w-[60%] md:mx-auto gap-4 flex flex-col ">
-      <p className="text-2xl capitalize text-miprimary text-center">
+    <div className="w-full h-screen p-4 md:p-6 mt-20 md:max-w-[60%] relative md:mx-auto gap-4 flex flex-col ">
+      <Image
+        src={"/logo.png"}
+        alt=""
+        width={500}
+        height={200}
+        className="w-full h-20 bg-gray-400 object-cover p-2 "
+      />
+      <p className="text-2xl capitalize text-miprimary text-center  ">
         {roomName.startsWith("scalf.io") && "Welcome to our supports"}
       </p>
       <RealtimeChat

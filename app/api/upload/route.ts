@@ -48,7 +48,7 @@ export async function POST(req: Request) {
       .from("scalf.io-bucket")
       .getPublicUrl(filePath);
 
-    urls.push(publicUrl);
+    urls.push(publicUrl.publicUrl);
   }
 
   return NextResponse.json({ urls });

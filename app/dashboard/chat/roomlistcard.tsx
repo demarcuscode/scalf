@@ -1,30 +1,40 @@
 "use client";
 import { Avatar } from "@/components/ui/avatar";
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
+import { supabase } from "@/lib/supabase/client";
 import { AvatarImage } from "@radix-ui/react-avatar";
-import Image from "next/image";
-import React from "react";
+import { useEffect, useState } from "react";
 
-interface roomlistcard {}
+interface pageprops {
+  created_by: string;
+  created_at: string;
+  to?: string;
+}
+export default function Roomlistcard({
+  created_by,
+  created_at,
+  to,
+}: pageprops) {
+  const [user, setUser] = useState(null);
 
-export default function Roomlistcard() {
+  useEffect(() => {
+    const fetchuser = async () => {
+      const { data, error } = await supabase
+        .from("profiles")
+        .select("*")
+        .eq("id", created_by)
+        .single();
+      setUser(data);
+    };
+  }, []);
+  console.log(user);
   return (
     <div>
       <div>
         <Card>
           <CardContent>
             <div className="">
-              <div>
-                <Avatar>
-                  <AvatarImage
-                    src={"/logo.png"}
-                    alt={""}
-                    width={500}
-                    height={500}
-                    className=""
-                  />
-                </Avatar>
-              </div>
+              <div></div>
               <CardTitle></CardTitle>
               <div></div>
             </div>
