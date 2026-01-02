@@ -4,6 +4,8 @@ import Link from "next/link";
 import { MessageCircle, MessageSquare } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
+import { useState } from "react";
+import Roomlistcard from "./roomlistcard";
 
 interface ChatRoom {
   id: string;
@@ -20,48 +22,12 @@ interface ChatRoomListProps {
 export default function ChatRoomList({ rooms }: ChatRoomListProps) {
   return (
     <div className="w-full flex flex-col gap-4 md:max-w-[80%] md:mx-auto  space-y-5 ">
-      {rooms?.map((room) => (
-        <Link
-          href={`/chat/${room.id}`}
-          key={room.id}
-          className={cn(
-            "flex items-center justify-between p-4 rounded-xl border  bg-white dark:bg-neutral-900 hover:bg-neutral-100 shadow-lg shadow-miprimary dark:hover:bg-neutral-800 transition-all"
-          )}
-        >
-          {/* Left Section */}
-          <div className="flex items-center gap-3">
-            <MessageSquare
-              size={80}
-              className="w-5 h-10 text-blue-600 dark:text-blue-300"
-            />
-
-            <div className="flex flex-col">
-              <span className="text-lg font-semibold">{room.name}</span>
-
-              {room.lastMessage && (
-                <span className="text-sm text-neutral-500 truncate max-w-[200px]">
-                  {room.lastMessage}
-                </span>
-              )}
-            </div>
-          </div>
-
-          {/* Right Section */}
-          <div className="flex flex-col items-end gap-1">
-            {room.unread > 0 && (
-              <Badge className="bg-red-600 text-white px-2 py-1 rounded-full text-xs">
-                {room.unread}
-              </Badge>
-            )}
-
-            {room.lastMessageTime && (
-              <span className="text-xs text-neutral-400">
-                {room.lastMessageTime}
-              </span>
-            )}
-          </div>
-        </Link>
-      ))}
+      <div>
+        {rooms &&
+          rooms.map((item: any, index: number) => {
+            return <Roomlistcard key={index} {...item} />;
+          })}
+      </div>
     </div>
   );
 }

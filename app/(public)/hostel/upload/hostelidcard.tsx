@@ -23,7 +23,7 @@ interface hostelcardprops {
   price: string;
   rating?: string;
   className?: string;
-  images: string[];
+  images: any[];
   id: string;
 }
 
@@ -35,7 +35,7 @@ export default function Hostelcard(props: hostelcardprops) {
     currencyDisplay: "code",
     maximumFractionDigits: 2,
   }).format(parseInt(props.price));
-  const imageurl = props?.images[0];
+  const imageurl: any = props?.images[0];
   return (
     <Card className=" overflow-hidden p-0 shadow-lg shadow-misecondary ease-out   rounded-lg relative hover:scale-[1.02] transition-all cursor-pointer">
       <div className="h-[30vh] w-full max-w-full p-0 rounded-t-lg object-contain ">

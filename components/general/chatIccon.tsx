@@ -23,9 +23,9 @@ export default function ChatIcon(props: chaticonprops) {
 
   return (
     <Link
-      href={`/chat/${user?.email + user?.id}?roomName=${
-        user?.email + user?.id
-      }&username=${user?.email}`}
+      href={`/chat/${user?.id}?roomName=${user?.id}&username=${
+        user?.email
+      }&to=${"owaremarcuskofi@gmail.com"}`}
       className="absolute bottom-5 right-5 z-40 fixed max-w-25   object-contain p-2"
     >
       {pathname.startsWith("/hostel/") || pathname.startsWith("/chat") ? (

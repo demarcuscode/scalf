@@ -1,8 +1,10 @@
 "use client";
 import ChatRoomList from "@/app/dashboard/chat/chatroomlist";
-import React from "react";
+import { supabase } from "@/lib/supabase/client";
+import React, { useEffect, useState } from "react";
 
 export default function page() {
+  const [rooms, setRooms] = useState<any>(null);
   const data = [
     {
       id: "1",
@@ -40,10 +42,18 @@ export default function page() {
       lastMessageTime: "8:32pm",
     },
   ];
+  useEffect(() => {
+    const getrooms = async () => {
+      const { data, error } = await supabase.from("chat_rooms").select("*");
+      setRooms(data);
+    };
+    getrooms();
+  }, []);
+
   return (
     <div className="mt-20">
       <div className="p-4">
-        <ChatRoomList rooms={data} />
+        <ChatRoomList rooms={rooms} />
       </div>
     </div>
   );

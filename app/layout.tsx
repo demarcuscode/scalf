@@ -1,14 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/next";
-import { Poppins } from "next/font/google";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-
-const poppins = Poppins({
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
-  variable: "--font-poppins",
-});
 
 export const metadata: Metadata = {
   title: "Scalf.io | Stop Looking Start Searching",
@@ -23,7 +16,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${poppins.variable} antialiased relative`}>
+      <body className={`font-sans w-full antialiased relative`}>
         <Analytics debug={false} />
         <SpeedInsights debug={false} />
         <main className="w-full font-sans ">{children}</main>

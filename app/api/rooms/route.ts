@@ -49,6 +49,8 @@ export async function POST(req: Request) {
       .getPublicUrl(filePath);
 
     urls.push(publicUrlData.publicUrl); // publicUrlData has the publicUrl property
+
+    console.log(urls);
   }
 
   return NextResponse.json({ urls });

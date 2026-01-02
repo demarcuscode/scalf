@@ -47,10 +47,17 @@ export default function Idpagecomp({ hostel, hostelId }: idprops) {
         data: { user },
       } = await supabase.auth.getUser();
       setUser((prev: any) => user);
+
+      // dfetch manager
+      const { data, error: manError } = await supabase
+        .from("hostels")
+        .select("*")
+        .eq("id", hostel?.hostel_id);
     };
+
     fetchuser();
   }, []);
-
+  console.log(hostel);
   const sendreview = async () => {
     if (!hostel || !user) return;
 
@@ -59,8 +66,6 @@ export default function Idpagecomp({ hostel, hostelId }: idprops) {
       user_id: user.id,
       message: message.trim(),
     });
-
-    console.log(data);
 
     setMessage("");
     toast.success("review sent!");
@@ -141,9 +146,7 @@ export default function Idpagecomp({ hostel, hostelId }: idprops) {
         <Button
           onClick={() =>
             router.push(
-              `/chat/${hostel?.label + user.id}?roomName=${
-                hostel?.label + user?.id
-              }&username=${user?.email}}`
+              `/chat/${user.id}?roomName=${user?.id}&username=${user?.email}&to=${hostel?.manager_id}}`
             )
           }
           className="w-full py-6 hover:bg-miaccent cursor-pointer hover:ease-out hover:-translate-y-0.5  text-lg shadow-lg  bg-miaccent text-white"
@@ -152,6 +155,7 @@ export default function Idpagecomp({ hostel, hostelId }: idprops) {
           <MessageCircle />
         </Button>
       </div>
+
       {hostel?.rooms ? (
         <p className="text-center text-2xl text-miprimary font-bold  py-5">
           Rooms types and pricing
@@ -167,7 +171,8 @@ export default function Idpagecomp({ hostel, hostelId }: idprops) {
             return <RoomDetailsCard key={index} {...item} />;
           })}
       </div>
-      <div className="p-4 md:p-8">
+
+      {/* <div className="p-4 md:p-8">
         <Card className="w-full">
           <CardHeader>
             <CardTitle className="text-center">Add a Review</CardTitle>
@@ -189,7 +194,7 @@ export default function Idpagecomp({ hostel, hostelId }: idprops) {
             </Button>
           </CardContent>
         </Card>
-      </div>
+      </div> */}
     </div>
   );
 }

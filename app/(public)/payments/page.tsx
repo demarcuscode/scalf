@@ -1,5 +1,7 @@
+"use client";
 import { WalletForm } from "@/components/payment/walletform";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 export default function page() {

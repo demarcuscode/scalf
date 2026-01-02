@@ -31,7 +31,7 @@ export default function SponsorSlider({
               alt={sponsor.name}
               width={100}
               height={100}
-              className="object-contain"
+              className=" w-100 h-30 object-contain"
             />
           </div>
         ))}

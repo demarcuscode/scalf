@@ -88,6 +88,7 @@ export function WalletForm() {
 
     toast.success("🎉 Wallet created successfully");
     form.reset();
+    router.push("/dashboard");
     router.refresh();
   };
 
